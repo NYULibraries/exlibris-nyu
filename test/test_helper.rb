@@ -1,10 +1,12 @@
-# Ignore simplecov when running on travis.
-unless ENV['CI']
-  require 'simplecov'
-  SimpleCov.start
-end
+require 'coveralls'
+Coveralls.wear!
 require 'test/unit'
 require File.expand_path("../../lib/exlibris-primo-nyu.rb",  __FILE__)
+
+# Use the included testmnt for testing.
+Exlibris::Aleph.configure do |config|
+  config.tab_path = "#{File.dirname(__FILE__)}/../test/mnt/aleph_tab" if ENV['CI']
+end
 
 # VCR is used to 'record' HTTP interactions with
 # third party services used in tests, and play em

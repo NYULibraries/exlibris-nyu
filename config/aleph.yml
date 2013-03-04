@@ -3,5 +3,5 @@ rest_url: "http://aleph.library.nyu.edu:1891/rest-dlf"
 adms:
   - NYU50
   - NYU51
-tab_path: "/mnt/aleph_tab"
-yml_path: "config/aleph"
+tab_path: /mnt/aleph_tab
+yml_path: config/aleph

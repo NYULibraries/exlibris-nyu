@@ -60,13 +60,14 @@ module Exlibris
           (expanding?) ? expanded_holdings : super
         end
 
-        # Overrides Exlibris::Primo::Source::Aleph#dedup?
-        # Iff we're expanding are we deduping since we
-        # if we're not expanding we just want to convert the
-        # existing Primo sources to holdings
-        def dedup?
-          expanding?
+        # Overrides Exlibris::Primo::Holding#==
+        def ==(other_nyu_aleph)
+          # Only compare to other Primo Holdings
+          return super unless other_nyu_aleph.is_a? Exlibris::Primo::Holding
+          (expanding?) ?
+            (source_id == other_nyu_aleph.source_id and source_record_id == other_nyu_aleph.source_record_id) : super
         end
+        alias :eql? :==
 
         # Does this holding request link support AJAX requests?
         # Only if we're expanding
@@ -167,7 +168,7 @@ module Exlibris
 
         # Get expanded holdings based on Aleph items.
         def expanded_holdings
-          @expanded_holdings ||= (not expanding?) ? [] : aleph_items.collect do |aleph_item|
+          @expanded_holdings ||= aleph_items.collect do |aleph_item|
             source_data = {
               :item_id => aleph_item["href"].match(/items\/(.+)$/)[1],
               :adm_library_code => aleph_item["z30"]["translate_change_active_library"],
