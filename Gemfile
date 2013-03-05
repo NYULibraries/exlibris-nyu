@@ -5,4 +5,3 @@ source "https://rubygems.org"
 # development dependencies will be added by default to the :development group.
 gemspec
 gem "coveralls", "~> 0.6.0", require: false, :group => :test
-gem "exlibris-aleph", git: "git://github.com/scotdalton/exlibris-aleph.git", branch: "development"
