@@ -207,7 +207,7 @@ module Exlibris
 
         # Get Aleph holdings info
         def aleph_holdings
-          @aleph_holdings ||= aleph_record.bib
+          @aleph_holdings ||= aleph_record.holdings
         end
         private :aleph_holdings
 
@@ -285,9 +285,9 @@ module Exlibris
         def bib_coverage
           @bib_coverage ||= []
           if @bib_coverage.empty?
-            Nokogiri::XML(aleph_bib).xpath("//datafield[@tag='866']").each do |bib_866|
+            aleph_bib.each_by_tag('866') do |bib_866|
               # Get subfield l
-              subfield_l = bib_866.at_xpath("subfield[@code='l']").inner_text unless bib_866.at_xpath("subfield[@code='l']").nil?
+              subfield_l = bib_866['l']
               # Map the 866 subfields to actual Aleph sub library based on config
               bib_866_subfield_l_mapping = bib_866_subfield_l_map[subfield_l]
               # Skip if there is no match, since we don't know what the sublibrary is.
@@ -301,8 +301,8 @@ module Exlibris
                 # Indicate that we've looked at this coverage ADM, sub library combo
                 coverages_seen << { :adm_library => bib_866_adm_library, :sub_library_code => bib_866_sub_library_code }
                 bib_866_collection_code = bib_866_subfield_l_mapping['collection']
-                bib_866_j = bib_866.at_xpath("subfield[@code='j']").inner_text unless bib_866.at_xpath("subfield[@code='j']").nil?
-                bib_866_k = bib_866.at_xpath("subfield[@code='k']").inner_text unless bib_866.at_xpath("subfield[@code='k']").nil?
+                bib_866_j = bib_866['j']
+                bib_866_k = bib_866['k']
                 bib_866_collection = aleph_helper.collection_text(
                   :adm_library_code => bib_866_adm_library.downcase, :sub_library_code => bib_866_sub_library_code,
                     :collection_code => bib_866_collection_code ) unless bib_866_adm_library.nil?
@@ -310,7 +310,7 @@ module Exlibris
                   if bib_866_j or bib_866_k
                     @bib_coverage << "Available in #{bib_866_collection}: #{format_coverage_string(bib_866_j, bib_866_k)}".strip
                   else
-                    bib_866_i = bib_866.at_xpath("subfield[@code='i']").inner_text unless bib_866.at_xpath("subfield[@code='i']").nil?
+                    bib_866_i = bib_866['i']
                     @bib_coverage << "#{bib_866_i}".strip unless bib_866_i.nil?
                   end
                 end
@@ -325,10 +325,9 @@ module Exlibris
         def holdings_coverage
           @holdings_coverage ||= []
           if @holdings_coverage.empty?
-            Nokogiri::XML(aleph_holdings).xpath("//holding").each do |aleph_holding|
+            aleph_holdings.each do |aleph_holding|
               # Get the holding sub library
-              holding_sub_library_code = aleph_holding.at_xpath("//datafield[@tag='852']/subfield[@code='b']").
-                inner_text unless aleph_holding.at_xpath("//datafield[@tag='852']/subfield[@code='b']").nil?
+              holding_sub_library_code = aleph_holding['852']['b']
               # If this matches the NyuAleph holding, process it.
               if library_code.upcase == holding_sub_library_code.upcase
                 # Get the ADM library from the Aleph helper
@@ -340,17 +339,14 @@ module Exlibris
                   :adm_library => holding_adm_library, :sub_library_code => holding_sub_library_code })
                 # Indicate that we've looked at this coverage ADM, sub library combo
                 coverages_seen << { :adm_library => holding_adm_library, :sub_library_code => holding_sub_library_code }
-                holding_collection_code = aleph_holding.at_xpath("//datafield[@tag='852']/subfield[@code='c']").
-                  inner_text unless aleph_holding.at_xpath("//datafield[@tag='852']/subfield[@code='c']").nil?
-                holding_852_z = aleph_holding.at_xpath("//datafield[@tag='852']/subfield[@code='z']").
-                  inner_text unless aleph_holding.at_xpath("//datafield[@tag='852']/subfield[@code='z']").nil?
+                holding_collection_code = aleph_holding['852']['c']
+                holding_852_z = aleph_holding['852']['z']
                 @holdings_coverage << ("Note: #{holding_852_z}") unless holding_852_z.nil?
                 holding_collection = aleph_helper.collection_text(
                   :adm_library_code => holding_adm_library.downcase, :sub_library_code => holding_sub_library_code,
                     :collection_code => holding_collection_code ) unless holding_adm_library.nil?
-                aleph_holding.search("//datafield[@tag='866']") do |holding_866|
-                  holding_866_a = holding_866.at_xpath("subfield[@code='a']").
-                    inner_text unless holding_866.at_xpath("subfield[@code='a']").nil?
+                aleph_holding.each_tag('866') do |holding_866|
+                  holding_866_a = holding_866['a']
                   @holdings_coverage << "Available in #{holding_collection}: #{holding_866_a.gsub(",", ", ")}".
                     strip unless holding_collection.nil? or holding_866_a.nil?
                 end
