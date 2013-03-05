@@ -195,7 +195,7 @@ module Exlibris
         # Get Aleph record
         def aleph_record
           @aleph_record ||= 
-            Exlibris::Aleph::Rest::Record.new(bib_library: original_source_id, record_id: source_record_id)
+            Exlibris::Aleph::Record.new(bib_library: original_source_id, record_id: source_record_id)
         end
         private :aleph_record
 
