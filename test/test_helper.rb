@@ -1,7 +1,7 @@
 require 'coveralls'
 Coveralls.wear!
 require 'test/unit'
-require File.expand_path("../../lib/exlibris-primo-nyu.rb",  __FILE__)
+require File.expand_path("../../lib/exlibris-nyu.rb",  __FILE__)
 
 # Use the included testmnt for testing.
 Exlibris::Aleph.configure do |config|
