@@ -6,6 +6,7 @@ require File.expand_path("../../lib/exlibris-primo-nyu.rb",  __FILE__)
 # Use the included testmnt for testing.
 Exlibris::Aleph.configure do |config|
   config.tab_path = "#{File.dirname(__FILE__)}/../test/mnt/aleph_tab" if ENV['CI']
+  config.yml_path = "#{File.dirname(__FILE__)}/../test/config/aleph" if ENV['CI']
 end
 
 # VCR is used to 'record' HTTP interactions with
