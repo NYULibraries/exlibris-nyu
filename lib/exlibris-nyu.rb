@@ -12,9 +12,11 @@ end
 
 # Load Rails specific configuration if we're in a Rails environment
 if defined?(::Rails) && ::Rails.version >= '3.1.0'
-  Exlibris::Aleph.configure do |config|
-    config.logger = Rails.logger
-    config.yml_path = "#{Rails.root}/config/aleph"
+  ActiveSupport.on_load(:after_initialize) do
+    Exlibris::Aleph.configure do |config|
+      config.logger = Rails.logger
+      config.yml_path = "#{Rails.root}/config/aleph"
+    end
   end
 end
 
