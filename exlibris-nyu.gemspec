@@ -1,17 +1,17 @@
 $:.push File.expand_path("../lib", __FILE__)
 
 # Maintain your gem's version:
-require "exlibris/primo/nyu/version"
+require "exlibris/nyu/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = "exlibris-primo-nyu"
-  s.version     = Exlibris::Primo::Nyu::VERSION
+  s.name        = "exlibris-nyu"
+  s.version     = Exlibris::Nyu::VERSION
   s.authors     = ["Scot Dalton"]
   s.email       = ["scot.dalton@nyu.edu"]
-  s.homepage    = "https://github.com/NYULibraries/exlibris-primo-nyu"
-  s.summary     = "NYU extensions to the exlibris-primo gem."
-  s.description = "NYU extensions to the exlibris-primo gem. Does not require Rails."
+  s.homepage    = "https://github.com/NYULibraries/exlibris-nyu"
+  s.summary     = "NYU extensions to and configurations for the exlibris gems."
+  s.description = "NYU extensions to and configurations for the exlibris gems. Does not require Rails."
 
   s.files = Dir["{lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
   s.test_files = Dir["test/**/*"]
