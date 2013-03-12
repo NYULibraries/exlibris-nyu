@@ -2,12 +2,12 @@
 http_interactions:
 - request:
     method: post
-    uri: http://bobcat.library.nyu.edu/PrimoWebServices/services/searcher
+    uri: http://bobcatdev.library.nyu.edu/PrimoWebServices/services/searcher
     body:
       encoding: US-ASCII
       string: "<?xml version=\"1.0\" encoding=\"UTF-8\"?><env:Envelope xmlns:xsd=\"\
         http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
-        \ xmlns:wsdl=\"http://bobcat.library.nyu.edu/PrimoWebServices/services/searcher\"\
+        \ xmlns:wsdl=\"http://bobcatdev.library.nyu.edu/PrimoWebServices/services/searcher\"\
         \ xmlns:env=\"http://schemas.xmlsoap.org/soap/envelope/\"><env:Body><searchBrief><request><![CDATA[<searchRequest\
         \ xmlns=\"http://www.exlibris.com/primo/xsd/wsRequest\" xmlns:uic=\"http://www.exlibris.com/primo/xsd/primoview/uicomponents\"\
         ><PrimoSearchRequest xmlns=\"http://www.exlibris.com/primo/xsd/search/request\"\
@@ -313,7 +313,7 @@ http_interactions:
                       &lt;/addata&gt;
                     &lt;/record&gt;
                   &lt;/PrimoNMBib&gt;
-                  &lt;sear:GETIT GetIt2=&quot;https://getit.library.nyu.edu/resolve?&amp;amp;ctx_ver=Z39.88-2004&amp;amp;ctx_enc=info:ofi/enc:UTF-8&amp;amp;ctx_tim=2013-03-04T14%3A23%3A52IST&amp;amp;url_ver=Z39.88-2004&amp;amp;url_ctx_fmt=infofi/fmt:kev:mtx:ctx&amp;amp;rfr_id=info:sid/primo.exlibrisgroup.com:primo-dedupmrg52309495&amp;amp;rft_val_fmt=info:ofi/fmt:kev:mtx:book&amp;amp;rft.genre=book&amp;amp;rft.jtitle=&amp;amp;rft.btitle=Mary%20Shelley%2C%20Frankenstein%20:%20the%201818%20text%2C%20contexts%2C%20nineteenth-century%20responses%2C%20criticism&amp;amp;rft.aulast=Hunter&amp;amp;rft.aufirst=J.&amp;amp;rft.auinit=&amp;amp;rft.auinit1=&amp;amp;rft.auinitm=&amp;amp;rft.ausuffix=&amp;amp;rft.au=Shelley%2C%20Mary%20Wollstonecraft%2C%201797-1851&amp;amp;rft.aucorp=&amp;amp;rft.volume=&amp;amp;rft.issue=&amp;amp;rft.part=&amp;amp;rft.quarter=&amp;amp;rft.ssn=&amp;amp;rft.spage=&amp;amp;rft.epage=&amp;amp;rft.pages=&amp;amp;rft.artnum=&amp;amp;rft.pub=W.W.%20Norton&amp;amp;rft.place=New%20York&amp;amp;rft.issn=&amp;amp;rft.eissn=&amp;amp;rft.isbn=0393964582&amp;amp;rft.sici=&amp;amp;rft.coden=&amp;amp;rft_id=info:doi/&amp;amp;rft.object_id=&amp;amp;rft.primo=dedupmrg52309495&amp;amp;rft.eisbn=&amp;amp;rft_dat=&amp;lt;nyu_aleph&gt;003567368&amp;lt;/nyu_aleph&gt;&amp;amp;rft_id=info:oai/&quot; GetIt1=&quot;http://aleph.library.nyu.edu/F?func=item-global&amp;amp;doc_library=NYU01&amp;amp;local_base=PRIMOCOMMON&amp;amp;doc_number=002352826&quot; deliveryCategory=&quot;Physical Item&quot;/&gt;
+                  &lt;sear:GETIT GetIt2=&quot;https://getit.library.nyu.edu/resolve?&amp;amp;ctx_ver=Z39.88-2004&amp;amp;ctx_enc=info:ofi/enc:UTF-8&amp;amp;ctx_tim=2013-03-04T14%3A23%3A52IST&amp;amp;url_ver=Z39.88-2004&amp;amp;url_ctx_fmt=infofi/fmt:kev:mtx:ctx&amp;amp;rfr_id=info:sid/primo.exlibrisgroup.com:primo-dedupmrg52309495&amp;amp;rft_val_fmt=info:ofi/fmt:kev:mtx:book&amp;amp;rft.genre=book&amp;amp;rft.jtitle=&amp;amp;rft.btitle=Mary%20Shelley%2C%20Frankenstein%20:%20the%201818%20text%2C%20contexts%2C%20nineteenth-century%20responses%2C%20criticism&amp;amp;rft.aulast=Hunter&amp;amp;rft.aufirst=J.&amp;amp;rft.auinit=&amp;amp;rft.auinit1=&amp;amp;rft.auinitm=&amp;amp;rft.ausuffix=&amp;amp;rft.au=Shelley%2C%20Mary%20Wollstonecraft%2C%201797-1851&amp;amp;rft.aucorp=&amp;amp;rft.volume=&amp;amp;rft.issue=&amp;amp;rft.part=&amp;amp;rft.quarter=&amp;amp;rft.ssn=&amp;amp;rft.spage=&amp;amp;rft.epage=&amp;amp;rft.pages=&amp;amp;rft.artnum=&amp;amp;rft.pub=W.W.%20Norton&amp;amp;rft.place=New%20York&amp;amp;rft.issn=&amp;amp;rft.eissn=&amp;amp;rft.isbn=0393964582&amp;amp;rft.sici=&amp;amp;rft.coden=&amp;amp;rft_id=info:doi/&amp;amp;rft.object_id=&amp;amp;rft.primo=dedupmrg52309495&amp;amp;rft.eisbn=&amp;amp;rft_dat=&amp;lt;nyu_aleph&gt;003567368&amp;lt;/nyu_aleph&gt;&amp;amp;rft_id=info:oai/&quot; GetIt1=&quot;http://alephstage.library.nyu.edu/F?func=item-global&amp;amp;doc_library=NYU01&amp;amp;local_base=PRIMOCOMMON&amp;amp;doc_number=002352826&quot; deliveryCategory=&quot;Physical Item&quot;/&gt;
                   &lt;sear:LIBRARIES&gt;
                     &lt;sear:LIBRARY&gt;
                       &lt;sear:institution&gt;NS&lt;/sear:institution&gt;
@@ -321,7 +321,7 @@ http_interactions:
                       &lt;sear:status&gt;available&lt;/sear:status&gt;
                       &lt;sear:collection&gt;Main Collection&lt;/sear:collection&gt;
                       &lt;sear:callNumber&gt;(PR5397.F73 M36 1996 )&lt;/sear:callNumber&gt;
-                      &lt;sear:url&gt;http://aleph.library.nyu.edu/F?func=item-global&amp;amp;doc_library=NYU01&amp;amp;local_base=PRIMOCOMMON&amp;amp;doc_number=003567368&lt;/sear:url&gt;
+                      &lt;sear:url&gt;http://alephstage.library.nyu.edu/F?func=item-global&amp;amp;doc_library=NYU01&amp;amp;local_base=PRIMOCOMMON&amp;amp;doc_number=003567368&lt;/sear:url&gt;
                     &lt;/sear:LIBRARY&gt;
                     &lt;sear:LIBRARY&gt;
                       &lt;sear:institution&gt;NYU&lt;/sear:institution&gt;
@@ -329,7 +329,7 @@ http_interactions:
                       &lt;sear:status&gt;available&lt;/sear:status&gt;
                       &lt;sear:collection&gt;Main Collection&lt;/sear:collection&gt;
                       &lt;sear:callNumber&gt;(PR5397.F73 M36 1996 )&lt;/sear:callNumber&gt;
-                      &lt;sear:url&gt;http://aleph.library.nyu.edu/F?func=item-global&amp;amp;doc_library=NYU01&amp;amp;local_base=PRIMOCOMMON&amp;amp;doc_number=002352826&lt;/sear:url&gt;
+                      &lt;sear:url&gt;http://alephstage.library.nyu.edu/F?func=item-global&amp;amp;doc_library=NYU01&amp;amp;local_base=PRIMOCOMMON&amp;amp;doc_number=002352826&lt;/sear:url&gt;
                     &lt;/sear:LIBRARY&gt;
                     &lt;sear:LIBRARY&gt;
                       &lt;sear:institution&gt;NYUAD&lt;/sear:institution&gt;
@@ -337,20 +337,20 @@ http_interactions:
                       &lt;sear:status&gt;available&lt;/sear:status&gt;
                       &lt;sear:collection&gt;Main Collection&lt;/sear:collection&gt;
                       &lt;sear:callNumber&gt;(PR5397.F73 M36 1996 )&lt;/sear:callNumber&gt;
-                      &lt;sear:url&gt;http://aleph.library.nyu.edu/F?func=item-global&amp;amp;doc_library=NYU01&amp;amp;local_base=PRIMOCOMMON&amp;amp;doc_number=002352826&lt;/sear:url&gt;
+                      &lt;sear:url&gt;http://alephstage.library.nyu.edu/F?func=item-global&amp;amp;doc_library=NYU01&amp;amp;local_base=PRIMOCOMMON&amp;amp;doc_number=002352826&lt;/sear:url&gt;
                     &lt;/sear:LIBRARY&gt;
                   &lt;/sear:LIBRARIES&gt;
                   &lt;sear:LINKS&gt;
                     &lt;sear:openurl&gt;&lt;![CDATA[https://getit.library.nyu.edu/resolve?umlaut.institution=NS&amp;ctx_ver=Z39.88-2004&amp;ctx_enc=info:ofi/enc:UTF-8&amp;ctx_tim=2013-03-04T14%3A23%3A52IST&amp;url_ver=Z39.88-2004&amp;url_ctx_fmt=infofi/fmt:kev:mtx:ctx&amp;rfr_id=info:sid/primo.exlibrisgroup.com:primo-dedupmrg52309495&amp;rft_val_fmt=info:ofi/fmt:kev:mtx:book&amp;rft.genre=book&amp;rft.jtitle=&amp;rft.btitle=Mary%20Shelley%2C%20Frankenstein%20:%20the%201818%20text%2C%20contexts%2C%20nineteenth-century%20responses%2C%20criticism&amp;rft.aulast=Hunter&amp;rft.aufirst=J.&amp;rft.auinit=&amp;rft.auinit1=&amp;rft.auinitm=&amp;rft.ausuffix=&amp;rft.au=Shelley%2C%20Mary%20Wollstonecraft%2C%201797-1851&amp;rft.aucorp=&amp;rft.volume=&amp;rft.issue=&amp;rft.part=&amp;rft.quarter=&amp;rft.ssn=&amp;rft.spage=&amp;rft.epage=&amp;rft.pages=&amp;rft.artnum=&amp;rft.pub=W.W.%20Norton&amp;rft.place=New%20York&amp;rft.issn=&amp;rft.eissn=&amp;rft.isbn=0393964582&amp;rft.sici=&amp;rft.coden=&amp;rft_id=info:doi/&amp;rft.object_id=&amp;rft.primo=dedupmrg52309495&amp;rft.eisbn=&amp;rft_dat=&lt;nyu_aleph&gt;003567368&lt;/nyu_aleph&gt;&amp;rft_id=info:oai/]]&gt;&lt;/sear:openurl&gt;
                     &lt;sear:openurl&gt;&lt;![CDATA[https://getit.library.nyu.edu/resolve?umlaut.institution=NYUAD&amp;ctx_ver=Z39.88-2004&amp;ctx_enc=info:ofi/enc:UTF-8&amp;ctx_tim=2013-03-04T14%3A23%3A52IST&amp;url_ver=Z39.88-2004&amp;url_ctx_fmt=infofi/fmt:kev:mtx:ctx&amp;rfr_id=info:sid/primo.exlibrisgroup.com:primo-dedupmrg52309495&amp;rft_val_fmt=info:ofi/fmt:kev:mtx:book&amp;rft.genre=book&amp;rft.jtitle=&amp;rft.btitle=Mary%20Shelley%2C%20Frankenstein%20:%20the%201818%20text%2C%20contexts%2C%20nineteenth-century%20responses%2C%20criticism&amp;rft.aulast=Hunter&amp;rft.aufirst=J.&amp;rft.auinit=&amp;rft.auinit1=&amp;rft.auinitm=&amp;rft.ausuffix=&amp;rft.au=Shelley%2C%20Mary%20Wollstonecraft%2C%201797-1851&amp;rft.aucorp=&amp;rft.volume=&amp;rft.issue=&amp;rft.part=&amp;rft.quarter=&amp;rft.ssn=&amp;rft.spage=&amp;rft.epage=&amp;rft.pages=&amp;rft.artnum=&amp;rft.pub=W.W.%20Norton&amp;rft.place=New%20York&amp;rft.issn=&amp;rft.eissn=&amp;rft.isbn=0393964582&amp;rft.sici=&amp;rft.coden=&amp;rft_id=info:doi/&amp;rft.object_id=&amp;rft.primo=dedupmrg52309495&amp;rft.eisbn=&amp;rft_dat=&lt;nyu_aleph&gt;002352826&lt;/nyu_aleph&gt;&amp;rft_id=info:oai/]]&gt;&lt;/sear:openurl&gt;
-                    &lt;sear:backlink&gt;http://aleph.library.nyu.edu/F?func=direct&amp;amp;local_base=PRIMOCOMMON&amp;amp;doc_number=003567368&lt;/sear:backlink&gt;
-                    &lt;sear:backlink&gt;http://aleph.library.nyu.edu/F?func=direct&amp;amp;local_base=PRIMOCOMMON&amp;amp;doc_number=002352826&lt;/sear:backlink&gt;
+                    &lt;sear:backlink&gt;http://alephstage.library.nyu.edu/F?func=direct&amp;amp;local_base=PRIMOCOMMON&amp;amp;doc_number=003567368&lt;/sear:backlink&gt;
+                    &lt;sear:backlink&gt;http://alephstage.library.nyu.edu/F?func=direct&amp;amp;local_base=PRIMOCOMMON&amp;amp;doc_number=002352826&lt;/sear:backlink&gt;
                     &lt;sear:thumbnail&gt;http://images.amazon.com/images/P/0393964582.01._SSTHUM_.jpg&lt;/sear:thumbnail&gt;
                     &lt;sear:linktotoc&gt;http://www.amazon.com/gp/reader/0393964582&lt;/sear:linktotoc&gt;
                     &lt;sear:openurlfulltext&gt;&lt;![CDATA[https://getit.library.nyu.edu/resolve?umlaut.institution=NS&amp;ctx_ver=Z39.88-2004&amp;sfx.ignore_date_threshold=1&amp;ctx_enc=info:ofi/enc:UTF-8&amp;ctx_tim=2013-03-04T14%3A23%3A52IST&amp;url_ver=Z39.88-2004&amp;url_ctx_fmt=infofi/fmt:kev:mtx:ctx&amp;rfr_id=info:sid/primo.exlibrisgroup.com:primo-dedupmrg52309495&amp;rft_val_fmt=info:ofi/fmt:kev:mtx:book&amp;rft.genre=book&amp;rft.jtitle=&amp;rft.btitle=Mary%20Shelley%2C%20Frankenstein%20:%20the%201818%20text%2C%20contexts%2C%20nineteenth-century%20responses%2C%20criticism&amp;rft.aulast=Hunter&amp;rft.aufirst=J.&amp;rft.auinit=&amp;rft.auinit1=&amp;rft.auinitm=&amp;rft.ausuffix=&amp;rft.au=Shelley%2C%20Mary%20Wollstonecraft%2C%201797-1851&amp;rft.aucorp=&amp;rft.volume=&amp;rft.issue=&amp;rft.part=&amp;rft.quarter=&amp;rft.ssn=&amp;rft.spage=&amp;rft.epage=&amp;rft.pages=&amp;rft.artnum=&amp;rft.pub=W.W.%20Norton&amp;rft.place=New%20York&amp;rft.issn=&amp;rft.eissn=&amp;rft.isbn=0393964582&amp;rft.sici=&amp;rft.coden=&amp;rft_id=info:doi/&amp;rft.object_id=&amp;svc_val_fmt=info:ofi/fmt:kev:mtx:sch_svc&amp;svc.fulltext=yes&amp;rft.eisbn=&amp;rft_dat=&lt;nyu_aleph&gt;003567368&lt;/nyu_aleph&gt;&amp;rft_id=info:oai/]]&gt;&lt;/sear:openurlfulltext&gt;
                     &lt;sear:openurlfulltext&gt;&lt;![CDATA[https://getit.library.nyu.edu/resolve?umlaut.institution=NYUAD&amp;ctx_ver=Z39.88-2004&amp;sfx.ignore_date_threshold=1&amp;ctx_enc=info:ofi/enc:UTF-8&amp;ctx_tim=2013-03-04T14%3A23%3A52IST&amp;url_ver=Z39.88-2004&amp;url_ctx_fmt=infofi/fmt:kev:mtx:ctx&amp;rfr_id=info:sid/primo.exlibrisgroup.com:primo-dedupmrg52309495&amp;rft_val_fmt=info:ofi/fmt:kev:mtx:book&amp;rft.genre=book&amp;rft.jtitle=&amp;rft.btitle=Mary%20Shelley%2C%20Frankenstein%20:%20the%201818%20text%2C%20contexts%2C%20nineteenth-century%20responses%2C%20criticism&amp;rft.aulast=Hunter&amp;rft.aufirst=J.&amp;rft.auinit=&amp;rft.auinit1=&amp;rft.auinitm=&amp;rft.ausuffix=&amp;rft.au=Shelley%2C%20Mary%20Wollstonecraft%2C%201797-1851&amp;rft.aucorp=&amp;rft.volume=&amp;rft.issue=&amp;rft.part=&amp;rft.quarter=&amp;rft.ssn=&amp;rft.spage=&amp;rft.epage=&amp;rft.pages=&amp;rft.artnum=&amp;rft.pub=W.W.%20Norton&amp;rft.place=New%20York&amp;rft.issn=&amp;rft.eissn=&amp;rft.isbn=0393964582&amp;rft.sici=&amp;rft.coden=&amp;rft_id=info:doi/&amp;rft.object_id=&amp;svc_val_fmt=info:ofi/fmt:kev:mtx:sch_svc&amp;svc.fulltext=yes&amp;rft.eisbn=&amp;rft_dat=&lt;nyu_aleph&gt;002352826&lt;/nyu_aleph&gt;&amp;rft_id=info:oai/]]&gt;&lt;/sear:openurlfulltext&gt;
-                    &lt;sear:linktoholdings&gt;http://aleph.library.nyu.edu/F?func=item-global&amp;amp;doc_library=NYU01&amp;amp;local_base=PRIMOCOMMON&amp;amp;doc_number=003567368&lt;/sear:linktoholdings&gt;
-                    &lt;sear:linktoholdings&gt;http://aleph.library.nyu.edu/F?func=item-global&amp;amp;doc_library=NYU01&amp;amp;local_base=PRIMOCOMMON&amp;amp;doc_number=002352826&lt;/sear:linktoholdings&gt;
+                    &lt;sear:linktoholdings&gt;http://alephstage.library.nyu.edu/F?func=item-global&amp;amp;doc_library=NYU01&amp;amp;local_base=PRIMOCOMMON&amp;amp;doc_number=003567368&lt;/sear:linktoholdings&gt;
+                    &lt;sear:linktoholdings&gt;http://alephstage.library.nyu.edu/F?func=item-global&amp;amp;doc_library=NYU01&amp;amp;local_base=PRIMOCOMMON&amp;amp;doc_number=002352826&lt;/sear:linktoholdings&gt;
                     &lt;sear:linktoreview&gt;https://library.nyu.edu/persistent/lcn/dedupmrg52309495?institution=NYU&amp;amp;persistent&lt;/sear:linktoreview&gt;
                     &lt;sear:linktouc&gt;http://www.amazon.com/gp/product/0393964582&lt;/sear:linktouc&gt;
                     &lt;sear:linktouc&gt;http://www.worldcat.org/search?q=isbn%3A0393964582&lt;/sear:linktouc&gt;
@@ -366,7 +366,7 @@ http_interactions:
   recorded_at: Mon, 04 Mar 2013 19:23:52 GMT
 - request:
     method: get
-    uri: http://aleph.library.nyu.edu:1891/rest-dlf/record/NYU01003567368/items?view=full
+    uri: http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01003567368/items?view=full
     body:
       encoding: US-ASCII
       string: ''
@@ -389,7 +389,7 @@ http_interactions:
     body:
       encoding: US-ASCII
       string: "<?xml version = \"1.0\" encoding = \"UTF-8\"?><get-item-list><reply-text>ok</reply-text><reply-code>0000</reply-code><items><item\
-        \ href=\"http://aleph.library.nyu.edu:1891/rest-dlf/record/NYU01003567368/items/NYU50003567368000010\"\
+        \ href=\"http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01003567368/items/NYU50003567368000010\"\
         ><z30-sub-library-code>TNSFO</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>01</z30-item-status-code><z30-collection-code>MAIN</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>003567368</z30-doc-number><z30-item-sequence>\
         \    1.0</z30-item-sequence><z30-barcode>31207040299293</z30-barcode><z30-sub-library>New\
         \ School Fogelman Library</z30-sub-library><z30-material>Books</z30-material><z30-item-status>Regular\
@@ -404,7 +404,7 @@ http_interactions:
   recorded_at: Mon, 04 Mar 2013 19:23:53 GMT
 - request:
     method: get
-    uri: http://aleph.library.nyu.edu:1891/rest-dlf/record/NYU01002352826/items?view=full
+    uri: http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002352826/items?view=full
     body:
       encoding: US-ASCII
       string: ''
@@ -427,7 +427,7 @@ http_interactions:
     body:
       encoding: US-ASCII
       string: "<?xml version = \"1.0\" encoding = \"UTF-8\"?><get-item-list><reply-text>ok</reply-text><reply-code>0000</reply-code><items><item\
-        \ href=\"http://aleph.library.nyu.edu:1891/rest-dlf/record/NYU01002352826/items/NYU50002352826000010\"\
+        \ href=\"http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002352826/items/NYU50002352826000010\"\
         ><z30-sub-library-code>BOBST</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>01</z30-item-status-code><z30-collection-code>MAIN</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>002352826</z30-doc-number><z30-item-sequence>\
         \    1.0</z30-item-sequence><z30-barcode>31142022826146</z30-barcode><z30-sub-library>NYU\
         \ Bobst</z30-sub-library><z30-material>Books</z30-material><z30-item-status>Regular\
@@ -439,7 +439,7 @@ http_interactions:
         \ :</z13-title><z13-imprint-code>260</z13-imprint-code><z13-imprint>New York\
         \ : W.W. Norton, c1996.</z13-imprint><z13-isbn-issn-code>020</z13-isbn-issn-code><z13-isbn-issn>0393964582\
         \ (pbk.)</z13-isbn-issn></z13><status>03/31/13</status></item><item href=\"\
-        http://aleph.library.nyu.edu:1891/rest-dlf/record/NYU01002352826/items/NYU50002352826000020\"\
+        http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002352826/items/NYU50002352826000020\"\
         ><z30-sub-library-code>BOBST</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>01</z30-item-status-code><z30-collection-code>MAIN</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>002352826</z30-doc-number><z30-item-sequence>\
         \    2.0</z30-item-sequence><z30-barcode>31142022826088</z30-barcode><z30-sub-library>NYU\
         \ Bobst</z30-sub-library><z30-material>Books</z30-material><z30-item-status>Regular\
@@ -451,7 +451,7 @@ http_interactions:
         \ :</z13-title><z13-imprint-code>260</z13-imprint-code><z13-imprint>New York\
         \ : W.W. Norton, c1996.</z13-imprint><z13-isbn-issn-code>020</z13-isbn-issn-code><z13-isbn-issn>0393964582\
         \ (pbk.)</z13-isbn-issn></z13><status>04/01/13</status></item><item href=\"\
-        http://aleph.library.nyu.edu:1891/rest-dlf/record/NYU01002352826/items/NYU50002352826000030\"\
+        http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002352826/items/NYU50002352826000030\"\
         ><z30-sub-library-code>BOBST</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>01</z30-item-status-code><z30-collection-code>MAIN</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>002352826</z30-doc-number><z30-item-sequence>\
         \    3.0</z30-item-sequence><z30-barcode>31142022826021</z30-barcode><z30-sub-library>NYU\
         \ Bobst</z30-sub-library><z30-material>Books</z30-material><z30-item-status>Regular\
@@ -463,7 +463,7 @@ http_interactions:
         \ :</z13-title><z13-imprint-code>260</z13-imprint-code><z13-imprint>New York\
         \ : W.W. Norton, c1996.</z13-imprint><z13-isbn-issn-code>020</z13-isbn-issn-code><z13-isbn-issn>0393964582\
         \ (pbk.)</z13-isbn-issn></z13><status>On Shelf</status></item><item href=\"\
-        http://aleph.library.nyu.edu:1891/rest-dlf/record/NYU01002352826/items/NYU50002352826000040\"\
+        http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002352826/items/NYU50002352826000040\"\
         ><z30-sub-library-code>BOBST</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>01</z30-item-status-code><z30-collection-code>MAIN</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>002352826</z30-doc-number><z30-item-sequence>\
         \    4.0</z30-item-sequence><z30-barcode>31142021889426</z30-barcode><z30-sub-library>NYU\
         \ Bobst</z30-sub-library><z30-material>Books</z30-material><z30-item-status>Regular\
@@ -475,7 +475,7 @@ http_interactions:
         \ :</z13-title><z13-imprint-code>260</z13-imprint-code><z13-imprint>New York\
         \ : W.W. Norton, c1996.</z13-imprint><z13-isbn-issn-code>020</z13-isbn-issn-code><z13-isbn-issn>0393964582\
         \ (pbk.)</z13-isbn-issn></z13><status>04/19/13</status></item><item href=\"\
-        http://aleph.library.nyu.edu:1891/rest-dlf/record/NYU01002352826/items/NYU51002352826000010\"\
+        http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002352826/items/NYU51002352826000010\"\
         ><z30-sub-library-code>NABUD</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>01</z30-item-status-code><z30-collection-code>MAIN</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU51</translate-change-active-library><z30-doc-number>002352826</z30-doc-number><z30-item-sequence>\
         \    1.0</z30-item-sequence><z30-barcode>31122050467310</z30-barcode><z30-sub-library>NYU\
         \ Abu Dhabi Library (UAE)</z30-sub-library><z30-material>Books</z30-material><z30-item-status>Regular\

@@ -2,12 +2,12 @@
 http_interactions:
 - request:
     method: post
-    uri: http://bobcat.library.nyu.edu/PrimoWebServices/services/searcher
+    uri: http://bobcatdev.library.nyu.edu/PrimoWebServices/services/searcher
     body:
       encoding: US-ASCII
       string: "<?xml version=\"1.0\" encoding=\"UTF-8\"?><env:Envelope xmlns:xsd=\"\
         http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
-        \ xmlns:wsdl=\"http://bobcat.library.nyu.edu/PrimoWebServices/services/searcher\"\
+        \ xmlns:wsdl=\"http://bobcatdev.library.nyu.edu/PrimoWebServices/services/searcher\"\
         \ xmlns:env=\"http://schemas.xmlsoap.org/soap/envelope/\"><env:Body><getRecord><request><![CDATA[<fullViewRequest\
         \ xmlns=\"http://www.exlibris.com/primo/xsd/wsRequest\" xmlns:uic=\"http://www.exlibris.com/primo/xsd/primoview/uicomponents\"\
         ><PrimoSearchRequest xmlns=\"http://www.exlibris.com/primo/xsd/search/request\"\
@@ -152,7 +152,7 @@ http_interactions:
   recorded_at: Mon, 04 Mar 2013 19:23:37 GMT
 - request:
     method: get
-    uri: http://aleph.library.nyu.edu:1891/rest-dlf/record/NYU30000193032/items?view=full
+    uri: http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU30000193032/items?view=full
     body:
       encoding: US-ASCII
       string: ''
@@ -175,7 +175,7 @@ http_interactions:
     body:
       encoding: US-ASCII
       string: "<?xml version = \"1.0\" encoding = \"UTF-8\"?><get-item-list><reply-text>ok</reply-text><reply-code>0000</reply-code><items><item\
-        \ href=\"http://aleph.library.nyu.edu:1891/rest-dlf/record/NYU30000193032/items/NYU50100285680000010\"\
+        \ href=\"http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU30000193032/items/NYU50100285680000010\"\
         ><z30-sub-library-code>BRES</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>20</z30-item-status-code><z30-collection-code>BRES</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>100285680</z30-doc-number><z30-item-sequence>\
         \    1.0</z30-item-sequence><z30-barcode>31142051608357</z30-barcode><z30-sub-library>NYU\
         \ Bobst Reserve Collection</z30-sub-library><z30-material>Books</z30-material><z30-item-status>Reserve\
@@ -185,7 +185,7 @@ http_interactions:
         \ in Process</z30-item-process-status><z30-copy-id></z30-copy-id><z30-hol-doc-number>000000000</z30-hol-doc-number><z30-temp-location>No</z30-temp-location><z30-enumeration-a></z30-enumeration-a><z30-enumeration-b></z30-enumeration-b><z30-enumeration-c></z30-enumeration-c><z30-enumeration-d></z30-enumeration-d><z30-enumeration-e></z30-enumeration-e><z30-enumeration-f></z30-enumeration-f><z30-enumeration-g></z30-enumeration-g><z30-enumeration-h></z30-enumeration-h><z30-chronological-i></z30-chronological-i><z30-chronological-j></z30-chronological-j><z30-chronological-k></z30-chronological-k><z30-chronological-l></z30-chronological-l><z30-chronological-m></z30-chronological-m><z30-supp-index-o></z30-supp-index-o><z30-85x-type></z30-85x-type><z30-depository-id></z30-depository-id><z30-linking-number>000000000</z30-linking-number><z30-gap-indicator></z30-gap-indicator><z30-maintenance-count>002</z30-maintenance-count><z30-process-status-date>20130130</z30-process-status-date></z30><z13><translate-change-active-library>NYU50</translate-change-active-library><z13-doc-number>000193031</z13-doc-number><z13-year>0000</z13-year><z13-open-date>20130130</z13-open-date><z13-update-date>20130130</z13-update-date><z13-call-no-key></z13-call-no-key><z13-call-no-code>LOC8</z13-call-no-code><z13-call-no></z13-call-no><z13-author-code>1001</z13-author-code><z13-author>Hall\
         \ &amp; Leiberman</z13-author><z13-title-code>245</z13-title-code><z13-title>Microeconomics:\
         \ Principles and applications (6th edt.)</z13-title><z13-imprint-code></z13-imprint-code><z13-imprint></z13-imprint><z13-isbn-issn-code></z13-isbn-issn-code><z13-isbn-issn></z13-isbn-issn></z13><status>On\
-        \ Shelf</status></item><item href=\"http://aleph.library.nyu.edu:1891/rest-dlf/record/NYU30000193032/items/NYU50100285680000020\"\
+        \ Shelf</status></item><item href=\"http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU30000193032/items/NYU50100285680000020\"\
         ><z30-sub-library-code>BRES</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>20</z30-item-status-code><z30-collection-code>BRES</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>100285680</z30-doc-number><z30-item-sequence>\
         \    2.0</z30-item-sequence><z30-barcode>31142051608365</z30-barcode><z30-sub-library>NYU\
         \ Bobst Reserve Collection</z30-sub-library><z30-material>Books</z30-material><z30-item-status>Reserve\
@@ -195,7 +195,7 @@ http_interactions:
         \ in Process</z30-item-process-status><z30-copy-id></z30-copy-id><z30-hol-doc-number>000000000</z30-hol-doc-number><z30-temp-location>No</z30-temp-location><z30-enumeration-a></z30-enumeration-a><z30-enumeration-b></z30-enumeration-b><z30-enumeration-c></z30-enumeration-c><z30-enumeration-d></z30-enumeration-d><z30-enumeration-e></z30-enumeration-e><z30-enumeration-f></z30-enumeration-f><z30-enumeration-g></z30-enumeration-g><z30-enumeration-h></z30-enumeration-h><z30-chronological-i></z30-chronological-i><z30-chronological-j></z30-chronological-j><z30-chronological-k></z30-chronological-k><z30-chronological-l></z30-chronological-l><z30-chronological-m></z30-chronological-m><z30-supp-index-o></z30-supp-index-o><z30-85x-type></z30-85x-type><z30-depository-id></z30-depository-id><z30-linking-number>000000000</z30-linking-number><z30-gap-indicator></z30-gap-indicator><z30-maintenance-count>004</z30-maintenance-count><z30-process-status-date>20130130</z30-process-status-date></z30><z13><translate-change-active-library>NYU50</translate-change-active-library><z13-doc-number>000193031</z13-doc-number><z13-year>0000</z13-year><z13-open-date>20130130</z13-open-date><z13-update-date>20130130</z13-update-date><z13-call-no-key></z13-call-no-key><z13-call-no-code>LOC8</z13-call-no-code><z13-call-no></z13-call-no><z13-author-code>1001</z13-author-code><z13-author>Hall\
         \ &amp; Leiberman</z13-author><z13-title-code>245</z13-title-code><z13-title>Microeconomics:\
         \ Principles and applications (6th edt.)</z13-title><z13-imprint-code></z13-imprint-code><z13-imprint></z13-imprint><z13-isbn-issn-code></z13-isbn-issn-code><z13-isbn-issn></z13-isbn-issn></z13><status>On\
-        \ Shelf</status></item><item href=\"http://aleph.library.nyu.edu:1891/rest-dlf/record/NYU30000193032/items/NYU50100285680000030\"\
+        \ Shelf</status></item><item href=\"http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU30000193032/items/NYU50100285680000030\"\
         ><z30-sub-library-code>BRES</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>20</z30-item-status-code><z30-collection-code>BRES</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>100285680</z30-doc-number><z30-item-sequence>\
         \    3.0</z30-item-sequence><z30-barcode>31142054052728</z30-barcode><z30-sub-library>NYU\
         \ Bobst Reserve Collection</z30-sub-library><z30-material>Books</z30-material><z30-item-status>Reserve\

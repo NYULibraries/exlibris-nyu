@@ -1,5 +1,5 @@
-base_url: "http://aleph.library.nyu.edu"
-rest_url: "http://aleph.library.nyu.edu:1891/rest-dlf"
+base_url: "http://alephstage.library.nyu.edu"
+rest_url: "http://alephstage.library.nyu.edu:1891/rest-dlf"
 adms:
   - NYU50
   - NYU51

@@ -25,7 +25,7 @@ class NyuAlephReservesTest < ActiveSupport::TestCase
         assert_equal("NYU Bobst Reserve Collection", bobst_source.library)
         assert_equal("", bobst_source.collection)
         assert_equal("Available - Reserve 2 hour loan", bobst_source.status)
-        assert_equal("http://aleph.library.nyu.edu/F?func=item-global&doc_library=NYU30&local_base=PRIMOCOMMON&doc_number=000193032&sub_library=BRES", bobst_source.url)
+        assert_equal("http://alephstage.library.nyu.edu/F?func=item-global&doc_library=NYU30&local_base=PRIMOCOMMON&doc_number=000193032&sub_library=BRES", bobst_source.url)
       end
     end
   end

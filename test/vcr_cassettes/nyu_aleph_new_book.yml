@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://aleph.library.nyu.edu:1891/rest-dlf/record/NYU01000655588/items?view=full
+    uri: http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01000655588/items?view=full
     body:
       encoding: US-ASCII
       string: ''
@@ -25,7 +25,7 @@ http_interactions:
     body:
       encoding: US-ASCII
       string: "<?xml version = \"1.0\" encoding = \"UTF-8\"?><get-item-list><reply-text>ok</reply-text><reply-code>0000</reply-code><items><item\
-        \ href=\"http://aleph.library.nyu.edu:1891/rest-dlf/record/NYU01000655588/items/NYU50000655588000010\"\
+        \ href=\"http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01000655588/items/NYU50000655588000010\"\
         ><z30-sub-library-code>BOBST</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>01</z30-item-status-code><z30-collection-code>MAIN</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>000655588</z30-doc-number><z30-item-sequence>\
         \    1.0</z30-item-sequence><z30-barcode>31142032087796</z30-barcode><z30-sub-library>NYU\
         \ Bobst</z30-sub-library><z30-material>Books</z30-material><z30-item-status>Regular\
@@ -36,7 +36,7 @@ http_interactions:
         \ Pippa.</z13-author><z13-title-code>24510</z13-title-code><z13-title>Digital\
         \ divide :</z13-title><z13-imprint-code>260</z13-imprint-code><z13-imprint>New\
         \ York : Cambridge University Press, 2001.</z13-imprint><z13-isbn-issn-code>020</z13-isbn-issn-code><z13-isbn-issn>0521807514</z13-isbn-issn></z13><status>On\
-        \ Shelf</status></item><item href=\"http://aleph.library.nyu.edu:1891/rest-dlf/record/NYU01000655588/items/NYU50000655588000020\"\
+        \ Shelf</status></item><item href=\"http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01000655588/items/NYU50000655588000020\"\
         ><z30-sub-library-code>TNSFO</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>01</z30-item-status-code><z30-collection-code>MAIN</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>000655588</z30-doc-number><z30-item-sequence>\
         \    2.0</z30-item-sequence><z30-barcode>31207027537921</z30-barcode><z30-sub-library>New\
         \ School Fogelman Library</z30-sub-library><z30-material>Books</z30-material><z30-item-status>Regular\
