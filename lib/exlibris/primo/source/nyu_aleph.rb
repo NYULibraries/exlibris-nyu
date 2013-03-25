@@ -20,7 +20,7 @@ module Exlibris
 
         attr_accessor :adm_library_code, :sub_library_code, :collection_code,
           :item_status_code, :item_process_status_code, :circulation_status,
-            :item_status, :item_process_status
+            :item_status, :item_process_status, :queue
 
         # Overwrites Exlibris::Primo::Source::Aleph#new
         def initialize(attributes={})
@@ -34,6 +34,8 @@ module Exlibris
         def availability_status_code
           # First check if the item is checked out
           return @availability_status_code = "checked_out" if checked_out?
+          # Then check if it's requested
+          return @availability_status_code = "requested" if requested?
           # Then check based on circulation status
           return @availability_status_code = circulation_status_code.dup unless circulation_status_code.nil?
           # Then check based on item_web_text
@@ -47,6 +49,10 @@ module Exlibris
         def availability_status
           # First check if the item is checked out
           return @availability_status = "Due: " + circulation_status if checked_out?
+          # Then check if we're reshelving
+          return @availability_status = "Reshelving" if reshelving?
+          # Then check if it's requested
+          return @availability_status = circulation_status if requested?
           # Then check based on item_web_text if we're not dealing with a circulation status
           return @availability_status = item_web_text if circulation_status_code.nil? and item_web_text
           # Otherwise super
@@ -111,7 +117,7 @@ module Exlibris
           # Some circulations statuses are non requestable.
           # Non-Requestable circulation statuses include:
           #   - Reshelving
-          return RequestableNo if ["Reshelving"].include?(circulation_status)
+          return RequestableNo if reshelving?
           # Check holding permissions
           # If the holding has "C" as its hold request permission, it is requestable.
           # Also if it has "Y" in its photocopy request (indicating ILL), it is requestable.
@@ -143,6 +149,24 @@ module Exlibris
           @request_permissions = {}
         end
         private :request_permissions
+
+        # Is this holding requested?
+        def requested?
+          /Requested/=~ circulation_status
+        end
+        private :requested?
+
+        # Are we reshelving this item?
+        def reshelving?
+          /Reshelving/=~ circulation_status
+        end
+        private :reshelving?
+
+        # The number of requests made for this holding
+        def request_count
+          @request_count ||= queue.match(/^(\d+)/)[0].to_i
+        end
+        private :request_count
 
         # Logic to determine whether we're expanding this holding
         # Only expand if not a journal
@@ -183,6 +207,7 @@ module Exlibris
               :item_status => aleph_item["z30"]["z30_item_status"],
               :item_process_status => aleph_item["z30"]["z30_item_process_status"],
               :circulation_status => aleph_item["status"],
+              :queue => aleph_item["queue"],
               :z30_callno => aleph_item["z30"]["z30_call_no"],
               :description => aleph_item["z30"]["z30_description"],
               :hol_doc_number => aleph_item["z30"]["z30_hol_doc_number"]
