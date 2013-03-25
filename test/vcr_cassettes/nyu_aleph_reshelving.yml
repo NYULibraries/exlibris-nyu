@@ -2,11 +2,11 @@
 http_interactions:
 - request:
     method: post
-    uri: http://bobcat.library.nyu.edu/PrimoWebServices/services/searcher
+    uri: http://bobcatdev.library.nyu.edu/PrimoWebServices/services/searcher
     body:
       encoding: US-ASCII
       string: <?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wsdl="http://bobcat.library.nyu.edu/PrimoWebServices/services/searcher"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wsdl="http://bobcatdev.library.nyu.edu/PrimoWebServices/services/searcher"
         xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"><env:Body><getRecord><request><![CDATA[<fullViewRequest
         xmlns="http://www.exlibris.com/primo/xsd/wsRequest" xmlns:uic="http://www.exlibris.com/primo/xsd/primoview/uicomponents"><PrimoSearchRequest
         xmlns="http://www.exlibris.com/primo/xsd/search/request"><QueryTerms><BoolOpeator>AND</BoolOpeator></QueryTerms><StartIndex>1</StartIndex><BulkSize>5</BulkSize><DidUMeanEnabled>false</DidUMeanEnabled></PrimoSearchRequest><institution>NYU</institution><docId>nyu_aleph002365745</docId></fullViewRequest>]]></request></getRecord></env:Body></env:Envelope>
@@ -149,7 +149,7 @@ http_interactions:
   recorded_at: Mon, 25 Mar 2013 15:49:23 GMT
 - request:
     method: get
-    uri: http://aleph.library.nyu.edu:1891/rest-dlf/record/NYU01002365745/items?view=full
+    uri: http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002365745/items?view=full
     body:
       encoding: US-ASCII
       string: ''
@@ -172,7 +172,7 @@ http_interactions:
     body:
       encoding: US-ASCII
       string: ! '<?xml version = "1.0" encoding = "UTF-8"?><get-item-list><reply-text>ok</reply-text><reply-code>0000</reply-code><items><item
-        href="http://aleph.library.nyu.edu:1891/rest-dlf/record/NYU01002365745/items/NYU50002365745000020"><z30-sub-library-code>BFALE</z30-sub-library-code><z30-item-process-status-code>DM</z30-item-process-status-code><z30-item-status-code>04</z30-item-status-code><z30-collection-code>FALES</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>002365745</z30-doc-number><z30-item-sequence>    2.0</z30-item-sequence><z30-barcode>31142042533508</z30-barcode><z30-sub-library>NYU
+        href="http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002365745/items/NYU50002365745000020"><z30-sub-library-code>BFALE</z30-sub-library-code><z30-item-process-status-code>DM</z30-item-process-status-code><z30-item-status-code>04</z30-item-status-code><z30-collection-code>FALES</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>002365745</z30-doc-number><z30-item-sequence>    2.0</z30-item-sequence><z30-barcode>31142042533508</z30-barcode><z30-sub-library>NYU
         Bobst Special Collections</z30-sub-library><z30-material>Books</z30-material><z30-item-status>Ask
         at Fales</z30-item-status><z30-open-date>20100622</z30-open-date><z30-update-date>20100910</z30-update-date><z30-cataloger>LANNANM</z30-cataloger><z30-date-last-return>00000000</z30-date-last-return><z30-hour-last-return>0000</z30-hour-last-return><z30-ip-last-return></z30-ip-last-return><z30-no-loans>000</z30-no-loans><z30-alpha>L</z30-alpha><z30-collection>SpecCol</z30-collection><z30-call-no-type>0</z30-call-no-type><z30-call-no>TX769
         .A486 1995 Non-circulating</z30-call-no><z30-call-no-key>0 tx&quot;769 a486
@@ -182,7 +182,7 @@ http_interactions:
         and flavors :</z13-title><z13-imprint-code>260</z13-imprint-code><z13-imprint>New
         York : Morrow, c1995.</z13-imprint><z13-isbn-issn-code>020</z13-isbn-issn-code><z13-isbn-issn>0688114113
         (acid-free paper)</z13-isbn-issn></z13><status>Ask at Fales</status></item><item
-        href="http://aleph.library.nyu.edu:1891/rest-dlf/record/NYU01002365745/items/NYU50002365745000010"><z30-sub-library-code>BOBST</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>01</z30-item-status-code><z30-collection-code>MAIN</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>002365745</z30-doc-number><z30-item-sequence>    1.0</z30-item-sequence><z30-barcode>31142021818797</z30-barcode><z30-sub-library>NYU
+        href="http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002365745/items/NYU50002365745000010"><z30-sub-library-code>BOBST</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>01</z30-item-status-code><z30-collection-code>MAIN</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>002365745</z30-doc-number><z30-item-sequence>    1.0</z30-item-sequence><z30-barcode>31142021818797</z30-barcode><z30-sub-library>NYU
         Bobst</z30-sub-library><z30-material>Books</z30-material><z30-item-status>Regular
         loan</z30-item-status><z30-open-date>19960912</z30-open-date><z30-update-date>19960912</z30-update-date><z30-cataloger>CIROUT5</z30-cataloger><z30-date-last-return>20130325</z30-date-last-return><z30-hour-last-return>1140</z30-hour-last-return><z30-ip-last-return>128.122.88.225</z30-ip-last-return><z30-no-loans>007</z30-no-loans><z30-alpha>L</z30-alpha><z30-collection>Main
         Collection</z30-collection><z30-call-no-type>0</z30-call-no-type><z30-call-no>TX769
