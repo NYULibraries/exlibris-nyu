@@ -329,4 +329,27 @@ class NyuAlephTest < ActiveSupport::TestCase
       end
     end
   end
+
+  test "nyu_aleph recalled" do
+    VCR.use_cassette('nyu_aleph recalled') do
+      holdings =
+        exlibris_primo_search.record_id!(@flatbreads_and_flavors_id).records.collect{|record| record.holdings}.flatten
+      sources = []
+      holdings.each do |holding|
+        source = holding.to_source
+        sources.concat(source.expand) unless sources.include? source
+      end
+      bobst_sources = sources.find_all do |source|
+        source.library.eql?("NYU Bobst")
+      end
+      bobst_sources.each do |bobst_source|
+        assert_equal("recalled", bobst_source.status_code)
+        assert_equal("Due: 03/10/13", bobst_source.status)
+        assert_equal("NYU01", bobst_source.original_source_id)
+        assert_equal("003710159", bobst_source.source_record_id)
+        assert_equal("003710159", bobst_source.source_data[:source_record_id])
+        assert_equal("http://alephstage.library.nyu.edu/F?func=item-global&doc_library=NYU01&local_base=PRIMOCOMMON&doc_number=003710159&sub_library=BOBST", bobst_source.url)
+      end
+    end
+  end
 end

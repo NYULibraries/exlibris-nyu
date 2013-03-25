@@ -32,10 +32,12 @@ module Exlibris
 
         # Overrides Exlibris::Primo::Holding#availability_status_code
         def availability_status_code
-          # First check if the item is checked out
+          # First check if the item is recalled.
+          return @availability_status_code = "recalled" if recalled?
+          # Then check if the item is checked out
           return @availability_status_code = "checked_out" if checked_out?
           # Then check if it's requested
-          return @availability_status_code = "requested" if requested?
+          return @availability_status_code = "requested" if requested? or recalled?
           # Then check based on circulation status
           return @availability_status_code = circulation_status_code.dup unless circulation_status_code.nil?
           # Then check based on item_web_text
@@ -47,8 +49,10 @@ module Exlibris
 
         # Overrides Exlibris::Primo::Holding#availability_status
         def availability_status
-          # First check if the item is checked out
-          return @availability_status = "Due: " + circulation_status if checked_out?
+          # First check if the item is recalled.
+          return @availability_status = "Due: #{recalled_due_date}" if recalled?
+          # Then check if the item is checked out
+          return @availability_status = "Due: #{circulation_status}" if checked_out?
           # Then check if we're reshelving
           return @availability_status = "Reshelving" if reshelving?
           # Then check if it's requested
@@ -156,6 +160,12 @@ module Exlibris
         end
         private :requested?
 
+        # Is this holding recalled?
+        def recalled?
+          /Recalled/=~ circulation_status
+        end
+        private :recalled?
+
         # Are we reshelving this item?
         def reshelving?
           /Reshelving/=~ circulation_status
@@ -167,6 +177,12 @@ module Exlibris
           @request_count ||= queue.match(/^(\d+)/)[0].to_i
         end
         private :request_count
+
+        # Return the recalled due date
+        def recalled_due_date
+          @recalled_due_date ||= circulation_status.match(/Recalled due date: (\d{2}\/\d{2}\/\d{2})/)[1]
+        end
+        private :recalled_due_date
 
         # Logic to determine whether we're expanding this holding
         # Only expand if not a journal
