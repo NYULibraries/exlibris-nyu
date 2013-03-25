@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01001244378/items?view=full
+    uri: http://aleph.library.edu:1891/rest-dlf/record/NYU01001244378/items?view=full
     body:
       encoding: US-ASCII
       string: ''
@@ -25,7 +25,7 @@ http_interactions:
     body:
       encoding: US-ASCII
       string: "<?xml version = \"1.0\" encoding = \"UTF-8\"?><get-item-list><reply-text>ok</reply-text><reply-code>0000</reply-code><items><item\
-        \ href=\"http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01001244378/items/NYU50001244378000010\"\
+        \ href=\"http://aleph.library.edu:1891/rest-dlf/record/NYU01001244378/items/NYU50001244378000010\"\
         ><z30-sub-library-code>BOBST</z30-sub-library-code><z30-item-process-status-code>XD</z30-item-process-status-code><z30-item-status-code>01</z30-item-status-code><z30-collection-code>MAIN</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>001244378</z30-doc-number><z30-item-sequence>\
         \    1.0</z30-item-sequence><z30-barcode>31142023173340</z30-barcode><z30-sub-library>NYU\
         \ Bobst</z30-sub-library><z30-material>Scores</z30-material><z30-item-status>Request\

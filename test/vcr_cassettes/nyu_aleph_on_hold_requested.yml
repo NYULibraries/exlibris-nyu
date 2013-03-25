@@ -2,11 +2,11 @@
 http_interactions:
 - request:
     method: post
-    uri: http://bobcatdev.library.nyu.edu/PrimoWebServices/services/searcher
+    uri: http://primo.library.edu/PrimoWebServices/services/searcher
     body:
       encoding: US-ASCII
       string: <?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wsdl="http://bobcatdev.library.nyu.edu/PrimoWebServices/services/searcher"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wsdl="http://primo.library.edu/PrimoWebServices/services/searcher"
         xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"><env:Body><getRecord><request><![CDATA[<fullViewRequest
         xmlns="http://www.exlibris.com/primo/xsd/wsRequest" xmlns:uic="http://www.exlibris.com/primo/xsd/primoview/uicomponents"><PrimoSearchRequest
         xmlns="http://www.exlibris.com/primo/xsd/search/request"><QueryTerms><BoolOpeator>AND</BoolOpeator></QueryTerms><StartIndex>1</StartIndex><BulkSize>5</BulkSize><DidUMeanEnabled>false</DidUMeanEnabled></PrimoSearchRequest><institution>NYU</institution><docId>nyu_aleph003710159</docId></fullViewRequest>]]></request></getRecord></env:Body></env:Envelope>
@@ -177,7 +177,7 @@ http_interactions:
   recorded_at: Mon, 25 Mar 2013 14:23:46 GMT
 - request:
     method: get
-    uri: http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01003710159/items?view=full
+    uri: http://aleph.library.edu:1891/rest-dlf/record/NYU01003710159/items?view=full
     body:
       encoding: US-ASCII
       string: ''
@@ -200,7 +200,7 @@ http_interactions:
     body:
       encoding: US-ASCII
       string: ! '<?xml version = "1.0" encoding = "UTF-8"?><get-item-list><reply-text>ok</reply-text><reply-code>0000</reply-code><items><item
-        href="http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01003710159/items/NYU50003710159000010"><z30-sub-library-code>BOBST</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>01</z30-item-status-code><z30-collection-code>MAIN</z30-collection-code><queue>4
+        href="http://aleph.library.edu:1891/rest-dlf/record/NYU01003710159/items/NYU50003710159000010"><z30-sub-library-code>BOBST</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>01</z30-item-status-code><z30-collection-code>MAIN</z30-collection-code><queue>4
         request(s) of 1 items.</queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>003710159</z30-doc-number><z30-item-sequence>    1.0</z30-item-sequence><z30-barcode>31142055184439</z30-barcode><z30-sub-library>NYU
         Bobst</z30-sub-library><z30-material>Books</z30-material><z30-item-status>Regular
         loan</z30-item-status><z30-open-date>20130212</z30-open-date><z30-update-date>20130220</z30-update-date><z30-cataloger>PARRC</z30-cataloger><z30-date-last-return>20130318</z30-date-last-return><z30-hour-last-return>1017</z30-hour-last-return><z30-ip-last-return>128.122.88.168</z30-ip-last-return><z30-no-loans>002</z30-no-loans><z30-alpha>L</z30-alpha><z30-collection>Main
@@ -210,7 +210,7 @@ http_interactions:
         Charles J.</z13-author><z13-title-code>24510</z13-title-code><z13-title>Naked
         statistics :</z13-title><z13-imprint-code></z13-imprint-code><z13-imprint></z13-imprint><z13-isbn-issn-code>020</z13-isbn-issn-code><z13-isbn-issn>9780393071955
         (hbk.)</z13-isbn-issn></z13><status>On Hold; Requested</status></item><item
-        href="http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01003710159/items/NYU51003710159000010"><z30-sub-library-code>NABUD</z30-sub-library-code><z30-item-process-status-code>CT</z30-item-process-status-code><z30-item-status-code>01</z30-item-status-code><z30-collection-code>MAIN</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU51</translate-change-active-library><z30-doc-number>003710159</z30-doc-number><z30-item-sequence>    1.0</z30-item-sequence><z30-barcode>31122054946202</z30-barcode><z30-sub-library>NYU
+        href="http://aleph.library.edu:1891/rest-dlf/record/NYU01003710159/items/NYU51003710159000010"><z30-sub-library-code>NABUD</z30-sub-library-code><z30-item-process-status-code>CT</z30-item-process-status-code><z30-item-status-code>01</z30-item-status-code><z30-collection-code>MAIN</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU51</translate-change-active-library><z30-doc-number>003710159</z30-doc-number><z30-item-sequence>    1.0</z30-item-sequence><z30-barcode>31122054946202</z30-barcode><z30-sub-library>NYU
         Abu Dhabi Library (UAE)</z30-sub-library><z30-material>Books</z30-material><z30-item-status>In
         Processing</z30-item-status><z30-open-date>20130301</z30-open-date><z30-update-date>20130315</z30-update-date><z30-cataloger>PANO</z30-cataloger><z30-date-last-return>00000000</z30-date-last-return><z30-hour-last-return>0000</z30-hour-last-return><z30-ip-last-return></z30-ip-last-return><z30-no-loans>000</z30-no-loans><z30-alpha>L</z30-alpha><z30-collection>Main
         Collection</z30-collection><z30-call-no-type>0</z30-call-no-type><z30-call-no></z30-call-no><z30-call-no-key>0

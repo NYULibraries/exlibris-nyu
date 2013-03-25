@@ -276,7 +276,7 @@ class NyuAlephTest < ActiveSupport::TestCase
         assert_equal("NYU01", bobst_source.original_source_id)
         assert_equal("003079903", bobst_source.source_record_id)
         assert_equal("003079903", bobst_source.source_data[:source_record_id])
-        assert_equal("http://alephstage.library.nyu.edu/F?func=item-global&doc_library=NYU01&local_base=PRIMOCOMMON&doc_number=003079903&sub_library=BOBST", bobst_source.url)
+        assert_equal("http://#{@@aleph_url}/F?func=item-global&doc_library=NYU01&local_base=PRIMOCOMMON&doc_number=003079903&sub_library=BOBST", bobst_source.url)
       end
     end
   end
@@ -302,7 +302,7 @@ class NyuAlephTest < ActiveSupport::TestCase
         assert_equal("NYU01", bobst_source.original_source_id)
         assert_equal("003710159", bobst_source.source_record_id)
         assert_equal("003710159", bobst_source.source_data[:source_record_id])
-        assert_equal("http://alephstage.library.nyu.edu/F?func=item-global&doc_library=NYU01&local_base=PRIMOCOMMON&doc_number=003710159&sub_library=BOBST", bobst_source.url)
+        assert_equal("http://#{@@aleph_url}/F?func=item-global&doc_library=NYU01&local_base=PRIMOCOMMON&doc_number=003710159&sub_library=BOBST", bobst_source.url)
       end
     end
   end
@@ -325,7 +325,7 @@ class NyuAlephTest < ActiveSupport::TestCase
         assert_equal("NYU01", bobst_source.original_source_id)
         assert_equal("002365745", bobst_source.source_record_id)
         assert_equal("002365745", bobst_source.source_data[:source_record_id])
-        assert_equal("http://alephstage.library.nyu.edu/F?func=item-global&doc_library=NYU01&local_base=PRIMOCOMMON&doc_number=002365745&sub_library=BOBST", bobst_source.url)
+        assert_equal("http://#{@@aleph_url}/F?func=item-global&doc_library=NYU01&local_base=PRIMOCOMMON&doc_number=002365745&sub_library=BOBST", bobst_source.url)
       end
     end
   end
@@ -348,7 +348,7 @@ class NyuAlephTest < ActiveSupport::TestCase
         assert_equal("NYU01", bobst_source.original_source_id)
         assert_equal("003710159", bobst_source.source_record_id)
         assert_equal("003710159", bobst_source.source_data[:source_record_id])
-        assert_equal("http://alephstage.library.nyu.edu/F?func=item-global&doc_library=NYU01&local_base=PRIMOCOMMON&doc_number=003710159&sub_library=BOBST", bobst_source.url)
+        assert_equal("http://#{@@aleph_url}/F?func=item-global&doc_library=NYU01&local_base=PRIMOCOMMON&doc_number=003710159&sub_library=BOBST", bobst_source.url)
       end
     end
   end

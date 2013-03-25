@@ -2,12 +2,12 @@
 http_interactions:
 - request:
     method: post
-    uri: http://bobcatdev.library.nyu.edu/PrimoWebServices/services/searcher
+    uri: http://primo.library.edu/PrimoWebServices/services/searcher
     body:
       encoding: US-ASCII
       string: "<?xml version=\"1.0\" encoding=\"UTF-8\"?><env:Envelope xmlns:xsd=\"\
         http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
-        \ xmlns:wsdl=\"http://bobcatdev.library.nyu.edu/PrimoWebServices/services/searcher\"\
+        \ xmlns:wsdl=\"http://primo.library.edu/PrimoWebServices/services/searcher\"\
         \ xmlns:env=\"http://schemas.xmlsoap.org/soap/envelope/\"><env:Body><getRecord><request><![CDATA[<fullViewRequest\
         \ xmlns=\"http://www.exlibris.com/primo/xsd/wsRequest\" xmlns:uic=\"http://www.exlibris.com/primo/xsd/primoview/uicomponents\"\
         ><PrimoSearchRequest xmlns=\"http://www.exlibris.com/primo/xsd/search/request\"\
@@ -298,7 +298,7 @@ http_interactions:
   recorded_at: Mon, 04 Mar 2013 19:23:46 GMT
 - request:
     method: get
-    uri: http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002626473/items?view=full
+    uri: http://aleph.library.edu:1891/rest-dlf/record/NYU01002626473/items?view=full
     body:
       encoding: US-ASCII
       string: ''
@@ -321,7 +321,7 @@ http_interactions:
     body:
       encoding: US-ASCII
       string: "<?xml version = \"1.0\" encoding = \"UTF-8\"?><get-item-list><reply-text>ok</reply-text><reply-code>0000</reply-code><items><item\
-        \ href=\"http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000250\"\
+        \ href=\"http://aleph.library.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000250\"\
         ><z30-sub-library-code>BFALE</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>04</z30-item-status-code><z30-collection-code>FALES</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>002626473</z30-doc-number><z30-item-sequence>\
         \   25.0</z30-item-sequence><z30-barcode>2626473-250</z30-barcode><z30-sub-library>NYU\
         \ Bobst Special Collections</z30-sub-library><z30-material>Books</z30-material><z30-item-status>Library\
@@ -333,7 +333,7 @@ http_interactions:
         \ Edouard, 1844-1926.</z13-author><z13-title-code>24514</z13-title-code><z13-title>The\
         \ temple of Deir el Bahari /</z13-title><z13-imprint-code>260</z13-imprint-code><z13-imprint>London\
         \ : Offices of the Egypt Exploration Fund, [1894-1908].</z13-imprint><z13-isbn-issn-code></z13-isbn-issn-code><z13-isbn-issn></z13-isbn-issn></z13><status>On\
-        \ Shelf</status></item><item href=\"http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000010\"\
+        \ Shelf</status></item><item href=\"http://aleph.library.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000010\"\
         ><z30-sub-library-code>BOBST</z30-sub-library-code><z30-item-process-status-code>DP</z30-item-process-status-code><z30-item-status-code>01</z30-item-status-code><z30-collection-code>MAIN</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>002626473</z30-doc-number><z30-item-sequence>\
         \    1.0</z30-item-sequence><z30-barcode>31142003304915</z30-barcode><z30-sub-library>NYU\
         \ Bobst</z30-sub-library><z30-material>Books</z30-material><z30-item-status>Offsite\
@@ -343,7 +343,7 @@ http_interactions:
         \ Edouard, 1844-1926.</z13-author><z13-title-code>24514</z13-title-code><z13-title>The\
         \ temple of Deir el Bahari /</z13-title><z13-imprint-code>260</z13-imprint-code><z13-imprint>London\
         \ : Offices of the Egypt Exploration Fund, [1894-1908].</z13-imprint><z13-isbn-issn-code></z13-isbn-issn-code><z13-isbn-issn></z13-isbn-issn></z13><status>Offsite\
-        \ Available</status></item><item href=\"http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000160\"\
+        \ Available</status></item><item href=\"http://aleph.library.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000160\"\
         ><z30-sub-library-code>CU</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>04</z30-item-status-code><z30-collection-code>MAIN</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>002626473</z30-doc-number><z30-item-sequence>\
         \   16.0</z30-item-sequence><z30-barcode>31206008449809</z30-barcode><z30-sub-library>Cooper\
         \ Union Library</z30-sub-library><z30-material>Books</z30-material><z30-item-status>Library\
@@ -355,7 +355,7 @@ http_interactions:
         \ Edouard, 1844-1926.</z13-author><z13-title-code>24514</z13-title-code><z13-title>The\
         \ temple of Deir el Bahari /</z13-title><z13-imprint-code>260</z13-imprint-code><z13-imprint>London\
         \ : Offices of the Egypt Exploration Fund, [1894-1908].</z13-imprint><z13-isbn-issn-code></z13-isbn-issn-code><z13-isbn-issn></z13-isbn-issn></z13><status>On\
-        \ Shelf</status></item><item href=\"http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000170\"\
+        \ Shelf</status></item><item href=\"http://aleph.library.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000170\"\
         ><z30-sub-library-code>CU</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>04</z30-item-status-code><z30-collection-code>MAIN</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>002626473</z30-doc-number><z30-item-sequence>\
         \   17.0</z30-item-sequence><z30-barcode>31206008449924</z30-barcode><z30-sub-library>Cooper\
         \ Union Library</z30-sub-library><z30-material>Books</z30-material><z30-item-status>Library\
@@ -367,7 +367,7 @@ http_interactions:
         \ Edouard, 1844-1926.</z13-author><z13-title-code>24514</z13-title-code><z13-title>The\
         \ temple of Deir el Bahari /</z13-title><z13-imprint-code>260</z13-imprint-code><z13-imprint>London\
         \ : Offices of the Egypt Exploration Fund, [1894-1908].</z13-imprint><z13-isbn-issn-code></z13-isbn-issn-code><z13-isbn-issn></z13-isbn-issn></z13><status>On\
-        \ Shelf</status></item><item href=\"http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000020\"\
+        \ Shelf</status></item><item href=\"http://aleph.library.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000020\"\
         ><z30-sub-library-code>NIFA</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>14</z30-item-status-code><z30-collection-code>EGYPT</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>002626473</z30-doc-number><z30-item-sequence>\
         \    2.0</z30-item-sequence><z30-barcode>31162028605013</z30-barcode><z30-sub-library>NYU\
         \ Institute of Fine Arts</z30-sub-library><z30-material>Books</z30-material><z30-item-status>In\
@@ -378,7 +378,7 @@ http_interactions:
         \ Edouard, 1844-1926.</z13-author><z13-title-code>24514</z13-title-code><z13-title>The\
         \ temple of Deir el Bahari /</z13-title><z13-imprint-code>260</z13-imprint-code><z13-imprint>London\
         \ : Offices of the Egypt Exploration Fund, [1894-1908].</z13-imprint><z13-isbn-issn-code></z13-isbn-issn-code><z13-isbn-issn></z13-isbn-issn></z13><status>On\
-        \ Shelf</status></item><item href=\"http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000030\"\
+        \ Shelf</status></item><item href=\"http://aleph.library.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000030\"\
         ><z30-sub-library-code>NIFA</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>14</z30-item-status-code><z30-collection-code>EGYPT</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>002626473</z30-doc-number><z30-item-sequence>\
         \    3.0</z30-item-sequence><z30-barcode>31162040746050</z30-barcode><z30-sub-library>NYU\
         \ Institute of Fine Arts</z30-sub-library><z30-material>Books</z30-material><z30-item-status>In\
@@ -389,7 +389,7 @@ http_interactions:
         \ Edouard, 1844-1926.</z13-author><z13-title-code>24514</z13-title-code><z13-title>The\
         \ temple of Deir el Bahari /</z13-title><z13-imprint-code>260</z13-imprint-code><z13-imprint>London\
         \ : Offices of the Egypt Exploration Fund, [1894-1908].</z13-imprint><z13-isbn-issn-code></z13-isbn-issn-code><z13-isbn-issn></z13-isbn-issn></z13><status>On\
-        \ Shelf</status></item><item href=\"http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000040\"\
+        \ Shelf</status></item><item href=\"http://aleph.library.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000040\"\
         ><z30-sub-library-code>NIFA</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>14</z30-item-status-code><z30-collection-code>EGYPT</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>002626473</z30-doc-number><z30-item-sequence>\
         \    4.0</z30-item-sequence><z30-barcode>31162023914709</z30-barcode><z30-sub-library>NYU\
         \ Institute of Fine Arts</z30-sub-library><z30-material>Books</z30-material><z30-item-status>In\
@@ -400,7 +400,7 @@ http_interactions:
         \ Edouard, 1844-1926.</z13-author><z13-title-code>24514</z13-title-code><z13-title>The\
         \ temple of Deir el Bahari /</z13-title><z13-imprint-code>260</z13-imprint-code><z13-imprint>London\
         \ : Offices of the Egypt Exploration Fund, [1894-1908].</z13-imprint><z13-isbn-issn-code></z13-isbn-issn-code><z13-isbn-issn></z13-isbn-issn></z13><status>On\
-        \ Shelf</status></item><item href=\"http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000050\"\
+        \ Shelf</status></item><item href=\"http://aleph.library.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000050\"\
         ><z30-sub-library-code>NIFA</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>14</z30-item-status-code><z30-collection-code>EGYPT</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>002626473</z30-doc-number><z30-item-sequence>\
         \    5.0</z30-item-sequence><z30-barcode>31162023908313</z30-barcode><z30-sub-library>NYU\
         \ Institute of Fine Arts</z30-sub-library><z30-material>Books</z30-material><z30-item-status>In\
@@ -411,7 +411,7 @@ http_interactions:
         \ Edouard, 1844-1926.</z13-author><z13-title-code>24514</z13-title-code><z13-title>The\
         \ temple of Deir el Bahari /</z13-title><z13-imprint-code>260</z13-imprint-code><z13-imprint>London\
         \ : Offices of the Egypt Exploration Fund, [1894-1908].</z13-imprint><z13-isbn-issn-code></z13-isbn-issn-code><z13-isbn-issn></z13-isbn-issn></z13><status>On\
-        \ Shelf</status></item><item href=\"http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000060\"\
+        \ Shelf</status></item><item href=\"http://aleph.library.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000060\"\
         ><z30-sub-library-code>NIFA</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>14</z30-item-status-code><z30-collection-code>EGYPT</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>002626473</z30-doc-number><z30-item-sequence>\
         \    6.0</z30-item-sequence><z30-barcode>31162023908362</z30-barcode><z30-sub-library>NYU\
         \ Institute of Fine Arts</z30-sub-library><z30-material>Books</z30-material><z30-item-status>In\
@@ -422,7 +422,7 @@ http_interactions:
         \ Edouard, 1844-1926.</z13-author><z13-title-code>24514</z13-title-code><z13-title>The\
         \ temple of Deir el Bahari /</z13-title><z13-imprint-code>260</z13-imprint-code><z13-imprint>London\
         \ : Offices of the Egypt Exploration Fund, [1894-1908].</z13-imprint><z13-isbn-issn-code></z13-isbn-issn-code><z13-isbn-issn></z13-isbn-issn></z13><status>On\
-        \ Shelf</status></item><item href=\"http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000070\"\
+        \ Shelf</status></item><item href=\"http://aleph.library.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000070\"\
         ><z30-sub-library-code>NIFA</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>14</z30-item-status-code><z30-collection-code>EGYPT</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>002626473</z30-doc-number><z30-item-sequence>\
         \    7.0</z30-item-sequence><z30-barcode>31162040746126</z30-barcode><z30-sub-library>NYU\
         \ Institute of Fine Arts</z30-sub-library><z30-material>Books</z30-material><z30-item-status>In\
@@ -433,7 +433,7 @@ http_interactions:
         \ Edouard, 1844-1926.</z13-author><z13-title-code>24514</z13-title-code><z13-title>The\
         \ temple of Deir el Bahari /</z13-title><z13-imprint-code>260</z13-imprint-code><z13-imprint>London\
         \ : Offices of the Egypt Exploration Fund, [1894-1908].</z13-imprint><z13-isbn-issn-code></z13-isbn-issn-code><z13-isbn-issn></z13-isbn-issn></z13><status>On\
-        \ Shelf</status></item><item href=\"http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000080\"\
+        \ Shelf</status></item><item href=\"http://aleph.library.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000080\"\
         ><z30-sub-library-code>NIFA</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>14</z30-item-status-code><z30-collection-code>EGYPT</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>002626473</z30-doc-number><z30-item-sequence>\
         \    8.0</z30-item-sequence><z30-barcode>31162023908412</z30-barcode><z30-sub-library>NYU\
         \ Institute of Fine Arts</z30-sub-library><z30-material>Books</z30-material><z30-item-status>In\
@@ -444,7 +444,7 @@ http_interactions:
         \ Edouard, 1844-1926.</z13-author><z13-title-code>24514</z13-title-code><z13-title>The\
         \ temple of Deir el Bahari /</z13-title><z13-imprint-code>260</z13-imprint-code><z13-imprint>London\
         \ : Offices of the Egypt Exploration Fund, [1894-1908].</z13-imprint><z13-isbn-issn-code></z13-isbn-issn-code><z13-isbn-issn></z13-isbn-issn></z13><status>On\
-        \ Shelf</status></item><item href=\"http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000090\"\
+        \ Shelf</status></item><item href=\"http://aleph.library.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000090\"\
         ><z30-sub-library-code>NIFA</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>14</z30-item-status-code><z30-collection-code>EGYPT</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>002626473</z30-doc-number><z30-item-sequence>\
         \    9.0</z30-item-sequence><z30-barcode>31162040789670</z30-barcode><z30-sub-library>NYU\
         \ Institute of Fine Arts</z30-sub-library><z30-material>Books</z30-material><z30-item-status>In\
@@ -455,7 +455,7 @@ http_interactions:
         \ Edouard, 1844-1926.</z13-author><z13-title-code>24514</z13-title-code><z13-title>The\
         \ temple of Deir el Bahari /</z13-title><z13-imprint-code>260</z13-imprint-code><z13-imprint>London\
         \ : Offices of the Egypt Exploration Fund, [1894-1908].</z13-imprint><z13-isbn-issn-code></z13-isbn-issn-code><z13-isbn-issn></z13-isbn-issn></z13><status>On\
-        \ Shelf</status></item><item href=\"http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000100\"\
+        \ Shelf</status></item><item href=\"http://aleph.library.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000100\"\
         ><z30-sub-library-code>NIFA</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>14</z30-item-status-code><z30-collection-code>EGYPT</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>002626473</z30-doc-number><z30-item-sequence>\
         \   10.0</z30-item-sequence><z30-barcode>31162040789555</z30-barcode><z30-sub-library>NYU\
         \ Institute of Fine Arts</z30-sub-library><z30-material>Books</z30-material><z30-item-status>In\
@@ -466,7 +466,7 @@ http_interactions:
         \ Edouard, 1844-1926.</z13-author><z13-title-code>24514</z13-title-code><z13-title>The\
         \ temple of Deir el Bahari /</z13-title><z13-imprint-code>260</z13-imprint-code><z13-imprint>London\
         \ : Offices of the Egypt Exploration Fund, [1894-1908].</z13-imprint><z13-isbn-issn-code></z13-isbn-issn-code><z13-isbn-issn></z13-isbn-issn></z13><status>On\
-        \ Shelf</status></item><item href=\"http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000110\"\
+        \ Shelf</status></item><item href=\"http://aleph.library.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000110\"\
         ><z30-sub-library-code>NIFA</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>14</z30-item-status-code><z30-collection-code>EGYPT</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>002626473</z30-doc-number><z30-item-sequence>\
         \   11.0</z30-item-sequence><z30-barcode>31162040789431</z30-barcode><z30-sub-library>NYU\
         \ Institute of Fine Arts</z30-sub-library><z30-material>Books</z30-material><z30-item-status>In\
@@ -477,7 +477,7 @@ http_interactions:
         \ Edouard, 1844-1926.</z13-author><z13-title-code>24514</z13-title-code><z13-title>The\
         \ temple of Deir el Bahari /</z13-title><z13-imprint-code>260</z13-imprint-code><z13-imprint>London\
         \ : Offices of the Egypt Exploration Fund, [1894-1908].</z13-imprint><z13-isbn-issn-code></z13-isbn-issn-code><z13-isbn-issn></z13-isbn-issn></z13><status>On\
-        \ Shelf</status></item><item href=\"http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000120\"\
+        \ Shelf</status></item><item href=\"http://aleph.library.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000120\"\
         ><z30-sub-library-code>NIFA</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>14</z30-item-status-code><z30-collection-code>EGYPT</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>002626473</z30-doc-number><z30-item-sequence>\
         \   12.0</z30-item-sequence><z30-barcode>31162040777212</z30-barcode><z30-sub-library>NYU\
         \ Institute of Fine Arts</z30-sub-library><z30-material>Books</z30-material><z30-item-status>In\
@@ -488,7 +488,7 @@ http_interactions:
         \ Edouard, 1844-1926.</z13-author><z13-title-code>24514</z13-title-code><z13-title>The\
         \ temple of Deir el Bahari /</z13-title><z13-imprint-code>260</z13-imprint-code><z13-imprint>London\
         \ : Offices of the Egypt Exploration Fund, [1894-1908].</z13-imprint><z13-isbn-issn-code></z13-isbn-issn-code><z13-isbn-issn></z13-isbn-issn></z13><status>On\
-        \ Shelf</status></item><item href=\"http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000130\"\
+        \ Shelf</status></item><item href=\"http://aleph.library.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000130\"\
         ><z30-sub-library-code>NIFA</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>14</z30-item-status-code><z30-collection-code>EGYPT</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>002626473</z30-doc-number><z30-item-sequence>\
         \   13.0</z30-item-sequence><z30-barcode>31162040789316</z30-barcode><z30-sub-library>NYU\
         \ Institute of Fine Arts</z30-sub-library><z30-material>Books</z30-material><z30-item-status>In\
@@ -499,7 +499,7 @@ http_interactions:
         \ Edouard, 1844-1926.</z13-author><z13-title-code>24514</z13-title-code><z13-title>The\
         \ temple of Deir el Bahari /</z13-title><z13-imprint-code>260</z13-imprint-code><z13-imprint>London\
         \ : Offices of the Egypt Exploration Fund, [1894-1908].</z13-imprint><z13-isbn-issn-code></z13-isbn-issn-code><z13-isbn-issn></z13-isbn-issn></z13><status>On\
-        \ Shelf</status></item><item href=\"http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000140\"\
+        \ Shelf</status></item><item href=\"http://aleph.library.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000140\"\
         ><z30-sub-library-code>NIFA</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>14</z30-item-status-code><z30-collection-code>EGYPT</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>002626473</z30-doc-number><z30-item-sequence>\
         \   14.0</z30-item-sequence><z30-barcode>31162040777105</z30-barcode><z30-sub-library>NYU\
         \ Institute of Fine Arts</z30-sub-library><z30-material>Books</z30-material><z30-item-status>In\
@@ -510,7 +510,7 @@ http_interactions:
         \ Edouard, 1844-1926.</z13-author><z13-title-code>24514</z13-title-code><z13-title>The\
         \ temple of Deir el Bahari /</z13-title><z13-imprint-code>260</z13-imprint-code><z13-imprint>London\
         \ : Offices of the Egypt Exploration Fund, [1894-1908].</z13-imprint><z13-isbn-issn-code></z13-isbn-issn-code><z13-isbn-issn></z13-isbn-issn></z13><status>On\
-        \ Shelf</status></item><item href=\"http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000180\"\
+        \ Shelf</status></item><item href=\"http://aleph.library.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000180\"\
         ><z30-sub-library-code>NISAW</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>14</z30-item-status-code><z30-collection-code>MAIN</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>002626473</z30-doc-number><z30-item-sequence>\
         \   18.0</z30-item-sequence><z30-barcode>31154046849640</z30-barcode><z30-sub-library>NYU\
         \ Inst Study Ancient World</z30-sub-library><z30-material>Books</z30-material><z30-item-status>In\
@@ -524,7 +524,7 @@ http_interactions:
         \ Edouard, 1844-1926.</z13-author><z13-title-code>24514</z13-title-code><z13-title>The\
         \ temple of Deir el Bahari /</z13-title><z13-imprint-code>260</z13-imprint-code><z13-imprint>London\
         \ : Offices of the Egypt Exploration Fund, [1894-1908].</z13-imprint><z13-isbn-issn-code></z13-isbn-issn-code><z13-isbn-issn></z13-isbn-issn></z13><status>On\
-        \ Shelf</status></item><item href=\"http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000190\"\
+        \ Shelf</status></item><item href=\"http://aleph.library.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000190\"\
         ><z30-sub-library-code>NISAW</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>14</z30-item-status-code><z30-collection-code>MAIN</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>002626473</z30-doc-number><z30-item-sequence>\
         \   19.0</z30-item-sequence><z30-barcode>31154046849657</z30-barcode><z30-sub-library>NYU\
         \ Inst Study Ancient World</z30-sub-library><z30-material>Books</z30-material><z30-item-status>In\
@@ -538,7 +538,7 @@ http_interactions:
         \ Edouard, 1844-1926.</z13-author><z13-title-code>24514</z13-title-code><z13-title>The\
         \ temple of Deir el Bahari /</z13-title><z13-imprint-code>260</z13-imprint-code><z13-imprint>London\
         \ : Offices of the Egypt Exploration Fund, [1894-1908].</z13-imprint><z13-isbn-issn-code></z13-isbn-issn-code><z13-isbn-issn></z13-isbn-issn></z13><status>On\
-        \ Shelf</status></item><item href=\"http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000200\"\
+        \ Shelf</status></item><item href=\"http://aleph.library.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000200\"\
         ><z30-sub-library-code>NISAW</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>14</z30-item-status-code><z30-collection-code>MAIN</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>002626473</z30-doc-number><z30-item-sequence>\
         \   20.0</z30-item-sequence><z30-barcode>31154046849707</z30-barcode><z30-sub-library>NYU\
         \ Inst Study Ancient World</z30-sub-library><z30-material>Books</z30-material><z30-item-status>In\
@@ -552,7 +552,7 @@ http_interactions:
         \ Edouard, 1844-1926.</z13-author><z13-title-code>24514</z13-title-code><z13-title>The\
         \ temple of Deir el Bahari /</z13-title><z13-imprint-code>260</z13-imprint-code><z13-imprint>London\
         \ : Offices of the Egypt Exploration Fund, [1894-1908].</z13-imprint><z13-isbn-issn-code></z13-isbn-issn-code><z13-isbn-issn></z13-isbn-issn></z13><status>On\
-        \ Shelf</status></item><item href=\"http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000210\"\
+        \ Shelf</status></item><item href=\"http://aleph.library.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000210\"\
         ><z30-sub-library-code>NISAW</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>14</z30-item-status-code><z30-collection-code>MAIN</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>002626473</z30-doc-number><z30-item-sequence>\
         \   21.0</z30-item-sequence><z30-barcode>31154047941271</z30-barcode><z30-sub-library>NYU\
         \ Inst Study Ancient World</z30-sub-library><z30-material>Books</z30-material><z30-item-status>In\
@@ -566,7 +566,7 @@ http_interactions:
         \ Edouard, 1844-1926.</z13-author><z13-title-code>24514</z13-title-code><z13-title>The\
         \ temple of Deir el Bahari /</z13-title><z13-imprint-code>260</z13-imprint-code><z13-imprint>London\
         \ : Offices of the Egypt Exploration Fund, [1894-1908].</z13-imprint><z13-isbn-issn-code></z13-isbn-issn-code><z13-isbn-issn></z13-isbn-issn></z13><status>On\
-        \ Shelf</status></item><item href=\"http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000220\"\
+        \ Shelf</status></item><item href=\"http://aleph.library.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000220\"\
         ><z30-sub-library-code>NISAW</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>14</z30-item-status-code><z30-collection-code>MAIN</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>002626473</z30-doc-number><z30-item-sequence>\
         \   22.0</z30-item-sequence><z30-barcode>31154046849723</z30-barcode><z30-sub-library>NYU\
         \ Inst Study Ancient World</z30-sub-library><z30-material>Books</z30-material><z30-item-status>In\
@@ -580,7 +580,7 @@ http_interactions:
         \ Edouard, 1844-1926.</z13-author><z13-title-code>24514</z13-title-code><z13-title>The\
         \ temple of Deir el Bahari /</z13-title><z13-imprint-code>260</z13-imprint-code><z13-imprint>London\
         \ : Offices of the Egypt Exploration Fund, [1894-1908].</z13-imprint><z13-isbn-issn-code></z13-isbn-issn-code><z13-isbn-issn></z13-isbn-issn></z13><status>On\
-        \ Shelf</status></item><item href=\"http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000230\"\
+        \ Shelf</status></item><item href=\"http://aleph.library.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000230\"\
         ><z30-sub-library-code>NISAW</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>14</z30-item-status-code><z30-collection-code>MAIN</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>002626473</z30-doc-number><z30-item-sequence>\
         \   23.0</z30-item-sequence><z30-barcode>31154046849731</z30-barcode><z30-sub-library>NYU\
         \ Inst Study Ancient World</z30-sub-library><z30-material>Books</z30-material><z30-item-status>In\
@@ -594,7 +594,7 @@ http_interactions:
         \ Edouard, 1844-1926.</z13-author><z13-title-code>24514</z13-title-code><z13-title>The\
         \ temple of Deir el Bahari /</z13-title><z13-imprint-code>260</z13-imprint-code><z13-imprint>London\
         \ : Offices of the Egypt Exploration Fund, [1894-1908].</z13-imprint><z13-isbn-issn-code></z13-isbn-issn-code><z13-isbn-issn></z13-isbn-issn></z13><status>On\
-        \ Shelf</status></item><item href=\"http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000240\"\
+        \ Shelf</status></item><item href=\"http://aleph.library.edu:1891/rest-dlf/record/NYU01002626473/items/NYU50002626473000240\"\
         ><z30-sub-library-code>NISAW</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>14</z30-item-status-code><z30-collection-code>MAIN</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>002626473</z30-doc-number><z30-item-sequence>\
         \   24.0</z30-item-sequence><z30-barcode>31154046792378</z30-barcode><z30-sub-library>NYU\
         \ Inst Study Ancient World</z30-sub-library><z30-material>Books</z30-material><z30-item-status>In\
