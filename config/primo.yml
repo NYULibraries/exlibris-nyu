@@ -292,6 +292,7 @@ sources:
        ask_fales: ["Ask at Fales"]
        ask_reference: ["Ask at Reference"]
        on_exhibit: ["On Exhibit"]
+       reshelving: ["Reshelving"]
      deferred_statuses: ["requested"]
      requestable_statuses: ["checked_out", "offsite", available_requestable, "Depository", "Offsite Available"]
      requestable_collections: ["checked_out", "offsite", available_requestable, "Depository", "Offsite Available"]
@@ -349,6 +350,7 @@ sources:
        ask_fales: ["Ask at Fales"]
        ask_reference: ["Ask at Reference"]
        on_exhibit: ["On Exhibit"]
+       reshelving: ["Reshelving"]
   ADCOURSES:
      base_url: "http://aleph.library.nyu.edu"
      rest_url: "http://aleph.library.nyu.edu:1891/rest-dlf"
@@ -403,3 +405,4 @@ sources:
        ask_fales: ["Ask at Fales"]
        ask_reference: ["Ask at Reference"]
        on_exhibit: ["On Exhibit"]
+       reshelving: ["Reshelving"]

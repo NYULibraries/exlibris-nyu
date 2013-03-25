@@ -7,6 +7,8 @@ class NyuAlephTest < ActiveSupport::TestCase
     @the_new_yorker_issn = "0028-792X"
     @temple_of_deir_el_bahari_id = "nyu_aleph002626473"
     @chemistry_the_molecular_nature_of_matter_and_change_id = "nyu_aleph003079903"
+    @naked_statistics_id = "nyu_aleph003710159"
+    @flatbreads_and_flavors_id = "nyu_aleph002365745"
   end
 
   test "nyu_aleph new book" do
@@ -275,6 +277,55 @@ class NyuAlephTest < ActiveSupport::TestCase
         assert_equal("003079903", bobst_source.source_record_id)
         assert_equal("003079903", bobst_source.source_data[:source_record_id])
         assert_equal("http://aleph.library.nyu.edu/F?func=item-global&doc_library=NYU01&local_base=PRIMOCOMMON&doc_number=003079903&sub_library=BOBST", bobst_source.url)
+      end
+    end
+  end
+
+  test "nyu_aleph on hold requested" do
+    VCR.use_cassette('nyu_aleph on hold requested') do
+      holdings =
+        exlibris_primo_search.record_id!(@naked_statistics_id).records.collect{|record| record.holdings}.flatten
+      sources = []
+      holdings.each do |holding|
+        source = holding.to_source
+        sources.concat(source.expand) unless sources.include? source
+      end
+      bobst_sources = sources.find_all do |source|
+        source.library.eql?("NYU Bobst")
+      end
+      bobst_sources.each do |bobst_source|
+        assert_equal("4 request(s) of 1 items.", bobst_source.queue)
+        assert_equal(4, bobst_source.send(:request_count))
+        assert(bobst_source.send(:requested?))
+        assert_equal("requested", bobst_source.status_code)
+        assert_equal("On Hold; Requested", bobst_source.status)
+        assert_equal("NYU01", bobst_source.original_source_id)
+        assert_equal("003710159", bobst_source.source_record_id)
+        assert_equal("003710159", bobst_source.source_data[:source_record_id])
+        assert_equal("http://aleph.library.nyu.edu/F?func=item-global&doc_library=NYU01&local_base=PRIMOCOMMON&doc_number=003710159&sub_library=BOBST", bobst_source.url)
+      end
+    end
+  end
+
+  test "nyu_aleph reshelving" do
+    VCR.use_cassette('nyu_aleph reshelving') do
+      holdings =
+        exlibris_primo_search.record_id!(@flatbreads_and_flavors_id).records.collect{|record| record.holdings}.flatten
+      sources = []
+      holdings.each do |holding|
+        source = holding.to_source
+        sources.concat(source.expand) unless sources.include? source
+      end
+      bobst_sources = sources.find_all do |source|
+        source.library.eql?("NYU Bobst")
+      end
+      bobst_sources.each do |bobst_source|
+        assert_equal("reshelving", bobst_source.status_code)
+        assert_equal("Reshelving", bobst_source.status)
+        assert_equal("NYU01", bobst_source.original_source_id)
+        assert_equal("002365745", bobst_source.source_record_id)
+        assert_equal("002365745", bobst_source.source_data[:source_record_id])
+        assert_equal("http://aleph.library.nyu.edu/F?func=item-global&doc_library=NYU01&local_base=PRIMOCOMMON&doc_number=002365745&sub_library=BOBST", bobst_source.url)
       end
     end
   end

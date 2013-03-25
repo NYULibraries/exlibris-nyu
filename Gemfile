@@ -4,4 +4,8 @@ source "https://rubygems.org"
 # Bundler will treat runtime dependencies like base dependencies, and
 # development dependencies will be added by default to the :development group.
 gemspec
-gem "coveralls", "~> 0.6.0", require: false, :group => :test
+
+group :test do
+  gem "coveralls", "~> 0.6.0", require: false
+  gem 'debugger', "~> 1.5.0", :platforms => :mri
+end
