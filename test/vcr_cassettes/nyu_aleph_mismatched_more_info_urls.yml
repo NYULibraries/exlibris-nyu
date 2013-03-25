@@ -2,12 +2,12 @@
 http_interactions:
 - request:
     method: post
-    uri: http://bobcatdev.library.nyu.edu/PrimoWebServices/services/searcher
+    uri: http://primo.library.edu/PrimoWebServices/services/searcher
     body:
       encoding: US-ASCII
       string: "<?xml version=\"1.0\" encoding=\"UTF-8\"?><env:Envelope xmlns:xsd=\"\
         http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
-        \ xmlns:wsdl=\"http://bobcatdev.library.nyu.edu/PrimoWebServices/services/searcher\"\
+        \ xmlns:wsdl=\"http://primo.library.edu/PrimoWebServices/services/searcher\"\
         \ xmlns:env=\"http://schemas.xmlsoap.org/soap/envelope/\"><env:Body><getRecord><request><![CDATA[<fullViewRequest\
         \ xmlns=\"http://www.exlibris.com/primo/xsd/wsRequest\" xmlns:uic=\"http://www.exlibris.com/primo/xsd/primoview/uicomponents\"\
         ><PrimoSearchRequest xmlns=\"http://www.exlibris.com/primo/xsd/search/request\"\
@@ -217,7 +217,7 @@ http_interactions:
   recorded_at: Mon, 04 Mar 2013 19:23:48 GMT
 - request:
     method: get
-    uri: http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01003079903/items?view=full
+    uri: http://aleph.library.edu:1891/rest-dlf/record/NYU01003079903/items?view=full
     body:
       encoding: US-ASCII
       string: ''
@@ -240,7 +240,7 @@ http_interactions:
     body:
       encoding: US-ASCII
       string: "<?xml version = \"1.0\" encoding = \"UTF-8\"?><get-item-list><reply-text>ok</reply-text><reply-code>0000</reply-code><items><item\
-        \ href=\"http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01003079903/items/NYU50003087986000010\"\
+        \ href=\"http://aleph.library.edu:1891/rest-dlf/record/NYU01003079903/items/NYU50003087986000010\"\
         ><z30-sub-library-code>BOBST</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>01</z30-item-status-code><z30-collection-code>MAIN</z30-collection-code><queue>1\
         \ request(s) of 5 items.</queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>003087986</z30-doc-number><z30-item-sequence>\
         \    1.0</z30-item-sequence><z30-barcode>31142047405942</z30-barcode><z30-sub-library>NYU\
@@ -253,7 +253,7 @@ http_interactions:
         \ :</z13-title><z13-imprint-code>260</z13-imprint-code><z13-imprint>Boston\
         \ : McGraw-Hill, c2009.</z13-imprint><z13-isbn-issn-code>020</z13-isbn-issn-code><z13-isbn-issn>9780073048598\
         \ (hbk. : alk. paper)</z13-isbn-issn></z13><status>On Hold</status></item><item\
-        \ href=\"http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01003079903/items/NYU50003087986000020\"\
+        \ href=\"http://aleph.library.edu:1891/rest-dlf/record/NYU01003079903/items/NYU50003087986000020\"\
         ><z30-sub-library-code>BOBST</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>01</z30-item-status-code><z30-collection-code>MAIN</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>003087986</z30-doc-number><z30-item-sequence>\
         \    2.0</z30-item-sequence><z30-barcode>31142047406940</z30-barcode><z30-sub-library>NYU\
         \ Bobst</z30-sub-library><z30-material>Books</z30-material><z30-item-status>Regular\
@@ -265,7 +265,7 @@ http_interactions:
         \ :</z13-title><z13-imprint-code>260</z13-imprint-code><z13-imprint>Boston\
         \ : McGraw-Hill, c2009.</z13-imprint><z13-isbn-issn-code>020</z13-isbn-issn-code><z13-isbn-issn>9780073048598\
         \ (hbk. : alk. paper)</z13-isbn-issn></z13><status>05/03/13</status></item><item\
-        \ href=\"http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01003079903/items/NYU50003087986000030\"\
+        \ href=\"http://aleph.library.edu:1891/rest-dlf/record/NYU01003079903/items/NYU50003087986000030\"\
         ><z30-sub-library-code>BOBST</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>01</z30-item-status-code><z30-collection-code>MAIN</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>003087986</z30-doc-number><z30-item-sequence>\
         \    3.0</z30-item-sequence><z30-barcode>31142047406957</z30-barcode><z30-sub-library>NYU\
         \ Bobst</z30-sub-library><z30-material>Books</z30-material><z30-item-status>Regular\
@@ -277,7 +277,7 @@ http_interactions:
         \ :</z13-title><z13-imprint-code>260</z13-imprint-code><z13-imprint>Boston\
         \ : McGraw-Hill, c2009.</z13-imprint><z13-isbn-issn-code>020</z13-isbn-issn-code><z13-isbn-issn>9780073048598\
         \ (hbk. : alk. paper)</z13-isbn-issn></z13><status>04/05/13</status></item><item\
-        \ href=\"http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01003079903/items/NYU50003087986000040\"\
+        \ href=\"http://aleph.library.edu:1891/rest-dlf/record/NYU01003079903/items/NYU50003087986000040\"\
         ><z30-sub-library-code>BOBST</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>01</z30-item-status-code><z30-collection-code>MAIN</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>003087986</z30-doc-number><z30-item-sequence>\
         \    4.0</z30-item-sequence><z30-barcode>31142047406965</z30-barcode><z30-sub-library>NYU\
         \ Bobst</z30-sub-library><z30-material>Books</z30-material><z30-item-status>Regular\
@@ -289,7 +289,7 @@ http_interactions:
         \ :</z13-title><z13-imprint-code>260</z13-imprint-code><z13-imprint>Boston\
         \ : McGraw-Hill, c2009.</z13-imprint><z13-isbn-issn-code>020</z13-isbn-issn-code><z13-isbn-issn>9780073048598\
         \ (hbk. : alk. paper)</z13-isbn-issn></z13><status>On Shelf</status></item><item\
-        \ href=\"http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01003079903/items/NYU50003087986000050\"\
+        \ href=\"http://aleph.library.edu:1891/rest-dlf/record/NYU01003079903/items/NYU50003087986000050\"\
         ><z30-sub-library-code>BOBST</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>01</z30-item-status-code><z30-collection-code>MAIN</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>003087986</z30-doc-number><z30-item-sequence>\
         \    5.0</z30-item-sequence><z30-barcode>31142051157652</z30-barcode><z30-sub-library>NYU\
         \ Bobst</z30-sub-library><z30-material>Books</z30-material><z30-item-status>Regular\

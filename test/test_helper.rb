@@ -18,11 +18,16 @@ end
 require 'vcr'
 require 'webmock'
 
+@@aleph_url = "aleph.library.nyu.edu"
+@@primo_url = "bobcat.library.nyu.edu"
+
 VCR.configure do |c|
   c.cassette_library_dir = 'test/vcr_cassettes'
   # webmock needed for HTTPClient testing
   c.hook_into :webmock
   # c.debug_logger = $stderr
+  c.filter_sensitive_data("aleph.library.edu") { @@aleph_url }
+  c.filter_sensitive_data("primo.library.edu") { @@primo_url }
 end
 
 # Add Exlibris::Primo::Search to TestCase

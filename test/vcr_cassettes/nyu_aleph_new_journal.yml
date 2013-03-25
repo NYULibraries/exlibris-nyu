@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002904404?view=full
+    uri: http://aleph.library.edu:1891/rest-dlf/record/NYU01002904404?view=full
     body:
       encoding: US-ASCII
       string: ''
@@ -275,7 +275,7 @@ http_interactions:
   recorded_at: Mon, 04 Mar 2013 23:59:56 GMT
 - request:
     method: get
-    uri: http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002904404/holdings?view=full
+    uri: http://aleph.library.edu:1891/rest-dlf/record/NYU01002904404/holdings?view=full
     body:
       encoding: US-ASCII
       string: ''
@@ -298,7 +298,7 @@ http_interactions:
     body:
       encoding: US-ASCII
       string: "<?xml version = \"1.0\" encoding = \"UTF-8\"?><get-hol-list><reply-text>ok</reply-text><reply-code>0000</reply-code><holdings><holding\
-        \ href=\"http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002904404/holdings/NYU60003807743\"\
+        \ href=\"http://aleph.library.edu:1891/rest-dlf/record/NYU01002904404/holdings/NYU60003807743\"\
         ><leader>     ny  a22     3i 4500</leader><controlfield tag=\"001\">003807743</controlfield><controlfield\
         \ tag=\"004\">002904404</controlfield><controlfield tag=\"008\">0905192p \
         \   8   4001aaeng1000000</controlfield><datafield tag=\"852\" ind1=\" \" ind2=\"\
@@ -306,7 +306,7 @@ http_interactions:
         \ code=\"m\">Non-circulating</subfield><subfield code=\"a\">NNCoo</subfield></datafield><datafield\
         \ tag=\"866\" ind1=\"3\" ind2=\"0\"><subfield code=\"8\">1</subfield><subfield\
         \ code=\"a\">v.1(1925)-v.81(2005)</subfield><subfield code=\"z\">On DVD. Ask\
-        \ at Desk.</subfield></datafield></holding><holding href=\"http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002904404/holdings/NYU60003807742\"\
+        \ at Desk.</subfield></datafield></holding><holding href=\"http://aleph.library.edu:1891/rest-dlf/record/NYU01002904404/holdings/NYU60003807742\"\
         ><leader>     ny  a22     3i 4500</leader><controlfield tag=\"001\">003807742</controlfield><controlfield\
         \ tag=\"004\">002904404</controlfield><controlfield tag=\"007\">ta</controlfield><controlfield\
         \ tag=\"008\">0905194p    8   0001aaeng1000000</controlfield><datafield tag=\"\
@@ -314,7 +314,7 @@ http_interactions:
         c\">PERIO</subfield><subfield code=\"m\">Non-circulating</subfield><subfield\
         \ code=\"a\">NNCoo</subfield></datafield><datafield tag=\"866\" ind1=\"3\"\
         \ ind2=\"1\"><subfield code=\"8\">1</subfield><subfield code=\"a\">v.81(2005)-</subfield></datafield></holding><holding\
-        \ href=\"http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002904404/holdings/NYU60000358492\"\
+        \ href=\"http://aleph.library.edu:1891/rest-dlf/record/NYU01002904404/holdings/NYU60000358492\"\
         ><leader>     cyH a22024375  4500</leader><controlfield tag=\"001\">000358492</controlfield><controlfield\
         \ tag=\"004\">NYUb10624873</controlfield><controlfield tag=\"005\">20080531115102.0</controlfield><controlfield\
         \ tag=\"007\">ta</controlfield><controlfield tag=\"008\">9908194p||||4   0001aaeng0091120</controlfield><datafield\
@@ -1013,7 +1013,7 @@ http_interactions:
         \ treatment;</subfield><subfield code=\"c\">2010;</subfield><subfield code=\"\
         i\">Shrinkwrapped;</subfield><subfield code=\"i\">Clysar HPG;</subfield><subfield\
         \ code=\"x\">Offsite;</subfield><subfield code=\"2\">pda;</subfield><subfield\
-        \ code=\"5\">NNU</subfield></datafield></holding><holding href=\"http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002904404/holdings/NYU60000358493\"\
+        \ code=\"5\">NNU</subfield></datafield></holding><holding href=\"http://aleph.library.edu:1891/rest-dlf/record/NYU01002904404/holdings/NYU60000358493\"\
         ><leader>     cyH a22003855  4500</leader><controlfield tag=\"001\">000358493</controlfield><controlfield\
         \ tag=\"004\">NYUb10624873</controlfield><controlfield tag=\"005\">20080531115102.0</controlfield><controlfield\
         \ tag=\"007\">he</controlfield><controlfield tag=\"008\">0002230|||||8   |001|||||000022</controlfield><datafield\
@@ -1108,7 +1108,7 @@ http_interactions:
         0\"><subfield code=\"8\">2.19</subfield><subfield code=\"a\">83</subfield><subfield\
         \ code=\"b\">2</subfield><subfield code=\"i\">2008</subfield><subfield code=\"\
         j\"></subfield><subfield code=\"p\">P863.11635286</subfield></datafield></holding><holding\
-        \ href=\"http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002904404/holdings/NYU60000358494\"\
+        \ href=\"http://aleph.library.edu:1891/rest-dlf/record/NYU01002904404/holdings/NYU60000358494\"\
         ><leader>     cyH a22021015  4500</leader><controlfield tag=\"001\">000358494</controlfield><controlfield\
         \ tag=\"004\">NYUb10624873</controlfield><controlfield tag=\"005\">20080531115102.0</controlfield><controlfield\
         \ tag=\"007\">ta</controlfield><controlfield tag=\"008\">0307310|||||8   |001|||||003073</controlfield><datafield\
@@ -1642,7 +1642,7 @@ http_interactions:
         \ code=\"a\">79</subfield><subfield code=\"b\">23</subfield><subfield code=\"\
         i\">1965</subfield><subfield code=\"j\">Oct.-Dec.</subfield><subfield code=\"\
         p\">31142036796202</subfield><subfield code=\"w\">n</subfield></datafield></holding><holding\
-        \ href=\"http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002904404/holdings/NYU60000358496\"\
+        \ href=\"http://aleph.library.edu:1891/rest-dlf/record/NYU01002904404/holdings/NYU60000358496\"\
         ><leader>     cyH a22001695  4500</leader><controlfield tag=\"001\">000358496</controlfield><controlfield\
         \ tag=\"004\">NYUb10624873</controlfield><controlfield tag=\"005\">20080531115102.0</controlfield><controlfield\
         \ tag=\"007\">ta</controlfield><controlfield tag=\"008\">0310010|||||8   |001|||||003100</controlfield><datafield\
