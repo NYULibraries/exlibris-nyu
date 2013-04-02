@@ -386,7 +386,7 @@ module Exlibris
                 holding_collection = aleph_helper.collection_text(
                   :adm_library_code => holding_adm_library.downcase, :sub_library_code => holding_sub_library_code,
                     :collection_code => holding_collection_code ) unless holding_adm_library.nil?
-                aleph_holding.each_tag('866') do |holding_866|
+                aleph_holding.each_by_tag('866') do |holding_866|
                   holding_866_a = holding_866['a']
                   @holdings_coverage << "Available in #{holding_collection}: #{holding_866_a.gsub(",", ", ")}".
                     strip unless holding_collection.nil? or holding_866_a.nil?
