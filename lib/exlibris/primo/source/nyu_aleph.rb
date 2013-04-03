@@ -148,9 +148,6 @@ module Exlibris
             aleph_helper.item_permissions(:adm_library_code => adm_library_code.downcase, 
               :sub_library_code => sub_library_code, :item_status_code => item_status_code, 
                 :item_process_status_code => item_process_status_code) 
-        rescue => e
-          Rails.logger.error("#{e.message}\nSource data: #{source_data.inspect}\n#{e.backtrace.join("\n")}")
-          @request_permissions = {}
         end
         private :request_permissions
 
