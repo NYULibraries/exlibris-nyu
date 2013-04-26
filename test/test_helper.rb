@@ -18,8 +18,8 @@ end
 require 'vcr'
 require 'webmock'
 
-@@aleph_url = "aleph.library.nyu.edu"
-@@primo_url = "bobcat.library.nyu.edu"
+@@aleph_url = "alephstage.library.nyu.edu"
+@@primo_url = "bobcatdev.library.nyu.edu"
 
 VCR.configure do |c|
   c.cassette_library_dir = 'test/vcr_cassettes'
