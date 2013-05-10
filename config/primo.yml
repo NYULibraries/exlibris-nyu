@@ -279,7 +279,7 @@ sources:
        NAFC: NYUAD
      statuses:
        available: ["On Shelf", "Available"]
-       requested: ["Requested"]
+       requested: ["Requested", "On Hold"]
        request_ill: ["Request ILL"]
        billed_as_lost: ["Billed as Lost", "Claimed Returned"]
        offsite: ["Offsite Available"]
