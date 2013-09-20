@@ -80,11 +80,11 @@ module Exlibris
         alias :eql? :==
 
         # Does this holding request link support AJAX requests?
-        # Only if we're expanding
+        # Only if we're already expanded
         # TODO: this is tightly couple to the Umlaut application
         # and should be abstracted out, or something :)
         def ajax?
-          expanding?
+          expanded?
         end
         alias :request_link_supports_ajax_call? :ajax?
         alias :request_link_supports_ajax_call :ajax?
@@ -182,11 +182,19 @@ module Exlibris
         private :recalled_due_date
 
         # Logic to determine whether we're expanding this holding
-        # Only expand if not a journal
+        # Only expand if not a journal and we've already been to Aleph
+        # or we have expanded holdings from Aleph (Aleph could be down) or 
         def expanding?
-          @expanding ||= (display_type and (not journal?))
+          @expanding ||= (display_type and (not journal?) and 
+            (from_aleph? or expanded_holdings.any?))
         end
         private :expanding?
+
+        # Is this Holding from Aleph?
+        def from_aleph?
+          @from_aleph ||= source_data[:from_aleph]
+        end
+        alias :expanded? :from_aleph?
 
         # Is this a journal
         def journal?
@@ -207,25 +215,28 @@ module Exlibris
         def expanded_holdings
           @expanded_holdings ||= aleph_items.collect do |aleph_item|
             source_data = {
-              :item_id => aleph_item["href"].match(/items\/(.+)$/)[1],
-              :adm_library_code => aleph_item["z30"]["translate_change_active_library"],
-              :call_number => format_aleph_call_number(aleph_item).gsub("&nbsp;", " "),
-              :sub_library_code => aleph_item["z30_sub_library_code"].strip,
-              :collection_code => aleph_item["z30_collection_code"],
-              :source_record_id => source_record_id,
-              :sequence_number => aleph_item["z30"]["z30_item_sequence"].strip,
-              :barcode => aleph_item["z30"]["z30_barcode"],
-              :item_status_code => aleph_item["z30_item_status_code"],
-              :item_process_status_code => aleph_item["z30_item_process_status_code"],
-              :item_status => aleph_item["z30"]["z30_item_status"],
-              :item_process_status => aleph_item["z30"]["z30_item_process_status"],
-              :circulation_status => aleph_item["status"],
-              :queue => aleph_item["queue"],
-              :z30_callno => aleph_item["z30"]["z30_call_no"],
-              :description => aleph_item["z30"]["z30_description"],
-              :hol_doc_number => aleph_item["z30"]["z30_hol_doc_number"]
+              # Flag to short circuit expansion check, since we've already expanded.
+              # This says, yes I am source data from Aleph, fool.
+              from_aleph: true,
+              item_id: aleph_item["href"].match(/items\/(.+)$/)[1],
+              adm_library_code: aleph_item["z30"]["translate_change_active_library"],
+              call_number: format_aleph_call_number(aleph_item).gsub("&nbsp;", " "),
+              sub_library_code: aleph_item["z30_sub_library_code"].strip,
+              collection_code: aleph_item["z30_collection_code"],
+              source_record_id: source_record_id,
+              sequence_number: aleph_item["z30"]["z30_item_sequence"].strip,
+              barcode: aleph_item["z30"]["z30_barcode"],
+              item_status_code: aleph_item["z30_item_status_code"],
+              item_process_status_code: aleph_item["z30_item_process_status_code"],
+              item_status: aleph_item["z30"]["z30_item_status"],
+              item_process_status: aleph_item["z30"]["z30_item_process_status"],
+              circulation_status: aleph_item["status"],
+              queue: aleph_item["queue"],
+              z30_callno: aleph_item["z30"]["z30_call_no"],
+              description: aleph_item["z30"]["z30_description"],
+              hol_doc_number: aleph_item["z30"]["z30_hol_doc_number"]
             }
-            holding = self.class.new({:holding => self, :source_data => source_data}.merge(source_data))
+            holding = self.class.new({holding: self, source_data: source_data}.merge(source_data))
           end
         end
         private :expanded_holdings
@@ -233,25 +244,34 @@ module Exlibris
         # Get Aleph record
         def aleph_record
           @aleph_record ||= 
-            Exlibris::Aleph::Record.new(bib_library: original_source_id, record_id: source_record_id)
+              Exlibris::Aleph::Record.new(bib_library: original_source_id, record_id: source_record_id)
         end
         private :aleph_record
 
         # Get Aleph bibliographic info
+        # Returns nil if we get an error, e.g. Aleph is down
         def aleph_bib
           @aleph_bib ||= aleph_record.bib
+        rescue
+          nil
         end
         private :aleph_bib
 
         # Get Aleph holdings info
+        # Returns an empty array if Aleph is down
         def aleph_holdings
           @aleph_holdings ||= aleph_record.holdings
+        rescue
+          []
         end
         private :aleph_holdings
 
         # Get Aleph items
+        # Returns an empty array if Aleph is down
         def aleph_items
           @aleph_items ||= aleph_record.items
+        rescue
+          []
         end
         private :aleph_items
 
@@ -299,10 +319,10 @@ module Exlibris
         # and item processing status.
         def item_web_text
           @item_web_text ||= aleph_helper.item_web_text(
-            :adm_library_code => adm_library_code.downcase,
-            :sub_library_code => sub_library_code,
-            :item_status_code => item_status_code,
-            :item_process_status_code => item_process_status_code ) unless adm_library_code.nil?
+            adm_library_code: adm_library_code.downcase,
+            sub_library_code: sub_library_code,
+            item_status_code: item_status_code,
+            item_process_status_code: item_process_status_code ) unless adm_library_code.nil?
         end
         private :item_web_text
 
@@ -322,7 +342,7 @@ module Exlibris
         # Coverage array from Aleph bib 866$j and 866$k or 866$i.
         def bib_coverage
           @bib_coverage ||= []
-          if @bib_coverage.empty?
+          if @bib_coverage.empty? and aleph_bib
             aleph_bib.each_by_tag('866') do |bib_866|
               # Get subfield l
               subfield_l = bib_866['l']
@@ -337,13 +357,13 @@ module Exlibris
                 # Get the ADM library from the Aleph helper
                 bib_866_adm_library = aleph_helper.sub_library_adm(bib_866_sub_library_code)
                 # Indicate that we've looked at this coverage ADM, sub library combo
-                coverages_seen << { :adm_library => bib_866_adm_library, :sub_library_code => bib_866_sub_library_code }
+                coverages_seen << { adm_library: bib_866_adm_library, sub_library_code: bib_866_sub_library_code }
                 bib_866_collection_code = bib_866_subfield_l_mapping['collection']
                 bib_866_j = bib_866['j']
                 bib_866_k = bib_866['k']
                 bib_866_collection = aleph_helper.collection_text(
-                  :adm_library_code => bib_866_adm_library.downcase, :sub_library_code => bib_866_sub_library_code,
-                    :collection_code => bib_866_collection_code ) unless bib_866_adm_library.nil?
+                  adm_library_code: bib_866_adm_library.downcase, sub_library_code: bib_866_sub_library_code,
+                    collection_code: bib_866_collection_code ) unless bib_866_adm_library.nil?
                 if bib_866_collection
                   if bib_866_j or bib_866_k
                     @bib_coverage << "Available in #{bib_866_collection}: #{format_coverage_string(bib_866_j, bib_866_k)}".strip
@@ -362,7 +382,7 @@ module Exlibris
         # Coverage array from Aleph holdings 852$z and 866$a.
         def holdings_coverage
           @holdings_coverage ||= []
-          if @holdings_coverage.empty?
+          if @holdings_coverage.empty? and aleph_holdings
             aleph_holdings.each do |aleph_holding|
               # Get the holding sub library
               holding_sub_library_code = aleph_holding['852']['b']
@@ -374,15 +394,15 @@ module Exlibris
                 # HACK ALERT: Need to decouple from the run order.
                 # Only works since bib coverage runs first.
                 next if coverages_seen.include?({
-                  :adm_library => holding_adm_library, :sub_library_code => holding_sub_library_code })
+                  adm_library: holding_adm_library, sub_library_code: holding_sub_library_code })
                 # Indicate that we've looked at this coverage ADM, sub library combo
-                coverages_seen << { :adm_library => holding_adm_library, :sub_library_code => holding_sub_library_code }
+                coverages_seen << { adm_library: holding_adm_library, sub_library_code: holding_sub_library_code }
                 holding_collection_code = aleph_holding['852']['c']
                 holding_852_z = aleph_holding['852']['z']
                 @holdings_coverage << ("Note: #{holding_852_z}") unless holding_852_z.nil?
                 holding_collection = aleph_helper.collection_text(
-                  :adm_library_code => holding_adm_library.downcase, :sub_library_code => holding_sub_library_code,
-                    :collection_code => holding_collection_code ) unless holding_adm_library.nil?
+                  adm_library_code: holding_adm_library.downcase, sub_library_code: holding_sub_library_code,
+                    collection_code: holding_collection_code ) unless holding_adm_library.nil?
                 aleph_holding.each_by_tag('866') do |holding_866|
                   holding_866_a = holding_866['a']
                   @holdings_coverage << "Available in #{holding_collection}: #{holding_866_a.gsub(",", ", ")}".

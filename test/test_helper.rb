@@ -18,6 +18,7 @@ end
 require 'vcr'
 require 'webmock'
 
+@@aleph_rest_url = Exlibris::Aleph::Config.rest_url
 @@aleph_url = Exlibris::Aleph::Config.base_url
 @@primo_url = Exlibris::Primo::Config.base_url
 
