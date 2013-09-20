@@ -132,18 +132,20 @@ class NyuAlephTest < ActiveSupport::TestCase
   end
 
   test "nyu_aleph equality" do
-    holding = Exlibris::Primo::Holding.new({
-      :display_type => "book",
-      :title => "Digital divide : civic engagement, information poverty, and the Internet worldwide",
-      :record_id => "nyu_aleph000655588",
-      :source_id => "nyu_aleph",
-      :original_source_id => "NYU01",
-      :source_record_id => "000655588"})
-    other_holding = Exlibris::Primo::Holding.new({
-      :source_id => "nyu_aleph",
-      :source_record_id => "000655588"})
-    assert((not holding.eql?(other_holding)))
-    assert holding.to_source.eql?(other_holding)
+    VCR.use_cassette('nyu_aleph equality') do
+      holding = Exlibris::Primo::Holding.new({
+        :display_type => "book",
+        :title => "Digital divide : civic engagement, information poverty, and the Internet worldwide",
+        :record_id => "nyu_aleph000655588",
+        :source_id => "nyu_aleph",
+        :original_source_id => "NYU01",
+        :source_record_id => "000655588"})
+      other_holding = Exlibris::Primo::Holding.new({
+        :source_id => "nyu_aleph",
+        :source_record_id => "000655588"})
+      assert((not holding.eql?(other_holding)))
+      assert holding.to_source.eql?(other_holding)
+    end
   end
 
   test "nyu_aleph checked out book" do
@@ -184,17 +186,13 @@ class NyuAlephTest < ActiveSupport::TestCase
       holdings =
         exlibris_primo_search.isbn_is(@frankenstein_isbn).records.collect{|record| record.holdings}.flatten
       assert_equal(3, holdings.size, "Holdings size mismatch")
-      holdings.each do |holding|
-        nyu_aleph = holding.to_source
-        # This is a book, so we should be expanding.
-        assert(nyu_aleph.send(:expanding?), "Not expanding book")
-      end
       sources = []
       holdings.each do |holding|
         source = holding.to_source
         sources.concat(source.expand) unless sources.include? source
       end
       assert_equal(6, sources.size)
+      sources.each { |source| assert source.expanded?, "Not expanded" }
     end
   end
 
@@ -203,14 +201,11 @@ class NyuAlephTest < ActiveSupport::TestCase
       holdings =
         exlibris_primo_search.isbn_is(@the_new_yorker_issn).records.collect{|record| record.holdings}.flatten
       assert_equal(6, holdings.size, "Holdings size mismatch")
-      holdings.each do |holding|
-        nyu_aleph = holding.to_source
-        # This is a journal, so we shouldn't be expanding.
-        assert((not nyu_aleph.send(:expanding?)), "Expanding journal")
-      end
       sources = []
       holdings.each do |holding|
         source = holding.to_source
+        # This is a journal, so we shouldn't be expanding.
+        assert((not source.send(:expanding?)), "Expanding journal")
         sources.concat(source.expand) unless sources.include? source
       end
       assert_equal(6, sources.size)
@@ -222,11 +217,6 @@ class NyuAlephTest < ActiveSupport::TestCase
       holdings =
         exlibris_primo_search.record_id!(@temple_of_deir_el_bahari_id).records.collect{|record| record.holdings}.flatten
       assert_equal(5, holdings.size, "Holdings size mismatch")
-      holdings.each do |holding|
-        nyu_aleph = holding.to_source
-        # This is a book, so we should be expanding.
-        assert(nyu_aleph.send(:expanding?), "Not expanding book")
-      end
       sources = []
       holdings.each do |holding|
         source = holding.to_source
@@ -238,6 +228,8 @@ class NyuAlephTest < ActiveSupport::TestCase
           source.collection.eql?("Main Collection"))
       end
       cu_main_collection_sources.each do |source|
+        assert(source.expanded?, "Not expanded")
+        assert(source.ajax?, "Not ajax")
         assert_equal("CU", source.institution)
       end
       assert_equal(2, cu_main_collection_sources.length)
@@ -255,6 +247,7 @@ class NyuAlephTest < ActiveSupport::TestCase
       end
       assert_equal(6, sources.size)
       sources.each do |source|
+        assert source.expanded?, "Not expanded?"
         assert_equal("deferred", source.requestability)
       end
     end
@@ -273,10 +266,12 @@ class NyuAlephTest < ActiveSupport::TestCase
         source.library.eql?("NYU Bobst")
       end
       bobst_sources.each do |bobst_source|
+        assert(bobst_source.expanded?, "Not expanded")
+        assert(bobst_source.ajax?, "Not ajax")
         assert_equal("NYU01", bobst_source.original_source_id)
         assert_equal("003079903", bobst_source.source_record_id)
         assert_equal("003079903", bobst_source.source_data[:source_record_id])
-        assert_equal("http://#{@@aleph_url}/F?func=item-global&doc_library=NYU01&local_base=PRIMOCOMMON&doc_number=003079903&sub_library=BOBST", bobst_source.url)
+        assert_equal("#{@@aleph_url}/F?func=item-global&doc_library=NYU01&local_base=PRIMOCOMMON&doc_number=003079903&sub_library=BOBST", bobst_source.url)
       end
     end
   end
@@ -294,6 +289,8 @@ class NyuAlephTest < ActiveSupport::TestCase
         source.library.eql?("NYU Bobst")
       end
       bobst_sources.each do |bobst_source|
+        assert(bobst_source.expanded?, "Not expanded")
+        assert(bobst_source.ajax?, "Not ajax")
         assert_equal("4 request(s) of 1 items.", bobst_source.queue)
         assert_equal(4, bobst_source.send(:request_count))
         assert(bobst_source.send(:requested?))
@@ -302,7 +299,7 @@ class NyuAlephTest < ActiveSupport::TestCase
         assert_equal("NYU01", bobst_source.original_source_id)
         assert_equal("003710159", bobst_source.source_record_id)
         assert_equal("003710159", bobst_source.source_data[:source_record_id])
-        assert_equal("http://#{@@aleph_url}/F?func=item-global&doc_library=NYU01&local_base=PRIMOCOMMON&doc_number=003710159&sub_library=BOBST", bobst_source.url)
+        assert_equal("#{@@aleph_url}/F?func=item-global&doc_library=NYU01&local_base=PRIMOCOMMON&doc_number=003710159&sub_library=BOBST", bobst_source.url)
       end
     end
   end
@@ -320,12 +317,14 @@ class NyuAlephTest < ActiveSupport::TestCase
         source.library.eql?("NYU Bobst")
       end
       bobst_sources.each do |bobst_source|
+        assert(bobst_source.expanded?, "Not expanded")
+        assert(bobst_source.ajax?, "Not ajax")
         assert_equal("reshelving", bobst_source.status_code)
         assert_equal("Reshelving", bobst_source.status)
         assert_equal("NYU01", bobst_source.original_source_id)
         assert_equal("002365745", bobst_source.source_record_id)
         assert_equal("002365745", bobst_source.source_data[:source_record_id])
-        assert_equal("http://#{@@aleph_url}/F?func=item-global&doc_library=NYU01&local_base=PRIMOCOMMON&doc_number=002365745&sub_library=BOBST", bobst_source.url)
+        assert_equal("#{@@aleph_url}/F?func=item-global&doc_library=NYU01&local_base=PRIMOCOMMON&doc_number=002365745&sub_library=BOBST", bobst_source.url)
       end
     end
   end
@@ -343,12 +342,41 @@ class NyuAlephTest < ActiveSupport::TestCase
         source.library.eql?("NYU Bobst")
       end
       bobst_sources.each do |bobst_source|
+        assert(bobst_source.expanded?, "Not expanded")
+        assert(bobst_source.ajax?, "Not ajax")
         assert_equal("recalled", bobst_source.status_code)
         assert_equal("Due: 03/10/13", bobst_source.status)
         assert_equal("NYU01", bobst_source.original_source_id)
         assert_equal("003710159", bobst_source.source_record_id)
         assert_equal("003710159", bobst_source.source_data[:source_record_id])
-        assert_equal("http://#{@@aleph_url}/F?func=item-global&doc_library=NYU01&local_base=PRIMOCOMMON&doc_number=003710159&sub_library=BOBST", bobst_source.url)
+        assert_equal("#{@@aleph_url}/F?func=item-global&doc_library=NYU01&local_base=PRIMOCOMMON&doc_number=003710159&sub_library=BOBST", bobst_source.url)
+      end
+    end
+  end
+
+  test "nyu_aleph down" do
+    VCR.use_cassette('nyu_aleph down', record: :new_episodes) do
+      begin
+        # Switch to a non-responsive URL (connection refused)
+        Exlibris::Aleph::Config.rest_url = "http://library.nyu.edu:1891/rest-dlf"
+        holdings =
+          exlibris_primo_search.isbn_is(@frankenstein_isbn).records.collect{|record| record.holdings}.flatten
+        assert_equal(3, holdings.size, "Holdings size mismatch")
+        holdings.each do |holding|
+          nyu_aleph = holding.to_source
+          # Aleph is a down, so we shouldn't be expanding.
+          assert((not nyu_aleph.send(:expanding?)),
+            "Aleph is down, so we shouldn't be expanding the book")
+        end
+        sources = []
+        holdings.each do |holding|
+          source = holding.to_source
+          sources.concat(source.expand) unless sources.include? source
+        end
+        assert_equal(3, sources.size)
+      ensure
+        # Ensure we reset the Aleph configuration
+        Exlibris::Aleph::Config.rest_url = @@aleph_rest_url
       end
     end
   end
