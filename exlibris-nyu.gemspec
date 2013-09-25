@@ -12,16 +12,18 @@ Gem::Specification.new do |s|
   s.homepage    = "https://github.com/NYULibraries/exlibris-nyu"
   s.summary     = "NYU extensions to and configurations for the exlibris gems."
   s.description = "NYU extensions to and configurations for the exlibris gems. Does not require Rails."
+  s.license     = 'MIT'
 
   s.files = Dir["{lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
   s.test_files = Dir["test/**/*"]
 
-  s.add_dependency "rake", "~> 10.1.0"
   s.add_dependency "require_all", "~> 1.3.1"
-  s.add_dependency "exlibris-primo", "~> 1.0.11"
-  s.add_dependency "exlibris-aleph", "~> 1.0.8"
+  s.add_dependency "exlibris-primo", "~> 1.1.0"
+  s.add_dependency "exlibris-aleph", "~> 1.1.0"
   s.add_dependency "nokogiri", "~> 1.6.0"
-  s.add_development_dependency "rdoc", "~> 4.0.1"
+
+  s.add_development_dependency "rake", "~> 10.1.0"
   s.add_development_dependency "vcr", "~> 2.5.0"
   s.add_development_dependency "webmock", "~> 1.13.0"
+  s.add_development_dependency "pry", "~> 0.9.12.2"
 end
