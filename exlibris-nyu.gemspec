@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
   s.add_dependency "nokogiri", "~> 1.6.0"
 
   s.add_development_dependency "rake", "~> 10.1.0"
+  s.add_development_dependency "rdoc"
   s.add_development_dependency "vcr", "~> 2.5.0"
   s.add_development_dependency "webmock", "~> 1.13.0"
   s.add_development_dependency "pry", "~> 0.9.12.2"
