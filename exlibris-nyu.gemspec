@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "require_all", "~> 1.3.1"
-  s.add_dependency "exlibris-primo", "~> 1.1.1"
+  s.add_dependency "exlibris-primo", "~> 1.1.2"
   s.add_dependency "exlibris-aleph", "~> 1.1.0"
   s.add_dependency "nokogiri", "~> 1.6.0"
 
