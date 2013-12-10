@@ -22,3 +22,6 @@ Gemfile.lock
 config/aleph
 
 .rbx
+
+# Ignore the wiki
+wiki
