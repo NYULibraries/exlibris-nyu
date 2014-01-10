@@ -103,8 +103,8 @@ availability_statuses:
 
 sources:
   nyu_aleph:
-     base_url: "http://alephstage.library.nyu.edu"
-     rest_url: "http://alephstage.library.nyu.edu:1891/rest-dlf"
+     base_url: "http://aleph.library.nyu.edu"
+     rest_url: "http://aleph.library.nyu.edu:1891/rest-dlf"
      illiad_url: "http://ill.library.nyu.edu"
      type: aleph
      class_name: NyuAleph
@@ -297,8 +297,8 @@ sources:
      requestable_statuses: ["checked_out", "offsite", available_requestable, "Depository", "Offsite Available"]
      requestable_collections: ["checked_out", "offsite", available_requestable, "Depository", "Offsite Available"]
   COURSES:
-     base_url: "http://alephstage.library.nyu.edu"
-     rest_url: "http://alephstage.library.nyu.edu:1891/rest-dlf"
+     base_url: "http://aleph.library.nyu.edu"
+     rest_url: "http://aleph.library.nyu.edu:1891/rest-dlf"
      illiad_url: "http://ill.library.nyu.edu"
      type: aleph
      class_name: NyuAlephReserves
@@ -352,8 +352,8 @@ sources:
        on_exhibit: ["On Exhibit"]
        reshelving: ["Reshelving"]
   ADCOURSES:
-     base_url: "http://alephstage.library.nyu.edu"
-     rest_url: "http://alephstage.library.nyu.edu:1891/rest-dlf"
+     base_url: "http://aleph.library.nyu.edu"
+     rest_url: "http://aleph.library.nyu.edu:1891/rest-dlf"
      illiad_url: "http://ill.library.nyu.edu"
      type: aleph
      class_name: NyuAlephReserves
