@@ -380,4 +380,26 @@ class NyuAlephTest < ActiveSupport::TestCase
       end
     end
   end
+
+  test "nyu_aleph missing request permissions" do
+    VCR.use_cassette('nyu_aleph missing request permissions') do
+      holdings =
+        exlibris_primo_search.record_id!("nyu_aleph003921627").records.collect{|record| record.holdings}.flatten
+      sources = []
+      holdings.each do |holding|
+        source = holding.to_source
+        sources.concat(source.expand) unless sources.include? source
+      end
+      abu_dhabi_sources = sources.find_all do |source|
+        source.library.starts_with?("NYU Abu Dhabi")
+      end
+      assert(abu_dhabi_sources.size > 0, "Don't have any sources")
+      abu_dhabi_sources.each do |abu_dhabi_source|
+        assert(abu_dhabi_source.expanded?, "Not expanded")
+        assert(abu_dhabi_source.ajax?, "Not ajax")
+        assert_nothing_raised { abu_dhabi_source.requestability }
+        assert_equal(Exlibris::Primo::Source::NyuAleph::RequestableNo, abu_dhabi_source.requestability)
+      end
+    end
+  end
 end
