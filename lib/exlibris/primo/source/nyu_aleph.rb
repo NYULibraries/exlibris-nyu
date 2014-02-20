@@ -122,6 +122,8 @@ module Exlibris
           # Non-Requestable circulation statuses include:
           #   - Reshelving
           return RequestableNo if reshelving?
+          # Also if we don't have request permissions, we can't request.
+          return RequestableNo if request_permissions.nil?
           # Check holding permissions
           # If the holding has "C" as its hold request permission, it is requestable.
           # Also if it has "Y" in its photocopy request (indicating ILL), it is requestable.
