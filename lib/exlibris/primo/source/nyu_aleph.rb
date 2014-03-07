@@ -210,7 +210,7 @@ module Exlibris
         def coverage
           # HACK ALERT: need to find a better way to do this.
           return @coverage unless @coverage.nil? or @coverage.empty?
-          @coverage = (journal?) ? (bib_coverage + holdings_coverage) : []
+          @coverage = (journal?) ? (holdings_coverage + bib_coverage) : []
         end
 
         # Get expanded holdings based on Aleph items.
