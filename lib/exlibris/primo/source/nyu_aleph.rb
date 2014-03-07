@@ -409,6 +409,8 @@ module Exlibris
                   holding_866_a = holding_866['a']
                   @holdings_coverage << "Available in #{holding_collection}: #{holding_866_a.gsub(",", ", ")}".
                     strip unless holding_collection.nil? or holding_866_a.nil?
+                  holding_866_z = holding_866['z']
+                  @holdings_coverage << ("Note: #{holding_866_z}") unless holding_866_z.nil?  
                 end
               end
             end
