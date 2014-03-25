@@ -1,5 +1,5 @@
 require 'coveralls'
-Coveralls.wear!
+Coveralls.wear_merged!
 require 'test/unit'
 require File.expand_path("../../lib/exlibris-nyu.rb",  __FILE__)
 
