@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.license     = 'MIT'
 
   s.files = Dir["{lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
-  s.test_files = Dir["test/**/*"]
+  s.test_files = Dir["test/**/*"] + Dir["spec/**/*"]
 
   s.add_dependency "require_all", "~> 1.3"
   s.add_dependency "exlibris-primo", "~> 1.1.2"
@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency "rake", "~> 10.1.0"
   s.add_development_dependency "rdoc"
+  s.add_development_dependency "rspec", "~> 2.14"
   s.add_development_dependency "vcr", "~> 2.8"
   s.add_development_dependency "webmock", "~> 1.17"
   s.add_development_dependency "pry", "~> 0.9.12"
