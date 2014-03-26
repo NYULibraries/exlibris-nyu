@@ -210,7 +210,8 @@ module Exlibris
         # based on Aleph bib and holdings coverage
         # Only get coverage for journals
         def coverage
-          @coverage ||= (journal?) ? (holdings_coverage || bib_coverage).to_a : []
+          return @coverage unless @coverage.nil? or @coverage.empty?
+          @coverage = (journal?) ? (holdings_coverage || bib_coverage).to_a : []
         end
 
         # Get expanded holdings based on Aleph items.
@@ -345,7 +346,7 @@ module Exlibris
               # If this bib 866 matches, process it
               if bib_866_matches?(bib_866)
                 public_note = bib_866['i']
-                notes << public_note unless public_note.nil?
+                notes << Coverage::Note.new(public_note) unless public_note.nil?
                 # Get the sub library and collection from the bib 866
                 (bib_866_sub_library_code, bib_866_collection_code) =
                   sub_library_and_collection_from_bib_866(bib_866)
@@ -365,13 +366,13 @@ module Exlibris
                 volumes = bib_866['j']
                 years = bib_866['k']
                 unless years.nil? and years.nil?
-                  textual_holdings <<
-                    "Available in #{collection}: #{format_coverage_string(volumes, years)}"
+                  textual_holding = format_coverage_string(volumes, years)
+                  textual_holdings << Coverage::TextualHolding.new(collection, textual_holding)
                 end
               end
             end
             unless textual_holdings.empty? && notes.empty?
-              @bib_coverage = CoverageStatement.new(textual_holdings, notes)
+              @bib_coverage = Coverage::Statement.new(textual_holdings, notes)
             end
           end
           @bib_coverage
@@ -406,7 +407,7 @@ module Exlibris
               if marc_holding_matches?(aleph_holding)
                 # Set the public note
                 public_note = aleph_holding['852']['z']
-                notes << public_note unless public_note.nil?
+                notes << Coverage::Note.new(public_note) unless public_note.nil?
                 # Get the holding sub library
                 holding_sub_library = aleph_holding['852']['b']
                 # Get the ADM library from the Aleph helper
@@ -428,12 +429,12 @@ module Exlibris
                   # Punt if we can't get the textual holding
                   next if textual_holding.nil?
                   textual_holding.gsub!(",", ", ")
-                  textual_holdings << "Available in #{collection}: #{textual_holding}"
+                  textual_holdings << Coverage::TextualHolding.new(collection, textual_holding)
                 end
               end
             end
             unless textual_holdings.empty? && notes.empty?
-              @holdings_coverage = CoverageStatement.new(textual_holdings, notes)
+              @holdings_coverage = Coverage::Statement.new(textual_holdings, notes)
             end
           end
           @holdings_coverage
