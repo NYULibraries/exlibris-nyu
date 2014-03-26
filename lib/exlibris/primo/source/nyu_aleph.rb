@@ -210,9 +210,7 @@ module Exlibris
         # based on Aleph bib and holdings coverage
         # Only get coverage for journals
         def coverage
-          # HACK ALERT: need to find a better way to do this.
-          return @coverage unless @coverage.nil? or @coverage.empty?
-          @coverage = (journal?) ? (holdings_coverage + bib_coverage) : []
+          @coverage ||= (journal?) ? (holdings_coverage || bib_coverage).to_a : []
         end
 
         # Get expanded holdings based on Aleph items.
@@ -336,24 +334,18 @@ module Exlibris
         end
         private :checked_out?
 
-        # Array of coverages already processed.
-        # Updated by bib_coverage and holdings_coverage.
-        def coverages_seen
-          @coverages_seen ||= []
-        end
-        private :coverages_seen
-
         # Coverage array from Aleph bib 866$j and 866$k or 866$i.
         def bib_coverage
           return @bib_coverage unless @bib_coverage.nil?
-          @bib_coverage = []
           # Only do this if we don't have holdings coverage for this item
-          if (@holdings_coverage.nil? || @holdings_coverage.empty?) && aleph_bib
+          if @holdings_coverage.nil? && aleph_bib
+            notes = []
+            textual_holdings = []
             aleph_bib.each_by_tag('866') do |bib_866|
               # If this bib 866 matches, process it
               if bib_866_matches?(bib_866)
                 public_note = bib_866['i']
-                @bib_coverage << "Note: #{public_note}" unless public_note.nil?
+                notes << public_note unless public_note.nil?
                 # Get the sub library and collection from the bib 866
                 (bib_866_sub_library_code, bib_866_collection_code) =
                   sub_library_and_collection_from_bib_866(bib_866)
@@ -373,10 +365,13 @@ module Exlibris
                 volumes = bib_866['j']
                 years = bib_866['k']
                 unless years.nil? and years.nil?
-                  @bib_coverage <<
+                  textual_holdings <<
                     "Available in #{collection}: #{format_coverage_string(volumes, years)}"
                 end
               end
+            end
+            unless textual_holdings.empty? && notes.empty?
+              @bib_coverage = CoverageStatement.new(textual_holdings, notes)
             end
           end
           @bib_coverage
@@ -402,15 +397,16 @@ module Exlibris
         # Coverage array from Aleph holdings 852$z and 866$a.
         def holdings_coverage
           return @holdings_coverage unless @holdings_coverage.nil?
-          @holdings_coverage = []
           # Only do this if we don't have bib coverage for this item
-          if (@bib_coverage.nil? || @bib_coverage.empty?) && aleph_holdings
+          if @bib_coverage.nil? && aleph_holdings
+            notes = []
+            textual_holdings = []
             aleph_holdings.each do |aleph_holding|
               # If this Aleph holding matches, process it
               if marc_holding_matches?(aleph_holding)
                 # Set the public note
                 public_note = aleph_holding['852']['z']
-                @holdings_coverage << "Note: #{public_note}" unless public_note.nil?
+                notes << public_note unless public_note.nil?
                 # Get the holding sub library
                 holding_sub_library = aleph_holding['852']['b']
                 # Get the ADM library from the Aleph helper
@@ -432,9 +428,12 @@ module Exlibris
                   # Punt if we can't get the textual holding
                   next if textual_holding.nil?
                   textual_holding.gsub!(",", ", ")
-                  @holdings_coverage << "Available in #{collection}: #{textual_holding}"
+                  textual_holdings << "Available in #{collection}: #{textual_holding}"
                 end
               end
+            end
+            unless textual_holdings.empty? && notes.empty?
+              @holdings_coverage = CoverageStatement.new(textual_holdings, notes)
             end
           end
           @holdings_coverage

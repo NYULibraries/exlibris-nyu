@@ -3,31 +3,13 @@ module Exlibris
   module Primo
     module Source
       describe CoverageStatement do
-        let(:aleph_helper) { Exlibris::Aleph::TabHelper.instance() }
-        let(:adm_library) { "New York" }
-        let(:sub_library) { "Sub Library" }
-        let(:textual_holding) { "These are the textual holdings" }
+        let(:textual_holding) { "This is a textual holding" }
         let(:textual_holdings) { [textual_holding] }
         let(:note) { "This is a note" }
         let(:notes) { [note] }
-        let(:attributes) do
-          {
-            adm_library: adm_library,
-            sub_library: sub_library,
-            textual_holdings: textual_holdings,
-            notes: notes
-          }
-        end
-        subject(:coverage_statement) { CoverageStatement.new(attributes) }
+        let(:args) { [textual_holdings, notes] }
+        subject(:coverage_statement) { CoverageStatement.new(*args) }
         it { should be_an CoverageStatement }
-        describe '#adm_library' do
-          subject { coverage_statement.adm_library }
-          it { should eq adm_library }
-        end
-        describe '#sub_library' do
-          subject { coverage_statement.sub_library }
-          it { should eq sub_library }
-        end
         describe '#textual_holdings' do
           subject { coverage_statement.textual_holdings }
           it { should eq textual_holdings }
@@ -36,59 +18,92 @@ module Exlibris
           subject { coverage_statement.notes }
           it { should eq notes }
         end
-        context 'when initialized without any attributes' do
+        describe '#to_a' do
+          subject { coverage_statement.to_a }
+          it { should be_an Array }
+          it 'should have 2 elements' do
+            expect(subject.size).to be 2
+          end
+        end
+        context 'when initialized without any arguments' do
           subject { CoverageStatement.new }
           it 'should raise an ArgumentError' do
             expect { subject }.to raise_error(ArgumentError)
           end
         end
-        context 'when initialized with attributes' do
-          subject { CoverageStatement.new(attributes) }
-          context 'but the attributes argument is not a Hash' do
-            let(:attributes) { "" }
+        context 'when initialized with a textual holdings argument' do
+          let(:args) { [] }
+          context 'but the argument is not nil or an Array' do
+            before { args << "" }
             it 'should raise an ArgumentError' do
               expect { subject }.to raise_error(ArgumentError)
             end
           end
-          context 'and the attributes argument is a Hash' do
-            let(:attributes) { Hash.new }
-            context 'but the attributes do not have an ADM library' do
+          context 'and the textual holdings argument is nil' do
+            before { args << nil }
+            context 'but there is no notes argument' do
               it 'should raise an ArgumentError' do
                 expect { subject }.to raise_error(ArgumentError)
               end
             end
-            context 'and the attributes do have an ADM library' do
-              before { attributes[:adm_library] = adm_library }
-              context 'but the attributes do not have a sub library' do
+            context 'and there is a notes argument' do
+              context 'but the notes argument is not an Array' do
+                before { args << "" }
                 it 'should raise an ArgumentError' do
                   expect { subject }.to raise_error(ArgumentError)
                 end
               end
-              context 'and the attributes do have a sub library' do
-                before { attributes[:sub_library] = sub_library }
-                context 'but the attributes do not have textual holdings' do
-                  context 'nor do the attributes have notes' do
+              context 'and the notes argument is an Array' do
+                context 'but the Array is empty' do
+                  before { args << [] }
+                  it 'should raise an ArgumentError' do
+                    expect { subject }.to raise_error(ArgumentError)
+                  end
+                end
+                context 'and the Array is not empty' do
+                  before { args << notes }
+                  it 'should not raise an ArgumentError' do
+                    expect { subject }.not_to raise_error
+                  end
+                end
+              end
+            end
+          end
+          context 'and the textual holdings argument is an Array' do
+            context 'and the Array is empty' do
+              before { args << [] }
+              context 'but there is no notes argument' do
+                it 'should raise an ArgumentError' do
+                  expect { subject }.to raise_error(ArgumentError)
+                end
+              end
+              context 'and there is a notes argument' do
+                context 'but the notes argument is not an Array' do
+                  before { args << "" }
+                  it 'should raise an ArgumentError' do
+                    expect { subject }.to raise_error(ArgumentError)
+                  end
+                end
+                context 'and the notes argument is an Array' do
+                  context 'but the Array is empty' do
+                    before { args << [] }
                     it 'should raise an ArgumentError' do
                       expect { subject }.to raise_error(ArgumentError)
                     end
                   end
-                end
-                context 'and the attributes have textual holdings' do
-                  before { attributes[:textual_holdings] = textual_holdings }
-                  context 'but they do not have notes' do
-                    it 'should not raise an error' do
+                  context 'and the Array is not empty' do
+                    before { args << notes }
+                    it 'should not raise an ArgumentError' do
                       expect { subject }.not_to raise_error
                     end
                   end
                 end
-                context 'and the attributes do have notes' do
-                  before { attributes[:notes] = notes }
-                  context 'but the attributes do not have textual holdings' do
-                    it 'should not raise an error' do
-                      expect { subject }.not_to raise_error
-                    end
-                  end
-                end
+              end
+            end
+            context 'and the Array is not empty' do
+              before { args << textual_holdings }
+              it 'should not raise an ArgumentError' do
+                expect { subject }.not_to raise_error
               end
             end
           end

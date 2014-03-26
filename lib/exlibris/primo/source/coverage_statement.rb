@@ -2,25 +2,25 @@ module Exlibris
   module Primo
     module Source
       class CoverageStatement
-        attr_reader :adm_library, :sub_library, :textual_holdings, :notes
-        def initialize(attributes)
-          unless attributes.is_a?(Hash)
-            raise ArgumentError.new("Argument is not a Hash")
+        attr_reader :textual_holdings, :notes
+        def initialize(textual_holdings, notes=[])
+          textual_holdings ||= []
+          notes ||= []
+          unless(textual_holdings.is_a?(Array))
+            raise ArgumentError.new("textual_holdings is not an array")
           end
-          @adm_library = attributes.fetch(:adm_library, nil)
-          if adm_library.nil?
-            raise ArgumentError.new("No :adm_library in given attributes")
+          unless(notes.is_a?(Array))
+            raise ArgumentError.new("notes is not an array")
           end
-          @sub_library = attributes.fetch(:sub_library, nil)
-          if sub_library.nil?
-            raise ArgumentError.new("No :sub_library in given attributes")
+          if textual_holdings.empty? && notes.empty?
+            raise ArgumentError.new("textual_holdings and notes can't both be empty")
           end
-          @textual_holdings = attributes.fetch(:textual_holdings, nil)
-          @notes = attributes.fetch(:notes, nil)
-          if textual_holdings.nil? && notes.nil?
-            raise ArgumentError.new("No :textual_holdings or :notes in given attributes;" +
-              "You must include at least one of them")
-          end
+          @textual_holdings = textual_holdings
+          @notes = notes
+        end
+        def to_a
+          @coverage_array ||= textual_holdings + notes.map { |note|
+            "Note: #{note}" }
         end
       end
     end
