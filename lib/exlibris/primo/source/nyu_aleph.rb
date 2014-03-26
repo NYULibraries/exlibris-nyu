@@ -18,6 +18,8 @@ module Exlibris
         RequestableNo = 'no' # No
         RequestableUnknown = 'unknown' # Unknown, but essentially no
 
+        alias_method :aleph_sub_library_code, :sub_library_code
+
         attr_accessor :adm_library_code, :sub_library_code, :collection_code,
           :item_status_code, :item_process_status_code, :circulation_status,
             :item_status, :item_process_status, :queue
@@ -343,36 +345,36 @@ module Exlibris
 
         # Coverage array from Aleph bib 866$j and 866$k or 866$i.
         def bib_coverage
-          @bib_coverage ||= []
-          if @bib_coverage.empty? and aleph_bib
+          return @bib_coverage unless @bib_coverage.nil?
+          @bib_coverage = []
+          # Only do this if we don't have holdings coverage for this item
+          if (@holdings_coverage.nil? || @holdings_coverage.empty?) && aleph_bib
             aleph_bib.each_by_tag('866') do |bib_866|
-              # Get subfield l
-              subfield_l = bib_866['l']
-              # Map the 866 subfields to actual Aleph sub library based on config
-              bib_866_subfield_l_mapping = bib_866_subfield_l_map[subfield_l]
-              # Skip if there is no match, since we don't know what the sublibrary is.
-              next if bib_866_subfield_l_mapping.nil?
-              # Get the 866 subfield sub library
-              bib_866_sub_library_code = bib_866_subfield_l_mapping['sub_library']
-              # If this matches the NyuAleph holding, process it.
-              if library_code.upcase.eql? bib_866_sub_library_code.upcase
+              # If this bib 866 matches, process it
+              if bib_866_matches?(bib_866)
+                public_note = bib_866['i']
+                @bib_coverage << "Note: #{public_note}" unless public_note.nil?
+                # Get the sub library and collection from the bib 866
+                (bib_866_sub_library_code, bib_866_collection_code) =
+                  sub_library_and_collection_from_bib_866(bib_866)
                 # Get the ADM library from the Aleph helper
-                bib_866_adm_library = aleph_helper.sub_library_adm(bib_866_sub_library_code)
-                # Indicate that we've looked at this coverage ADM, sub library combo
-                coverages_seen << { adm_library: bib_866_adm_library, sub_library_code: bib_866_sub_library_code }
-                bib_866_collection_code = bib_866_subfield_l_mapping['collection']
-                bib_866_j = bib_866['j']
-                bib_866_k = bib_866['k']
-                bib_866_collection = aleph_helper.collection_text(
-                  adm_library_code: bib_866_adm_library.downcase, sub_library_code: bib_866_sub_library_code,
-                    collection_code: bib_866_collection_code ) unless bib_866_adm_library.nil?
-                if bib_866_collection
-                  if bib_866_j or bib_866_k
-                    @bib_coverage << "Available in #{bib_866_collection}: #{format_coverage_string(bib_866_j, bib_866_k)}".strip
-                  else
-                    bib_866_i = bib_866['i']
-                    @bib_coverage << "#{bib_866_i}".strip unless bib_866_i.nil?
-                  end
+                adm_library = aleph_helper.sub_library_adm(bib_866_sub_library_code)
+                # Punt if we couldn't get the ADM library
+                # TODO: log this error state
+                next if adm_library.nil?
+                # Get the collection display text from the Aleph helper
+                collection = aleph_helper.collection_text(
+                  adm_library_code: adm_library.downcase,
+                  sub_library_code: bib_866_sub_library_code,
+                  collection_code: bib_866_collection_code)
+                # Punt if we couldn't get the collection display text
+                # TODO: log this error state
+                next if collection.nil?
+                volumes = bib_866['j']
+                years = bib_866['k']
+                unless years.nil? and years.nil?
+                  @bib_coverage <<
+                    "Available in #{collection}: #{format_coverage_string(volumes, years)}"
                 end
               end
             end
@@ -381,34 +383,56 @@ module Exlibris
         end
         private :bib_coverage
 
+        def bib_866_matches?(bib_866)
+          (bib_866_sub_library_code, bib_866_collection_code) =
+            sub_library_and_collection_from_bib_866(bib_866)
+          bib_866_sub_library_code == (aleph_sub_library_code || library_code)
+        end
+
+        # Get the sub library and collection from the crummy
+        # 866 subfield 'l' config mapping. This is problematic
+        # but the best we can do at this point.
+        def sub_library_and_collection_from_bib_866(bib_866)
+          bib_866_subfield_l_mapping = bib_866_subfield_l_map[bib_866['l']]
+          bib_866_sub_library_code = bib_866_subfield_l_mapping['sub_library']
+          bib_866_collection_code = bib_866_subfield_l_mapping['collection']
+          return [bib_866_sub_library_code, bib_866_collection_code]
+        end
+
         # Coverage array from Aleph holdings 852$z and 866$a.
         def holdings_coverage
-          @holdings_coverage ||= []
-          if @holdings_coverage.empty? and aleph_holdings
+          return @holdings_coverage unless @holdings_coverage.nil?
+          @holdings_coverage = []
+          # Only do this if we don't have bib coverage for this item
+          if (@bib_coverage.nil? || @bib_coverage.empty?) && aleph_holdings
             aleph_holdings.each do |aleph_holding|
-              # Get the holding sub library
-              holding_sub_library_code = aleph_holding['852']['b']
-              # If this matches the NyuAleph holding, process it.
-              if library_code.upcase == holding_sub_library_code.upcase
+              # If this Aleph holding matches, process it
+              if marc_holding_matches?(aleph_holding)
+                # Set the public note
+                public_note = aleph_holding['852']['z']
+                @holdings_coverage << "Note: #{public_note}" unless public_note.nil?
+                # Get the holding sub library
+                holding_sub_library = aleph_holding['852']['b']
                 # Get the ADM library from the Aleph helper
-                holding_adm_library = aleph_helper.sub_library_adm(holding_sub_library_code)
-                # Next if we've looked at this coverage ADM, sub library combo already
-                # HACK ALERT: Need to decouple from the run order.
-                # Only works since bib coverage runs first.
-                next if coverages_seen.include?({
-                  adm_library: holding_adm_library, sub_library_code: holding_sub_library_code })
-                # Indicate that we've looked at this coverage ADM, sub library combo
-                coverages_seen << { adm_library: holding_adm_library, sub_library_code: holding_sub_library_code }
-                holding_collection_code = aleph_holding['852']['c']
-                holding_852_z = aleph_holding['852']['z']
-                @holdings_coverage << ("Note: #{holding_852_z}") unless holding_852_z.nil?
-                holding_collection = aleph_helper.collection_text(
-                  adm_library_code: holding_adm_library.downcase, sub_library_code: holding_sub_library_code,
-                    collection_code: holding_collection_code ) unless holding_adm_library.nil?
+                adm_library = aleph_helper.sub_library_adm(holding_sub_library)
+                # Punt if we can't get the ADM library
+                # TODO: log this error state
+                next if adm_library.nil?
+                holding_collection = aleph_holding['852']['c']
+                # Get the collection display text from the Aleph helper
+                collection = aleph_helper.collection_text(
+                  adm_library_code: adm_library.downcase,
+                  sub_library_code: holding_sub_library,
+                  collection_code: holding_collection)
+                # Punt if we can't get the collection display text
+                # TODO: log this error state
+                next if collection.nil?
                 aleph_holding.each_by_tag('866') do |holding_866|
-                  holding_866_a = holding_866['a']
-                  @holdings_coverage << "Available in #{holding_collection}: #{holding_866_a.gsub(",", ", ")}".
-                    strip unless holding_collection.nil? or holding_866_a.nil?
+                  textual_holding = holding_866['a']
+                  # Punt if we can't get the textual holding
+                  next if textual_holding.nil?
+                  textual_holding.gsub!(",", ", ")
+                  @holdings_coverage << "Available in #{collection}: #{textual_holding}"
                 end
               end
             end
@@ -416,6 +440,10 @@ module Exlibris
           @holdings_coverage
         end
         private :holdings_coverage
+
+        def marc_holding_matches?(marc_holding)
+          (aleph_sub_library_code || library_code) == marc_holding['852']['b']
+        end
 
         # Format the Aleph call number for public consumption
         def format_aleph_call_number(aleph_item)
