@@ -2,7 +2,7 @@ module Exlibris
   module Primo
     module Source
       class CoverageStatement
-        attr_reader :adm_library, :sub_library, :collection, :textual_holdings, :notes
+        attr_reader :adm_library, :sub_library, :textual_holdings, :notes
         def initialize(attributes)
           unless attributes.is_a?(Hash)
             raise ArgumentError.new("Argument is not a Hash")
@@ -14,10 +14,6 @@ module Exlibris
           @sub_library = attributes.fetch(:sub_library, nil)
           if sub_library.nil?
             raise ArgumentError.new("No :sub_library in given attributes")
-          end
-          @collection = attributes.fetch(:collection, nil)
-          if collection.nil?
-            raise ArgumentError.new("No :collection in given attributes")
           end
           @textual_holdings = attributes.fetch(:textual_holdings, nil)
           @notes = attributes.fetch(:notes, nil)

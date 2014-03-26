@@ -3,9 +3,9 @@ module Exlibris
   module Primo
     module Source
       describe CoverageStatement do
+        let(:aleph_helper) { Exlibris::Aleph::TabHelper.instance() }
         let(:adm_library) { "New York" }
         let(:sub_library) { "Sub Library" }
-        let(:collection) { "Main Collection" }
         let(:textual_holding) { "These are the textual holdings" }
         let(:textual_holdings) { [textual_holding] }
         let(:note) { "This is a note" }
@@ -14,7 +14,6 @@ module Exlibris
           {
             adm_library: adm_library,
             sub_library: sub_library,
-            collection: collection,
             textual_holdings: textual_holdings,
             notes: notes
           }
@@ -67,34 +66,26 @@ module Exlibris
               end
               context 'and the attributes do have a sub library' do
                 before { attributes[:sub_library] = sub_library }
-                context 'but the attributes do not have a collection' do
-                  it 'should raise an ArgumentError' do
-                    expect { subject }.to raise_error(ArgumentError)
+                context 'but the attributes do not have textual holdings' do
+                  context 'nor do the attributes have notes' do
+                    it 'should raise an ArgumentError' do
+                      expect { subject }.to raise_error(ArgumentError)
+                    end
                   end
                 end
-                context 'and the attributes do have a collection' do
-                  before { attributes[:collection] = collection }
+                context 'and the attributes have textual holdings' do
+                  before { attributes[:textual_holdings] = textual_holdings }
+                  context 'but they do not have notes' do
+                    it 'should not raise an error' do
+                      expect { subject }.not_to raise_error
+                    end
+                  end
+                end
+                context 'and the attributes do have notes' do
+                  before { attributes[:notes] = notes }
                   context 'but the attributes do not have textual holdings' do
-                    context 'nor do the attributes have notes' do
-                      it 'should raise an ArgumentError' do
-                        expect { subject }.to raise_error(ArgumentError)
-                      end
-                    end
-                  end
-                  context 'and the attributes have textual holdings' do
-                    before { attributes[:textual_holdings] = textual_holdings }
-                    context 'but they do not have notes' do
-                      it 'should not raise an error' do
-                        expect { subject }.not_to raise_error
-                      end
-                    end
-                  end
-                  context 'and the attributes do have notes' do
-                    before { attributes[:notes] = notes }
-                    context 'but the attributes do not have textual holdings' do
-                      it 'should not raise an error' do
-                        expect { subject }.not_to raise_error
-                      end
+                    it 'should not raise an error' do
+                      expect { subject }.not_to raise_error
                     end
                   end
                 end
