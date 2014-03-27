@@ -7,7 +7,7 @@ module Exlibris
       describe NyuAleph do
         subject(:nyu_aleph) { NyuAleph.new }
         it { should be_an NyuAleph }
-        context 'when initialized with a Journal holding', vcr: { cassette_name: "vogue", record: :new_episodes } do
+        context 'when initialized with a Journal holding', vcr: { cassette_name: "vogue" } do
           let(:record_id) { "nyu_aleph002893728" }
           let(:search) { Exlibris::Primo::Search.new(record_id: record_id) }
           let(:records) { search.records }
