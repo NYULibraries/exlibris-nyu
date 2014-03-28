@@ -175,10 +175,6 @@ module Exlibris
             end
           end
         end
-        describe '#circulation_status' do
-          subject { nyu_aleph.circulation_status }
-          it { should eq circulation_status }
-        end
         describe '#availability_status_code' do
           subject { nyu_aleph.availability_status_code }
           context 'when the circulation status is "On Shelf"' do
@@ -207,7 +203,7 @@ module Exlibris
           end
           context 'when the circulation status is "Reshelving w/ some info"' do
             let(:circulation_status) { 'Reshelving w/ some info' }
-            xit { should eq "reshelving" }
+            it { should eq "reshelving" }
           end
           context 'when the circulation status is "Recalled due date: 05/31/14"' do
             let(:circulation_status) { 'Recalled due date: 05/31/14' }
