@@ -18,51 +18,78 @@ module Exlibris
         RequestableNo = 'no' # No
         RequestableUnknown = 'unknown' # Unknown, but essentially no
 
+        extend Forwardable
+
+        # Delegate the "status?" and :due_date methods to circulation status
+        def_delegators :circulation_status, :recalled?, :checked_out?,
+          :requested?, :reshelving?, :due_date
+
+        # Rename the old sub library code method
         alias_method :aleph_sub_library_code, :sub_library_code
 
         attr_accessor :adm_library_code, :sub_library_code, :collection_code,
-          :item_status_code, :item_process_status_code, :circulation_status,
-            :item_status, :item_process_status, :queue
+          :item_status_code, :item_process_status_code, :item_status,
+          :item_process_status, :queue
+
+        attr_accessor :circulation_status
+        private :circulation_status
 
         # Overwrites Exlibris::Primo::Source::Aleph#new
         def initialize(attributes={})
           super(attributes)
+          @circulation_status = CirculationStatus.new(circulation_status)
           @source_data[:sub_library] = sub_library
           @source_data[:illiad_url] = illiad_url
           @source_data[:aleph_rest_url] = aleph_rest_url
         end
 
         # Overrides Exlibris::Primo::Holding#availability_status_code
+        # Order of checks matter since the circulation status can
+        # be multiple statuses, go most granular first
+        #
+        # Can't use "or equal", i.e.
+        #
+        #   @availability_status_code ||= ...
+        #
+        # b/c @availability_status_code is set at instantiation time
+        # and we're trying to override it
         def availability_status_code
-          # First check if the item is recalled.
-          return @availability_status_code = "recalled" if recalled?
-          # Then check if the item is checked out
-          return @availability_status_code = "checked_out" if checked_out?
-          # Then check if it's requested
-          return @availability_status_code = "requested" if requested? or recalled?
-          # Then check based on circulation status
-          return @availability_status_code = circulation_status_code.dup unless circulation_status_code.nil?
-          # Then check based on item_web_text
-          return @availability_status_code = "overridden_by_nyu_aleph" unless item_web_text.nil?
-          # Otherwise super
-          super
+          @availability_status_code = begin
+            if recalled?
+              "recalled"
+            elsif checked_out?
+              "checked_out"
+            elsif requested?
+              "requested"
+            elsif circulation_status.code
+              "#{circulation_status.code}"
+            elsif translator.item_status
+              # TODO: this feels hacky, review
+              "overridden_by_nyu_aleph"
+            else
+              super
+            end
+          end
         end
         alias :status_code :availability_status_code
 
         # Overrides Exlibris::Primo::Holding#availability_status
+        # Order of checks matter since the circulation status can
+        # be multiple statuses, go most granular first
         def availability_status
-          # First check if the item is recalled.
-          return @availability_status = "Due: #{recalled_due_date}" if recalled?
-          # Then check if the item is checked out
-          return @availability_status = "Due: #{circulation_status}" if checked_out?
-          # Then check if we're reshelving
-          return @availability_status = "Reshelving" if reshelving?
-          # Then check if it's requested
-          return @availability_status = circulation_status if requested?
-          # Then check based on item_web_text if we're not dealing with a circulation status
-          return @availability_status = item_web_text if circulation_status_code.nil? and item_web_text
-          # Otherwise super
-          super
+          @availability_status ||= begin
+            if recalled? || checked_out?
+              "Due: #{due_date}"
+            elsif reshelving?
+              "Reshelving"
+            elsif requested?
+              circulation_status.value
+            elsif circulation_status.code.nil? && translator.item_status
+              translator.item_status
+            else
+              super
+            end
+          end
         end
         alias :availability :availability_status
         alias :status :availability_status
@@ -186,36 +213,6 @@ module Exlibris
         end
         private :request_permissions
 
-        # Is this holding requested?
-        def requested?
-          /Requested/=~ circulation_status
-        end
-        private :requested?
-
-        # Is this holding recalled?
-        def recalled?
-          /Recalled/=~ circulation_status
-        end
-        private :recalled?
-
-        # Are we reshelving this item?
-        def reshelving?
-          /Reshelving/=~ circulation_status
-        end
-        private :reshelving?
-
-        # The number of requests made for this holding
-        def request_count
-          @request_count ||= queue.match(/^(\d+)/)[0].to_i
-        end
-        private :request_count
-
-        # Return the recalled due date
-        def recalled_due_date
-          @recalled_due_date ||= circulation_status.match(/Recalled due date: (\d{2}\/\d{2}\/\d{2})/)[1]
-        end
-        private :recalled_due_date
-
         # Logic to determine whether we're expanding this holding
         # Only expand if not a journal and we've already been to Aleph
         # or we have expanded holdings from Aleph (Aleph could be down) or
@@ -254,7 +251,7 @@ module Exlibris
               from_aleph: true,
               item_id: aleph_item["href"].match(/items\/(.+)$/)[1],
               adm_library_code: aleph_item["z30"]["translate_change_active_library"],
-              call_number: format_aleph_call_number(aleph_item).gsub("&nbsp;", " "),
+              call_number: aleph_call_number(aleph_item),
               sub_library_code: aleph_item["z30_sub_library_code"].strip,
               collection_code: aleph_item["z30_collection_code"],
               source_record_id: source_record_id,
@@ -274,6 +271,13 @@ module Exlibris
           end
         end
         private :expanded_holdings
+
+        def aleph_call_number(aleph_item)
+          classification = aleph_item["z30"]["z30_call_no"]
+          description = aleph_item["z30"]["z30_description"]
+          CallNumber.new(classification, description).to_s
+        end
+        private :aleph_call_number
 
         # Get Aleph record
         def aleph_record
@@ -309,46 +313,11 @@ module Exlibris
         end
         private :aleph_items
 
-        # Source statuses from config.
-        def aleph_statuses
-          @aleph_statuses ||= source_config["statuses"] unless source_config.nil?
-        end
-        private :aleph_statuses
-
         # ILLiad base url from config.
         def illiad_url
           @illiad_url ||= source_config["illiad_url"] unless source_config.nil?
         end
         private :illiad_url
-
-        # Deferred statuses from config.
-        # def deferred_statuses
-        #   @deferred_statuses ||= source_config["deferred_statuses"] unless source_config.nil?
-        # end
-        # private :deferred_statuses
-
-        # Circulation status code based on the source statuses
-        # mapping of circulation statuses.
-        # Returns nil if the circulation status isn't in the statuses.
-        def circulation_status_code
-          @circulation_status_code ||= aleph_statuses.keys.find { |key|
-            aleph_statuses[key].instance_of?(Array) and
-              aleph_statuses[key].include?(circulation_status) }
-        end
-        private :circulation_status_code
-
-        # Return the Aleph item's web text based on item status
-        # and item processing status.
-        def item_web_text
-          @item_web_text ||= translator.item_status
-        end
-        private :item_web_text
-
-        # Is the NyuAleph holding checked out?
-        def checked_out?
-          @checked_out ||= (aleph_statuses["checked_out"] === circulation_status)
-        end
-        private :checked_out?
 
         def coverage_library
           @coverage_libary ||= (aleph_sub_library_code || library_code)
@@ -373,29 +342,6 @@ module Exlibris
           end
         end
         private :holdings_coverage
-
-        # Format the Aleph call number for public consumption
-        def format_aleph_call_number(aleph_item)
-          return "" if aleph_item.nil? or
-            (aleph_item["z30"].fetch("z30_call_no", "").nil? and
-            aleph_item["z30"].fetch("z30_description", "").nil?)
-          return "("+
-            de_marc_call_number(aleph_item["z30"].fetch("z30_call_no", ""))+
-            ")" if aleph_item["z30"].fetch("z30_description", "").nil?
-          return "("+
-            aleph_item["z30"].fetch("z30_description", "").to_s +
-            ")" if aleph_item["z30"].fetch("z30_call_no", "").nil?
-          return "("+
-            de_marc_call_number(aleph_item["z30"].fetch("z30_call_no", ""))+
-            " "+ aleph_item["z30"].fetch("z30_description", "").to_s+ ")"
-        end
-        private :format_aleph_call_number
-
-        # Remove MARC markup from the call number
-        def de_marc_call_number(marc_call_number)
-          marc_call_number.gsub(/\$\$h/, "").gsub(/\$\$i/, " ") unless marc_call_number.nil?
-        end
-        private :de_marc_call_number
 
         def nyu_aleph_config
           @nyu_aleph_config ||= Config.new(source_config)
