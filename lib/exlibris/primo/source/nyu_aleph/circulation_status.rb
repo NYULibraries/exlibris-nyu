@@ -46,7 +46,7 @@ module Exlibris
                 :reshelving
               elsif recalled?
                 :recalled
-              else
+              elsif value
                 value.downcase.to_sym
               end
             end
@@ -54,21 +54,21 @@ module Exlibris
 
           # Is this holding requested?
           def requested?
-            (/Requested/ =~ value || REQUESTED.include?(value))
+            (/Requested/ === value || REQUESTED.include?(value))
           end
 
           # Is this holding recalled?
           def recalled?
-            /Recalled/ =~ value
+            /Recalled/ === value
           end
 
           # Are we reshelving this item?
           def reshelving?
-            /Reshelving/ =~ value
+            /Reshelving/ === value
           end
 
           def checked_out?
-            /([0-9]{2}\/[0-9]{2}\/[0-9]{2})/ =~ value
+            /([0-9]{2}\/[0-9]{2}\/[0-9]{2})/ === value
           end
 
           def due_date
