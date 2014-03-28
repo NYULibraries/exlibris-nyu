@@ -91,29 +91,65 @@ module Exlibris
         alias :request_link_supports_ajax_call? :ajax?
         alias :request_link_supports_ajax_call :ajax?
 
-        # Overrides Exlibris::Primo::Source::Aleph#institution_code
+        # Overrides Exlibris::Primo::Source::Holding#institution_code
+        #
+        # Can't use "or equal", i.e.
+        #
+        #   @institution_code ||= ...
+        #
+        # b/c @institution_code is set at instantiation time
+        # and we're trying to override it with the source config settings
+        # 
+        # TODO: Figure out if this is even necessary?
         def institution_code
-          @insitution_code = ((not source_config["institution_codes"].nil?) and source_config["institution_codes"].has_key?(sub_library_code)) ?
-            source_config["institution_codes"][sub_library_code] : super
+          @institution_code =
+            (nyu_aleph_config.institutions[sub_library_code] || super)
         end
 
         # Overrides Exlibris::Primo::Source::Aleph#sub_library based
         # on the Aleph table helper
+        # Can't call super, i.e.
+        #
+        #   @sub_library ||= (... || super)
+        #
+        # b/c an infinite loop is then possible, since
+        # NyuAleph#library calls this method (i.e. NyuAleph#sub_library)
+        # and super (i.e. Aleph#sub_library) would call NyuAleph#library
+        #
+        # Infinite loop:
+        # 
+        #   library -> sub_library -> super -> library
         def sub_library
-          @sub_library ||= aleph_helper.sub_library_text(sub_library_code)
+          @sub_library ||= (translator.sub_library || sub_library_code)
         end
 
         # Overrides Exlibris::Primo::Holding#library to return sub_library
         def library
-          (sub_library.nil?) ? super : sub_library
+          @library ||= (sub_library || super)
         end
 
         # Overrides Exlibris::Primo::Holding#collection to return
         # based on Aleph table helper
+        #
+        # Can't use "or equal", i.e.
+        #
+        #   @collection ||= ...
+        #
+        # b/c @collection is set at instantiation time
+        # and we're trying to override it with the Aleph text
         def collection
-          (adm_library_code.nil? or sub_library_code.nil? or collection_code.nil?) ?
-              super : nyu_aleph_collection
+          @collection = (translator.collection || super)
         end
+
+        def translator
+          @translator ||= Translator.new(
+            adm_library_code: adm_library_code,
+            sub_library_code: sub_library_code,
+            collection_code: collection_code,
+            item_status_code: item_status_code,
+            item_process_status_code: item_process_status_code)
+        end
+        private :translator
 
         # The "requestability" of the holding, i.e. under what
         # circumstances is the holding requestable
@@ -129,7 +165,7 @@ module Exlibris
           # Check holding permissions
           # If the holding has "C" as its hold request permission, it is requestable.
           # Also if it has "Y" in its photocopy request (indicating ILL), it is requestable.
-          return RequestableYes if (request_permissions[:hold_request].eql?("C") or 
+          return RequestableYes if (request_permissions[:hold_request].eql?("C") or
             request_permissions[:photocopy_request].eql?("Y"))
           # If the holding has "Y" as it's hold request permission some user can request
           # so we must defer the decision.
@@ -137,21 +173,16 @@ module Exlibris
           return RequestableNo
         end
 
-        # The collection based on the Aleph table helper
-        def nyu_aleph_collection
-          @nyu_aleph_collection ||= aleph_helper.collection_text(
-            :adm_library_code => adm_library_code.downcase,
-              :sub_library_code => sub_library_code, :collection_code => collection_code)
-        end
-        private :nyu_aleph_collection
-
-        # Request permissions for this holding based on 
+        # Request permissions for this holding based on
         # the Aleph table helper
         def request_permissions
-          @request_permissions ||= (adm_library_code.nil?) ? {} :
-            aleph_helper.item_permissions(:adm_library_code => adm_library_code.downcase, 
-              :sub_library_code => sub_library_code, :item_status_code => item_status_code, 
-                :item_process_status_code => item_process_status_code) 
+          @request_permissions ||= begin
+            if translator.item_permissions.nil?
+              Hash.new
+            else
+              translator.item_permissions
+            end
+          end
         end
         private :request_permissions
 
@@ -187,9 +218,9 @@ module Exlibris
 
         # Logic to determine whether we're expanding this holding
         # Only expand if not a journal and we've already been to Aleph
-        # or we have expanded holdings from Aleph (Aleph could be down) or 
+        # or we have expanded holdings from Aleph (Aleph could be down) or
         def expanding?
-          @expanding ||= (display_type and (not journal?) and 
+          @expanding ||= (display_type and (not journal?) and
             (from_aleph? or expanded_holdings.any?))
         end
         private :expanding?
@@ -246,8 +277,8 @@ module Exlibris
 
         # Get Aleph record
         def aleph_record
-          @aleph_record ||= 
-              Exlibris::Aleph::Record.new(bib_library: original_source_id, record_id: source_record_id)
+          @aleph_record ||=
+            Exlibris::Aleph::Record.new(bib_library: original_source_id, record_id: source_record_id)
         end
         private :aleph_record
 
@@ -278,12 +309,6 @@ module Exlibris
         end
         private :aleph_items
 
-        # Get the Aleph "tab" helper
-        def aleph_helper
-          @aleph_helper ||= Exlibris::Aleph::TabHelper.instance()
-        end
-        private :aleph_helper
-
         # Source statuses from config.
         def aleph_statuses
           @aleph_statuses ||= source_config["statuses"] unless source_config.nil?
@@ -302,12 +327,6 @@ module Exlibris
         # end
         # private :deferred_statuses
 
-        # Bib 866 subfield l to Aleph sub library map from config.
-        def bib_866_subfield_l_map
-          @bib_866_subfield_l_map ||= source_config["866$l_mappings"] unless source_config.nil?
-        end
-        private :bib_866_subfield_l_map
-
         # Circulation status code based on the source statuses
         # mapping of circulation statuses.
         # Returns nil if the circulation status isn't in the statuses.
@@ -321,11 +340,7 @@ module Exlibris
         # Return the Aleph item's web text based on item status
         # and item processing status.
         def item_web_text
-          @item_web_text ||= aleph_helper.item_web_text(
-            adm_library_code: adm_library_code.downcase,
-            sub_library_code: sub_library_code,
-            item_status_code: item_status_code,
-            item_process_status_code: item_process_status_code ) unless adm_library_code.nil?
+          @item_web_text ||= translator.item_status
         end
         private :item_web_text
 
@@ -335,115 +350,29 @@ module Exlibris
         end
         private :checked_out?
 
+        def coverage_library
+          @coverage_libary ||= (aleph_sub_library_code || library_code)
+        end
+        private :coverage_library
+
         # Coverage array from Aleph bib 866$j and 866$k or 866$i.
+        # Only do this if we don't have holdings coverage for this item
         def bib_coverage
-          return @bib_coverage unless @bib_coverage.nil?
-          # Only do this if we don't have holdings coverage for this item
-          if @holdings_coverage.nil? && aleph_bib
-            notes = []
-            textual_holdings = []
-            aleph_bib.each_by_tag('866') do |bib_866|
-              # If this bib 866 matches, process it
-              if bib_866_matches?(bib_866)
-                public_note = bib_866['i']
-                notes << Coverage::Note.new(public_note) unless public_note.nil?
-                # Get the sub library and collection from the bib 866
-                (bib_866_sub_library_code, bib_866_collection_code) =
-                  sub_library_and_collection_from_bib_866(bib_866)
-                # Get the ADM library from the Aleph helper
-                adm_library = aleph_helper.sub_library_adm(bib_866_sub_library_code)
-                # Punt if we couldn't get the ADM library
-                # TODO: log this error state
-                next if adm_library.nil?
-                # Get the collection display text from the Aleph helper
-                collection = aleph_helper.collection_text(
-                  adm_library_code: adm_library.downcase,
-                  sub_library_code: bib_866_sub_library_code,
-                  collection_code: bib_866_collection_code)
-                # Punt if we couldn't get the collection display text
-                # TODO: log this error state
-                next if collection.nil?
-                volumes = bib_866['j']
-                years = bib_866['k']
-                unless years.nil? and years.nil?
-                  textual_holding = format_coverage_string(volumes, years)
-                  textual_holdings << Coverage::TextualHolding.new(collection, textual_holding)
-                end
-              end
-            end
-            unless textual_holdings.empty? && notes.empty?
-              @bib_coverage = Coverage::Statement.new(textual_holdings, notes)
-            end
+          if @holdings_coverage.nil?
+            @bib_coverage ||= Coverage::Statement.from_marc_bib(coverage_library, aleph_bib)
           end
-          @bib_coverage
         end
         private :bib_coverage
 
-        def bib_866_matches?(bib_866)
-          (bib_866_sub_library_code, bib_866_collection_code) =
-            sub_library_and_collection_from_bib_866(bib_866)
-          bib_866_sub_library_code == (aleph_sub_library_code || library_code)
-        end
-
-        # Get the sub library and collection from the crummy
-        # 866 subfield 'l' config mapping. This is problematic
-        # but the best we can do at this point.
-        def sub_library_and_collection_from_bib_866(bib_866)
-          bib_866_subfield_l_mapping = bib_866_subfield_l_map[bib_866['l']]
-          bib_866_sub_library_code = bib_866_subfield_l_mapping['sub_library']
-          bib_866_collection_code = bib_866_subfield_l_mapping['collection']
-          return [bib_866_sub_library_code, bib_866_collection_code]
-        end
-
         # Coverage array from Aleph holdings 852$z and 866$a.
         def holdings_coverage
-          return @holdings_coverage unless @holdings_coverage.nil?
           # Only do this if we don't have bib coverage for this item
-          if @bib_coverage.nil? && aleph_holdings
-            notes = []
-            textual_holdings = []
-            aleph_holdings.each do |aleph_holding|
-              # If this Aleph holding matches, process it
-              if marc_holding_matches?(aleph_holding)
-                # Set the public note
-                public_note = aleph_holding['852']['z']
-                notes << Coverage::Note.new(public_note) unless public_note.nil?
-                # Get the holding sub library
-                holding_sub_library = aleph_holding['852']['b']
-                # Get the ADM library from the Aleph helper
-                adm_library = aleph_helper.sub_library_adm(holding_sub_library)
-                # Punt if we can't get the ADM library
-                # TODO: log this error state
-                next if adm_library.nil?
-                holding_collection = aleph_holding['852']['c']
-                # Get the collection display text from the Aleph helper
-                collection = aleph_helper.collection_text(
-                  adm_library_code: adm_library.downcase,
-                  sub_library_code: holding_sub_library,
-                  collection_code: holding_collection)
-                # Punt if we can't get the collection display text
-                # TODO: log this error state
-                next if collection.nil?
-                aleph_holding.each_by_tag('866') do |holding_866|
-                  textual_holding = holding_866['a']
-                  # Punt if we can't get the textual holding
-                  next if textual_holding.nil?
-                  textual_holding.gsub!(",", ", ")
-                  textual_holdings << Coverage::TextualHolding.new(collection, textual_holding)
-                end
-              end
-            end
-            unless textual_holdings.empty? && notes.empty?
-              @holdings_coverage = Coverage::Statement.new(textual_holdings, notes)
-            end
+          if @bib_coverage.nil?
+            @holdings_coverage ||= 
+              Coverage::Statement.from_marc_holdings(coverage_library, aleph_holdings)
           end
-          @holdings_coverage
         end
         private :holdings_coverage
-
-        def marc_holding_matches?(marc_holding)
-          (aleph_sub_library_code || library_code) == marc_holding['852']['b']
-        end
 
         # Format the Aleph call number for public consumption
         def format_aleph_call_number(aleph_item)
@@ -468,14 +397,9 @@ module Exlibris
         end
         private :de_marc_call_number
 
-        # Format the coverage string based on give volumes and years.
-        def format_coverage_string(volumes, years)
-          rv = ""
-          rv += "VOLUMES: "+ volumes unless volumes.nil? or volumes.empty?
-          rv += " (YEARS: "+ years+ ") " unless years.nil? or years.empty?
-          return rv
+        def nyu_aleph_config
+          @nyu_aleph_config ||= Config.new(source_config)
         end
-        private :format_coverage_string
       end
     end
   end
