@@ -39,8 +39,6 @@ module Exlibris
                 :requested
               elsif reshelving?
                 :reshelving
-              elsif value
-                value.downcase.to_sym
               end
             end
           end
