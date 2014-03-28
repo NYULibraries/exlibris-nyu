@@ -9,16 +9,9 @@ module Exlibris
             available: AVAILABLE = ["On Shelf", "Available"],
             offsite: OFFSITE = ["Offsite Available"],
             requested: REQUESTED = ["Requested", "On Hold"],
-            ill: ILL = ["Request ILL"],
             billed_as_lost: BILLED_AS_LOST = ["Billed as Lost", "Claimed Returned"],
             unavailable: UNAVAILABLE = ["Unavailable"],
-            processing: PROCESSING = ["In Processing", "In Transit"],
-            afc: AFC = ["Ask at Avery Fisher Center"],
-            archives: ARCHIVES = ["Ask at NYU Archives"],
-            fales: FALES = ["Ask at Fales"],
-            tamiment: TAMIMENT = ["Ask at Tamiment"],
-            reference: REFERENCE = ["Ask at Reference"],
-            exhibit: EXHIBIT = ["On Exhibit"],
+            processing: PROCESSING = ["In Processing", "In Transit"]
           }
 
           # Define "status?" methods
@@ -38,14 +31,14 @@ module Exlibris
             @code ||= begin
               if pair_found?
                 found_pair.first
+              elsif recalled?
+                :recalled
               elsif checked_out?
                 :checked_out
               elsif requested?
                 :requested
               elsif reshelving?
                 :reshelving
-              elsif recalled?
-                :recalled
               elsif value
                 value.downcase.to_sym
               end

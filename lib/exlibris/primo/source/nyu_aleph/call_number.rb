@@ -27,6 +27,7 @@ module Exlibris
           def de_marcify(marcified)
             marcified.gsub(/\$\$h/, "").gsub(/\$\$i/, " ") if marcified
           end
+
           def de_nbsp(nbspied)
             nbspied.gsub("&nbsp;", " ") if nbspied
           end

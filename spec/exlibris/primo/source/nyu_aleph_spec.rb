@@ -23,10 +23,6 @@ module Exlibris
         it { should be_an NyuAleph }
         it { should be_an Aleph }
         it { should be_an Exlibris::Primo::Holding }
-        describe '#nyu_aleph_config' do
-          subject { nyu_aleph.nyu_aleph_config }
-          it { should be_a NyuAleph::Config }
-        end
         describe '#source_config' do
           subject { nyu_aleph.source_config }
           it { should be_a Hash }

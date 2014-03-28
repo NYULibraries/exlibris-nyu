@@ -290,7 +290,6 @@ class NyuAlephTest < ActiveSupport::TestCase
         assert(bobst_source.expanded?, "Not expanded")
         assert(bobst_source.ajax?, "Not ajax")
         assert_equal("4 request(s) of 1 items.", bobst_source.queue)
-        assert(bobst_source.send(:requested?))
         assert_equal("requested", bobst_source.status_code)
         assert_equal("On Hold; Requested", bobst_source.status)
         assert_equal("NYU01", bobst_source.original_source_id)
