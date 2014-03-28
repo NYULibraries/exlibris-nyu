@@ -10,7 +10,7 @@ module Exlibris
             @adm_library_code = attributes[:adm_library_code]
             @sub_library_code = attributes[:sub_library_code]
             @adm_library_code ||= adm_from_sub_library
-            @adm_library_code.downcase! unless adm_library_code.nil?
+            @adm_library_code = adm_library_code.downcase unless adm_library_code.nil?
             @collection_code = attributes[:collection_code]
             @item_status_code = attributes[:item_status_code]
             @item_process_status_code = attributes[:item_process_status_code]
