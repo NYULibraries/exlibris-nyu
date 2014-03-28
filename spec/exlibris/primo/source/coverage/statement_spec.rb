@@ -4,6 +4,9 @@ module Exlibris
     module Source
       module Coverage
         describe Statement do
+          let(:bib_library) { "NYU01" }
+          let(:record_id) { "002893728" }
+          let(:aleph_record) { Exlibris::Aleph::Record.new(bib_library: bib_library, record_id: record_id) }
           let(:textual_holding) { "This is a textual holding" }
           let(:textual_holdings) { [textual_holding] }
           let(:note) { "This is a note" }
@@ -11,12 +14,38 @@ module Exlibris
           let(:args) { [textual_holdings, notes] }
           subject(:statement) { Statement.new(*args) }
           it { should be_a Statement }
+          describe 'MARC initialization helpers', vcr: { cassette_name: "vogue" } do
+            describe '.from_marc_bib' do
+              let(:sub_library) { "BOBST" }
+              let(:marc_bib) { aleph_record.bib }
+              subject(:statement) { Statement.from_marc_bib(sub_library, marc_bib) }
+              it { should be_a Statement }
+              describe '#textual_holdings' do
+                subject { statement.textual_holdings }
+                it { should be_an Array }
+                it 'should have TextualHoldings as the elements' do
+                  expect(subject.size).to be > 0
+                  subject.each do |textual_holding|
+                    expect(textual_holding).to be_a TextualHolding
+                  end
+                end
+              end
+            end
+            describe '.from_marc_holdings', vcr: { cassette_name: "vogue" } do
+              let(:sub_library) { "TNSGI" }
+              let(:marc_holdings) { aleph_record.holdings }
+              subject { Statement.from_marc_holdings(sub_library, marc_holdings) }
+              it { should be_a Statement }
+            end
+          end
           describe '#textual_holdings' do
             subject { statement.textual_holdings }
+            it { should be_an Array }
             it { should eq textual_holdings }
           end
           describe '#notes' do
             subject { statement.notes }
+            it { should be_an Array }
             it { should eq notes }
           end
           describe '#to_a' do
