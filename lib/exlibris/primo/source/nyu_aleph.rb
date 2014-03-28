@@ -12,6 +12,8 @@ module Exlibris
       # information from the Aleph bib and holdings REST APIs.
       #
       class NyuAleph < Exlibris::Primo::Source::Aleph
+        ILLIAD_URL = "http://ill.library.nyu.edu"
+
         # Constants for 'requestability'.
         RequestableYes = 'yes' # Yes, obviously
         RequestableDeferred = 'deferred' # Defer the requestability decision
@@ -312,12 +314,6 @@ module Exlibris
           []
         end
         private :aleph_items
-
-        # ILLiad base url from config.
-        def illiad_url
-          @illiad_url ||= source_config["illiad_url"] unless source_config.nil?
-        end
-        private :illiad_url
 
         def coverage_library
           @coverage_libary ||= (aleph_sub_library_code || library_code)

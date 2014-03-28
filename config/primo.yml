@@ -71,7 +71,6 @@ sources:
   nyu_aleph:
      base_url: "http://alephstage.library.nyu.edu"
      rest_url: "http://alephstage.library.nyu.edu:1891/rest-dlf"
-     illiad_url: "http://ill.library.nyu.edu"
      type: aleph
      class_name: NyuAleph
      sub_library_codes:
@@ -163,7 +162,6 @@ sources:
   COURSES:
      base_url: "http://alephstage.library.nyu.edu"
      rest_url: "http://alephstage.library.nyu.edu:1891/rest-dlf"
-     illiad_url: "http://ill.library.nyu.edu"
      type: aleph
      class_name: NyuAlephReserves
      local_base: "PRIMOCOMMON"
