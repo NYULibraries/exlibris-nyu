@@ -9,6 +9,10 @@ module Exlibris
         let(:sub_library_code) { 'SUBLIB' }
         let(:collection_code) { 'COLL' }
         let(:circulation_status) { 'On Shelf' }
+        let(:availability_status_code) { 'available' }
+        let(:item_status_code) { '01' }
+        let(:item_process_status_code) { nil }
+        let(:availability_status_code) { 'available' }
         let(:attributes) do
           {
             source_id: 'nyu_aleph',
@@ -16,7 +20,10 @@ module Exlibris
             adm_library_code: adm_library_code,
             sub_library_code: sub_library_code,
             collection_code: collection_code,
-            circulation_status: circulation_status
+            circulation_status: circulation_status,
+            availability_status_code: availability_status_code,
+            item_status_code: item_status_code,
+            item_process_status_code: item_process_status_code
           }
         end
         subject(:nyu_aleph) { NyuAleph.new(attributes) }
@@ -173,6 +180,21 @@ module Exlibris
         end
         describe '#availability_status_code' do
           subject { nyu_aleph.availability_status_code }
+          context 'when the circulation status is nil' do
+            let(:circulation_status) { nil }
+            context 'and availability_status_code is "available"' do
+              let(:availability_status_code) { 'available' }
+              it { should eq "available" }
+            end
+            context 'and availability_status_code is "check_holdings"' do
+              let(:availability_status_code) { 'check_holdings' }
+              it { should eq "check_holdings" }
+            end
+            context 'and availability_status_code is "unavailable"' do
+              let(:availability_status_code) { 'unavailable' }
+              it { should eq "unavailable" }
+            end
+          end
           context 'when the circulation status is "On Shelf"' do
             let(:circulation_status) { 'On Shelf' }
             it { should eq "available" }
@@ -193,6 +215,14 @@ module Exlibris
             let(:circulation_status) { 'Requested w/ some info' }
             it { should eq "requested" }
           end
+          context 'when the circulation status is "On Hold"' do
+            let(:circulation_status) { 'On Hold' }
+            it { should eq "requested" }
+          end
+          context 'when the circulation status is "Requested; On Hold"' do
+            let(:circulation_status) { 'Requested; On Hold' }
+            it { should eq "requested" }
+          end
           context 'when the circulation status is "Reshelving"' do
             let(:circulation_status) { 'Reshelving' }
             it { should eq "reshelving" }
@@ -208,6 +238,89 @@ module Exlibris
           context 'when the circulation status is "05/31/14"' do
             let(:circulation_status) { '05/31/14' }
             it { should eq "checked_out" }
+          end
+          context 'when the circulation status is "Billed as Lost"' do
+            let(:circulation_status) { 'Billed as Lost' }
+            it { should eq "billed_as_lost" }
+          end
+        end
+        describe '#availability_status' do
+          subject { nyu_aleph.availability_status }
+          context 'when the circulation status is nil' do
+            let(:circulation_status) { nil }
+            context 'and there is no translated item status from the Aleph tables' do
+              let(:item_status_code) { nil }
+              let(:item_process_status_code) { nil }
+              context 'and availability_status_code is "available"' do
+                let(:availability_status_code) { 'available' }
+                it { should eq "Available" }
+              end
+              context 'and availability_status_code is "check_holdings"' do
+                let(:availability_status_code) { 'check_holdings' }
+                it { should eq "Check Availability" }
+              end
+              context 'and availability_status_code is "unavailable"' do
+                let(:availability_status_code) { 'unavailable' }
+                it { should eq "Check Availability" }
+              end
+            end
+            context 'and there is a translated item status from the Aleph tables' do
+              let(:adm_library_code) { 'NYU50' }
+              let(:sub_library_code) { 'BOBST' }
+              let(:item_status_code) { '01' }
+              let(:item_process_status_code) { 'DP' }
+              it 'should be the translated item status' do
+                expect(subject).to eq 'Offsite Available'
+              end
+            end
+          end
+          context 'when the circulation status is "On Shelf"' do
+            let(:circulation_status) { 'On Shelf' }
+            it { should eq "Available" }
+          end
+          context 'when the circulation status is "Available"' do
+            let(:circulation_status) { 'Available' }
+            it { should eq "Available" }
+          end
+          context 'when the circulation status is "Offsite Available"' do
+            let(:circulation_status) { 'Offsite Available' }
+            it { should eq "Offsite Available" }
+          end
+          context 'when the circulation status is "Requested"' do
+            let(:circulation_status) { 'Requested' }
+            it { should eq "Requested" }
+          end
+          context 'when the circulation status is "Requested w/ some info"' do
+            let(:circulation_status) { 'Requested w/ some info' }
+            it { should eq "Requested w/ some info" }
+          end
+          context 'when the circulation status is "On Hold"' do
+            let(:circulation_status) { 'On Hold' }
+            it { should eq "On Hold" }
+          end
+          context 'when the circulation status is "Requested; On Hold"' do
+            let(:circulation_status) { 'Requested; On Hold' }
+            it { should eq "Requested; On Hold" }
+          end
+          context 'when the circulation status is "Reshelving"' do
+            let(:circulation_status) { 'Reshelving' }
+            it { should eq "Reshelving" }
+          end
+          context 'when the circulation status is "Reshelving w/ some info"' do
+            let(:circulation_status) { 'Reshelving w/ some info' }
+            it { should eq "Reshelving" }
+          end
+          context 'when the circulation status is "Recalled due date: 05/31/14"' do
+            let(:circulation_status) { 'Recalled due date: 05/31/14' }
+            it { should eq "Due: 05/31/14" }
+          end
+          context 'when the circulation status is "05/31/14"' do
+            let(:circulation_status) { '05/31/14' }
+            it { should eq "Due: 05/31/14" }
+          end
+          context 'when the circulation status is "Billed as Lost"' do
+            let(:circulation_status) { 'Billed as Lost' }
+            it { should eq "Request ILL" }
           end
         end
         context 'when initialized with a Journal holding', vcr: { cassette_name: "vogue" } do

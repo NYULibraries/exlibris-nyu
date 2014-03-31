@@ -24,7 +24,9 @@ module Exlibris
           attr_reader :value
 
           def initialize(value)
-            @value = value
+            unless value.nil? or value.empty? or value.strip.empty?
+              @value = value
+            end
           end
 
           def code

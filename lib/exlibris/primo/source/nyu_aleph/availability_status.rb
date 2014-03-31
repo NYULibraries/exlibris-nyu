@@ -27,11 +27,13 @@ module Exlibris
 
           def value
             @value ||= begin
-              if circulation_status.recalled? || circulation_status.checked_out?
+              if circulation_status.recalled?
                 "Due: #{circulation_status.due_date}"
+              elsif circulation_status.checked_out?
+                "Due: #{circulation_status.value}"
               elsif circulation_status.reshelving?
                 "Reshelving"
-              elsif AVALABILITY_STATUSES[circulation_status.code]
+              elsif AVALABILITY_STATUSES.has_key?(circulation_status.code)
                 AVALABILITY_STATUSES[circulation_status.code]
               elsif circulation_status.value
                 circulation_status.value
