@@ -2,6 +2,7 @@ require 'coveralls'
 Coveralls.wear_merged!
 require 'test/unit'
 require File.expand_path("../../lib/exlibris-nyu.rb",  __FILE__)
+require 'pry'
 
 # Use the included testmnt for testing.
 Exlibris::Aleph.configure do |config|
