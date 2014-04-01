@@ -28,24 +28,10 @@ module Exlibris
         def initialize(attributes={})
           super(attributes)
           @circulation_status = CirculationStatus.new(attributes[:circulation_status])
-          @nyu_aleph_availability_status = AvailabilityStatus.new(circulation_status)
           @source_data[:sub_library] = sub_library
           @source_data[:illiad_url] = ILLIAD_URL
           @source_data[:aleph_rest_url] = aleph_rest_url
         end
-
-        # Overrides Exlibris::Primo::Holding#availability_status_code
-        def availability_status_code
-          (@nyu_aleph_availability_status.code || super)
-        end
-        alias :status_code :availability_status_code
-
-        # Overrides Exlibris::Primo::Holding#availability_status
-        def availability_status
-          (@nyu_aleph_availability_status.value || translator.item_status || super)
-        end
-        alias :availability :availability_status
-        alias :status :availability_status
 
         # Overrides Exlibris::Primo::Source::Aleph#expand
         def expand
@@ -53,29 +39,24 @@ module Exlibris
         end
 
         # Overrides Exlibris::Primo::Holding#==
+        # Only compare to other Primo Holdings
         def ==(other_nyu_aleph)
-          # Only compare to other Primo Holdings
           return super unless other_nyu_aleph.is_a? Exlibris::Primo::Holding
-          (expanding?) ?
-            (source_id == other_nyu_aleph.source_id and source_record_id == other_nyu_aleph.source_record_id) : super
+          if expanding?
+            ( source_id == other_nyu_aleph.source_id &&
+              source_record_id == other_nyu_aleph.source_record_id)
+          else
+            super
+          end
         end
         alias :eql? :==
 
-        # Does this holding request link support AJAX requests?
-        # Only if we're already expanded
-        # TODO: this is tightly couple to the Umlaut application
-        # and should be abstracted out, or something :)
-        def ajax?
-          expanded?
-        end
-        alias :request_link_supports_ajax_call? :ajax?
-        alias :request_link_supports_ajax_call :ajax?
-
         # Is this Holding from Aleph?
         def from_aleph?
-          @from_aleph ||= source_data[:from_aleph]
+          @from_aleph ||= !!source_data[:from_aleph]
         end
-        alias :expanded? :from_aleph?
+        alias_method :expanded?, :from_aleph?
+        alias_method :from_aleph, :from_aleph?
 
         # Overrides Exlibris::Primo::Source::Holding#institution_code
         #
