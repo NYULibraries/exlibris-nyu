@@ -24,10 +24,11 @@ module Exlibris
 
           # This kinda sucks. Way too clever. Completely unreadable.
           def to_h
-            @hash = Hash[JSON.parse(to_json).map{ |k, v| [k.to_sym, v] }]
-            # @hash ||= Hash[
-            #   *instance_variables.collect { |ivar| 
-            #     [ivar.to_s.gsub('@', '').to_sym, instance_variable_get(ivar)] }.flatten]
+            @hash ||= Hash[
+              *(instance_variables.collect { |ivar| 
+                [ivar.to_s.gsub('@', '').to_sym, instance_variable_get(ivar)]
+              }.flatten)
+            ]
           end
 
           private

@@ -227,7 +227,7 @@ class NyuAlephTest < ActiveSupport::TestCase
       end
       cu_main_collection_sources.each do |source|
         assert(source.expanded?, "Not expanded")
-        assert(source.ajax?, "Not ajax")
+        assert(source.from_aleph, "The holding should be from Aleph")
         assert_equal("CU", source.institution)
       end
       assert_equal(2, cu_main_collection_sources.length)
@@ -265,7 +265,7 @@ class NyuAlephTest < ActiveSupport::TestCase
       end
       bobst_sources.each do |bobst_source|
         assert(bobst_source.expanded?, "Not expanded")
-        assert(bobst_source.ajax?, "Not ajax")
+        assert(bobst_source.from_aleph, "The holding should be from Aleph")
         assert_equal("NYU01", bobst_source.original_source_id)
         assert_equal("003079903", bobst_source.source_record_id)
         assert_equal("003079903", bobst_source.source_data[:source_record_id])
@@ -288,7 +288,7 @@ class NyuAlephTest < ActiveSupport::TestCase
       end
       bobst_sources.each do |bobst_source|
         assert(bobst_source.expanded?, "Not expanded")
-        assert(bobst_source.ajax?, "Not ajax")
+        assert(bobst_source.from_aleph, "The holding should be from Aleph")
         assert_equal("4 request(s) of 1 items.", bobst_source.queue)
         assert_equal("requested", bobst_source.status_code)
         assert_equal("On Hold; Requested", bobst_source.status)
@@ -314,7 +314,7 @@ class NyuAlephTest < ActiveSupport::TestCase
       end
       bobst_sources.each do |bobst_source|
         assert(bobst_source.expanded?, "Not expanded")
-        assert(bobst_source.ajax?, "Not ajax")
+        assert(bobst_source.from_aleph, "The holding should be from Aleph")
         assert_equal("reshelving", bobst_source.status_code)
         assert_equal("Reshelving", bobst_source.status)
         assert_equal("NYU01", bobst_source.original_source_id)
@@ -339,7 +339,7 @@ class NyuAlephTest < ActiveSupport::TestCase
       end
       bobst_sources.each do |bobst_source|
         assert(bobst_source.expanded?, "Not expanded")
-        assert(bobst_source.ajax?, "Not ajax")
+        assert(bobst_source.from_aleph, "The holding should be from Aleph")
         assert_equal("recalled", bobst_source.status_code)
         assert_equal("Due: 03/10/13", bobst_source.status)
         assert_equal("NYU01", bobst_source.original_source_id)
@@ -392,9 +392,9 @@ class NyuAlephTest < ActiveSupport::TestCase
       assert(abu_dhabi_sources.size > 0, "Don't have any sources")
       abu_dhabi_sources.each do |abu_dhabi_source|
         assert(abu_dhabi_source.expanded?, "Not expanded")
-        assert(abu_dhabi_source.ajax?, "Not ajax")
+        assert(abu_dhabi_source.from_aleph, "The holding should be from Aleph")
         assert_nothing_raised { abu_dhabi_source.requestability }
-        assert_equal(Exlibris::Primo::Source::NyuAleph::RequestableNo, abu_dhabi_source.requestability)
+          assert_equal(Exlibris::Primo::Source::NyuAleph::Requestability::NO, abu_dhabi_source.requestability)
       end
     end
   end

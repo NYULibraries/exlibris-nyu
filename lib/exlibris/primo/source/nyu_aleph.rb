@@ -14,12 +14,6 @@ module Exlibris
       class NyuAleph < Exlibris::Primo::Source::Aleph
         ILLIAD_URL = "http://ill.library.nyu.edu"
 
-        # Constants for 'requestability'.
-        RequestableYes = 'yes' # Yes, obviously
-        RequestableDeferred = 'deferred' # Defer the requestability decision
-        RequestableNo = 'no' # No
-        RequestableUnknown = 'unknown' # Unknown, but essentially no
-
         # Rename the old sub library code method
         alias_method :aleph_sub_library_code, :sub_library_code
 
@@ -34,24 +28,10 @@ module Exlibris
         def initialize(attributes={})
           super(attributes)
           @circulation_status = CirculationStatus.new(attributes[:circulation_status])
-          @nyu_aleph_availability_status = AvailabilityStatus.new(circulation_status)
           @source_data[:sub_library] = sub_library
           @source_data[:illiad_url] = ILLIAD_URL
           @source_data[:aleph_rest_url] = aleph_rest_url
         end
-
-        # Overrides Exlibris::Primo::Holding#availability_status_code
-        def availability_status_code
-          (@nyu_aleph_availability_status.code || super)
-        end
-        alias :status_code :availability_status_code
-
-        # Overrides Exlibris::Primo::Holding#availability_status
-        def availability_status
-          (@nyu_aleph_availability_status.value || translator.item_status || super)
-        end
-        alias :availability :availability_status
-        alias :status :availability_status
 
         # Overrides Exlibris::Primo::Source::Aleph#expand
         def expand
@@ -59,29 +39,24 @@ module Exlibris
         end
 
         # Overrides Exlibris::Primo::Holding#==
+        # Only compare to other Primo Holdings
         def ==(other_nyu_aleph)
-          # Only compare to other Primo Holdings
           return super unless other_nyu_aleph.is_a? Exlibris::Primo::Holding
-          (expanding?) ?
-            (source_id == other_nyu_aleph.source_id and source_record_id == other_nyu_aleph.source_record_id) : super
+          if expanding?
+            ( source_id == other_nyu_aleph.source_id &&
+              source_record_id == other_nyu_aleph.source_record_id)
+          else
+            super
+          end
         end
         alias :eql? :==
 
-        # Does this holding request link support AJAX requests?
-        # Only if we're already expanded
-        # TODO: this is tightly couple to the Umlaut application
-        # and should be abstracted out, or something :)
-        def ajax?
-          expanded?
-        end
-        alias :request_link_supports_ajax_call? :ajax?
-        alias :request_link_supports_ajax_call :ajax?
-
         # Is this Holding from Aleph?
         def from_aleph?
-          @from_aleph ||= source_data[:from_aleph]
+          @from_aleph ||= !!source_data[:from_aleph]
         end
-        alias :expanded? :from_aleph?
+        alias_method :expanded?, :from_aleph?
+        alias_method :from_aleph, :from_aleph?
 
         # Overrides Exlibris::Primo::Source::Holding#institution_code
         #
@@ -133,27 +108,32 @@ module Exlibris
           @collection = (translator.collection || super)
         end
 
-        # The "requestability" of the holding, i.e. under what
-        # circumstances is the holding requestable
+        # Overrides Exlibris::Primo::Holding#availability_status_code
+        def availability_status_code
+          (nyu_aleph_availability_status.code || super)
+        end
+        alias :status_code :availability_status_code
+
+        # Overrides Exlibris::Primo::Holding#availability_status
+        def availability_status
+          (nyu_aleph_availability_status.value || translator.item_status || super)
+        end
+        alias :availability :availability_status
+        alias :status :availability_status
+
+        # The "requestability" of the item, i.e. under what
+        # circumstances is the item requestable
         # It's only requestable if we're expanding the holdings
         # Some circulations statuses are non requestable:
         #   - Reshelving
-        # Also if we don't have request permissions, we can't request.
-        # Check holding permissions
-        # If the holding permission is "C" it is requestable.
-        # Also if the ILL permission is "Y", it is requestable.
-        # If the holding permission is "Y", some users can request
-        # so we must defer the decision.
+        # If we're considering requestabilty, let a requestability
+        # object do the work
         def requestability
           @requestability ||= begin
-            if (!expanding? || circulation_status.reshelving? || translator.item_permissions.nil?)
-              RequestableNo
-            elsif (hold_permission == "C" || ill_permission == "Y")
-              RequestableYes
-            elsif hold_permission == "Y"
-              RequestableDeferred
+            if (!expanding? || circulation_status.reshelving?)
+              Requestability::NO
             else
-              RequestableNo
+              Requestability.new(translator.item_permissions).value
             end
           end
         end
@@ -167,12 +147,8 @@ module Exlibris
         end
 
         private
-        def hold_permission
-          @hold_permission ||= translator.item_permissions[:hold_request]
-        end
-
-        def ill_permission
-          @ill_permission ||= translator.item_permissions[:photocopy_request]
+        def nyu_aleph_availability_status
+          @nyu_aleph_availability_status ||= AvailabilityStatus.new(circulation_status)
         end
 
         def translator
@@ -182,12 +158,6 @@ module Exlibris
             collection_code: collection_code,
             item_status_code: item_status_code,
             item_process_status_code: item_process_status_code)
-        end
-
-        # Request permissions for this holding based on
-        # the Aleph table helper
-        def item_permissions
-          @item_permissions ||= translator.item_permissions
         end
 
         # Logic to determine whether we're expanding this holding
