@@ -13,6 +13,10 @@ module Exlibris
         let(:item_status_code) { '01' }
         let(:item_process_status_code) { nil }
         let(:availability_status_code) { 'available' }
+        let(:from_aleph) { true }
+        let(:source_data) do
+          { from_aleph: from_aleph}
+        end
         let(:attributes) do
           {
             source_id: 'nyu_aleph',
@@ -23,7 +27,8 @@ module Exlibris
             circulation_status: circulation_status,
             availability_status_code: availability_status_code,
             item_status_code: item_status_code,
-            item_process_status_code: item_process_status_code
+            item_process_status_code: item_process_status_code,
+            source_data: source_data
           }
         end
         subject(:nyu_aleph) { NyuAleph.new(attributes) }
@@ -321,6 +326,39 @@ module Exlibris
           context 'when the circulation status is "Billed as Lost"' do
             let(:circulation_status) { 'Billed as Lost' }
             it { should eq "Request ILL" }
+          end
+        end
+        describe 'from_aleph?' do
+          subject { nyu_aleph.from_aleph? }
+          context 'when expanded from Aleph' do
+            let(:from_aleph) { true }
+            it { should be_true }
+          end
+          context 'when not expanded from Aleph' do
+            let(:from_aleph) { false }
+            it { should be_false }
+          end
+        end
+        describe 'from_aleph' do
+          subject { nyu_aleph.from_aleph }
+          context 'when expanded from Aleph' do
+            let(:from_aleph) { true }
+            it { should be_true }
+          end
+          context 'when not expanded from Aleph' do
+            let(:from_aleph) { false }
+            it { should be_false }
+          end
+        end
+        describe 'expanded?' do
+          subject { nyu_aleph.expanded? }
+          context 'when expanded from Aleph' do
+            let(:from_aleph) { true }
+            it { should be_true }
+          end
+          context 'when not expanded from Aleph' do
+            let(:from_aleph) { false }
+            it { should be_false }
           end
         end
         context 'when initialized with a Journal holding', vcr: { cassette_name: "vogue" } do
