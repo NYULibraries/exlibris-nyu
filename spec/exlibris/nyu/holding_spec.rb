@@ -138,11 +138,6 @@ module Exlibris
           it { should be_false }
         end
       end
-      describe '#to_h' do
-        subject { holding.to_h }
-        it { should be_a Hash }
-        it { should_not be_empty }
-      end
       describe '#available?' do
       end
       describe '#recallable?' do

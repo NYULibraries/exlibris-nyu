@@ -43,18 +43,6 @@ module Exlibris
         @extras = attributes[:extras]
       end
 
-      def to_h
-        {
-          status: status,
-          status_display: status_display,
-          sub_library: sub_library,
-          collection: collection,
-          call_number: call_number,
-          requestability: requestability,
-          extras: extras
-        }
-      end
-
       def always_requestable?
         requestability == Requestability::YES
       end
