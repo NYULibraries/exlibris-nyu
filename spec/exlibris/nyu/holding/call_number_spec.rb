@@ -1,12 +1,12 @@
 require 'spec_helper'
 module Exlibris
-  module Primo
-    module Source
-      describe NyuAleph::CallNumber do
+  module Nyu
+    module Holding
+      describe CallNumber do
         let(:classification) { "classification" }
         let(:description) { "description" }
-        subject(:call_number) { NyuAleph::CallNumber.new(classification, description) }
-        it { should be_a NyuAleph::CallNumber}
+        subject(:call_number) { CallNumber.new(classification, description) }
+        it { should be_a CallNumber}
         describe '#classification' do
           subject { call_number.classification }
           it { should eq "classification" }

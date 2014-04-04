@@ -1,8 +1,8 @@
 require 'spec_helper'
 module Exlibris
-  module Primo
-    module Source
-      describe NyuAleph::Translator do
+  module Nyu
+    module Holding
+      describe Translator do
         let(:adm_library_code) { "NYU50" }
         let(:sub_library_code) { "BOBST" }
         let(:collection_code) { "MAIN" }
@@ -17,8 +17,8 @@ module Exlibris
             item_process_status_code: item_process_status_code
           }
         end
-        subject(:translator) { NyuAleph::Translator.new(attributes) }
-        it { should be_an NyuAleph::Translator }
+        subject(:translator) { Translator.new(attributes) }
+        it { should be_an Translator }
         describe '#adm_library_code' do
           subject { translator.adm_library_code }
           context 'when initialized with an ADM library code' do

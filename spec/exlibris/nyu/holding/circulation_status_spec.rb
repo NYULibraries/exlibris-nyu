@@ -1,38 +1,38 @@
 require 'spec_helper'
 module Exlibris
-  module Primo
-    module Source
-      describe NyuAleph::CirculationStatus do
+  module Nyu
+    module Holding
+      describe CirculationStatus do
         let(:value) { 'Available' }
-        subject(:circulation_status) { NyuAleph::CirculationStatus.new(value) }
-        it { should be_an NyuAleph::CirculationStatus }
-        describe NyuAleph::CirculationStatus::AVAILABLE do
-          subject { NyuAleph::CirculationStatus::AVAILABLE }
+        subject(:circulation_status) { CirculationStatus.new(value) }
+        it { should be_an CirculationStatus }
+        describe CirculationStatus::AVAILABLE do
+          subject { CirculationStatus::AVAILABLE }
           it { should be_an Array }
           it { should eq ['On Shelf', 'Available'] }
         end
-        describe NyuAleph::CirculationStatus::OFFSITE do
-          subject { NyuAleph::CirculationStatus::OFFSITE }
+        describe CirculationStatus::OFFSITE do
+          subject { CirculationStatus::OFFSITE }
           it { should be_an Array }
           it { should eq ['Offsite Available'] }
         end
-        describe NyuAleph::CirculationStatus::REQUESTED do
-          subject { NyuAleph::CirculationStatus::REQUESTED }
+        describe CirculationStatus::REQUESTED do
+          subject { CirculationStatus::REQUESTED }
           it { should be_an Array }
           it { should eq ['Requested', 'On Hold'] }
         end
-        describe NyuAleph::CirculationStatus::BILLED_AS_LOST do
-          subject { NyuAleph::CirculationStatus::BILLED_AS_LOST }
+        describe CirculationStatus::BILLED_AS_LOST do
+          subject { CirculationStatus::BILLED_AS_LOST }
           it { should be_an Array }
           it { should eq ['Billed as Lost', 'Claimed Returned'] }
         end
-        describe NyuAleph::CirculationStatus::UNAVAILABLE do
-          subject { NyuAleph::CirculationStatus::UNAVAILABLE }
+        describe CirculationStatus::UNAVAILABLE do
+          subject { CirculationStatus::UNAVAILABLE }
           it { should be_an Array }
           it { should eq ['Unavailable'] }
         end
-        describe NyuAleph::CirculationStatus::PROCESSING do
-          subject { NyuAleph::CirculationStatus::PROCESSING }
+        describe CirculationStatus::PROCESSING do
+          subject { CirculationStatus::PROCESSING }
           it { should be_an Array }
           it { should eq ['In Processing', 'In Transit'] }
         end
@@ -42,13 +42,13 @@ module Exlibris
         end
         describe '#code' do
           subject { circulation_status.code }
-          NyuAleph::CirculationStatus::AVAILABLE.each do |status|
+          CirculationStatus::AVAILABLE.each do |status|
             context "when initialized with the value \"#{status}\"" do
               let(:value) { status }
               it { should eq :available }
             end
           end
-          NyuAleph::CirculationStatus::REQUESTED.each do |status|
+          CirculationStatus::REQUESTED.each do |status|
             context "when initialized with the value \"#{status}\"" do
               let(:value) { status }
               it { should eq :requested }
@@ -88,7 +88,7 @@ module Exlibris
           end
         end
         describe '#checked_out?' do
-          NyuAleph::CirculationStatus::STATUSES.each do |code, statuses|
+          CirculationStatus::STATUSES.each do |code, statuses|
             statuses.each do |status|
               context "when initialized with the value \"#{status}\"" do
                 let(:value) { status }
@@ -104,12 +104,12 @@ module Exlibris
           end
         end
         describe '#available?' do
-          NyuAleph::CirculationStatus::STATUSES.each do |code, statuses|
+          CirculationStatus::STATUSES.each do |code, statuses|
             statuses.each do |status|
               context "when initialized with the value \"#{status}\"" do
                 let(:value) { status }
                 subject { circulation_status.available? }
-                if NyuAleph::CirculationStatus::AVAILABLE.include?(status)
+                if CirculationStatus::AVAILABLE.include?(status)
                   it { should be_true }
                 else
                   it { should be_false }
@@ -119,12 +119,12 @@ module Exlibris
           end
         end
         describe '#requested?' do
-          NyuAleph::CirculationStatus::STATUSES.each do |code, statuses|
+          CirculationStatus::STATUSES.each do |code, statuses|
             statuses.each do |status|
               context "when initialized with the value \"#{status}\"" do
                 let(:value) { status }
                 subject { circulation_status.requested? }
-                if NyuAleph::CirculationStatus::REQUESTED.include?(status)
+                if CirculationStatus::REQUESTED.include?(status)
                   it { should be_true }
                 else
                   it { should be_false }
@@ -139,12 +139,12 @@ module Exlibris
           end
         end
         describe '#billed_as_lost?' do
-          NyuAleph::CirculationStatus::STATUSES.each do |code, statuses|
+          CirculationStatus::STATUSES.each do |code, statuses|
             statuses.each do |status|
               context "when initialized with the value \"#{status}\"" do
                 let(:value) { status }
                 subject { circulation_status.billed_as_lost? }
-                if NyuAleph::CirculationStatus::BILLED_AS_LOST.include?(status)
+                if CirculationStatus::BILLED_AS_LOST.include?(status)
                   it { should be_true }
                 else
                   it { should be_false }
@@ -154,12 +154,12 @@ module Exlibris
           end
         end
         describe '#unavailable?' do
-          NyuAleph::CirculationStatus::STATUSES.each do |code, statuses|
+          CirculationStatus::STATUSES.each do |code, statuses|
             statuses.each do |status|
               context "when initialized with the value \"#{status}\"" do
                 let(:value) { status }
                 subject { circulation_status.unavailable? }
-                if NyuAleph::CirculationStatus::UNAVAILABLE.include?(status)
+                if CirculationStatus::UNAVAILABLE.include?(status)
                   it { should be_true }
                 else
                   it { should be_false }
@@ -169,12 +169,12 @@ module Exlibris
           end
         end
         describe '#processing?' do
-          NyuAleph::CirculationStatus::STATUSES.each do |code, statuses|
+          CirculationStatus::STATUSES.each do |code, statuses|
             statuses.each do |status|
               context "when initialized with the value \"#{status}\"" do
                 let(:value) { status }
                 subject { circulation_status.processing? }
-                if NyuAleph::CirculationStatus::PROCESSING.include?(status)
+                if CirculationStatus::PROCESSING.include?(status)
                   it { should be_true }
                 else
                   it { should be_false }
@@ -184,7 +184,7 @@ module Exlibris
           end
         end
         describe '#recalled?' do
-          NyuAleph::CirculationStatus::STATUSES.each do |code, statuses|
+          CirculationStatus::STATUSES.each do |code, statuses|
             statuses.each do |status|
               context "when initialized with the value \"#{status}\"" do
                 let(:value) { status }
@@ -200,7 +200,7 @@ module Exlibris
           end
         end
         describe '#reshelving?' do
-          NyuAleph::CirculationStatus::STATUSES.each do |code, statuses|
+          CirculationStatus::STATUSES.each do |code, statuses|
             statuses.each do |status|
               context "when initialized with the value \"#{status}\"" do
                 let(:value) { status }

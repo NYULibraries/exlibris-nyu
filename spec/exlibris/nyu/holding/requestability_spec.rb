@@ -1,13 +1,13 @@
 require 'spec_helper'
 module Exlibris
-  module Primo
-    module Source
-      describe NyuAleph::Requestability do
+  module Nyu
+    module Holding
+      describe Requestability do
         let(:item_permissions) do
           { hold_request: 'Y', photocopy_request: 'Y' }
         end
-        subject(:requestability) { NyuAleph::Requestability.new(item_permissions) }
-        it { should be_an NyuAleph::Requestability }
+        subject(:requestability) { Requestability.new(item_permissions) }
+        it { should be_an Requestability }
         describe '#value' do
           subject { requestability.value }
           context 'when the item always requestable' do
@@ -15,13 +15,13 @@ module Exlibris
               let(:item_permissions) do
                 { hold_request: 'C', photocopy_request: 'Y' }
               end
-              it { should eq NyuAleph::Requestability::YES }
+              it { should eq Requestability::YES }
             end
             context "and the item isn't ILL requestable" do
               let(:item_permissions) do
                 { hold_request: 'C', photocopy_request: 'N' }
               end
-              it { should eq NyuAleph::Requestability::YES }
+              it { should eq Requestability::YES }
             end
           end
           context "when the item's requestability depends on who is doing the requesting" do
@@ -29,13 +29,13 @@ module Exlibris
               let(:item_permissions) do
                 { hold_request: 'Y', photocopy_request: 'Y' }
               end
-              it { should eq NyuAleph::Requestability::YES }
+              it { should eq Requestability::YES }
             end
             context "and the item isn't ILL requestable" do
               let(:item_permissions) do
                 { hold_request: 'Y', photocopy_request: 'N' }
               end
-              it { should eq NyuAleph::Requestability::DEFERRED }
+              it { should eq Requestability::DEFERRED }
             end
           end
           context 'when the item is never requestable' do
@@ -43,13 +43,13 @@ module Exlibris
               let(:item_permissions) do
                 { hold_request: 'N', photocopy_request: 'Y' }
               end
-              it { should eq NyuAleph::Requestability::YES }
+              it { should eq Requestability::YES }
             end
             context "and the item isn't ILL requestable" do
               let(:item_permissions) do
                 { hold_request: 'N', photocopy_request: 'N' }
               end
-              it { should eq NyuAleph::Requestability::NO }
+              it { should eq Requestability::NO }
             end
           end
         end

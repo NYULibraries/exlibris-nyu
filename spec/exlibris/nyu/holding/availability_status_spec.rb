@@ -1,12 +1,12 @@
 require 'spec_helper'
 module Exlibris
-  module Primo
-    module Source
-      describe NyuAleph::AvailabilityStatus do
+  module Nyu
+    module Holding
+      describe AvailabilityStatus do
         let(:circulation_status_value) { 'On Shelf' }
-        let(:circulation_status) { NyuAleph::CirculationStatus.new(circulation_status_value) }
-        subject(:availability_status) { NyuAleph::AvailabilityStatus.new(circulation_status) }
-        it { should be_an NyuAleph::AvailabilityStatus }
+        let(:circulation_status) { CirculationStatus.new(circulation_status_value) }
+        subject(:availability_status) { AvailabilityStatus.new(circulation_status) }
+        it { should be_an AvailabilityStatus }
         describe '#code' do
           subject { availability_status.code }
           context 'when the circulation status is nil' do

@@ -1,11 +1,11 @@
 require 'spec_helper'
 module Exlibris
-  module Primo
-    module Source
-      describe NyuAleph::Config do
+  module Nyu
+    module Holding
+      describe Config do
         let(:source) { Primo.config.sources['nyu_aleph'] }
-        subject(:config) { NyuAleph::Config.new(source) }
-        it { should be_an NyuAleph::Config }
+        subject(:config) { Config.new(source) }
+        it { should be_an Config }
         describe '#institutions' do
           subject { config.institutions }
           it { should be_a Hash }
@@ -16,7 +16,7 @@ module Exlibris
         end
         context 'when initialized without any arguments' do
           it 'should raise an ArgumentError' do
-            expect { NyuAleph::Config.new }.to raise_error ArgumentError
+            expect { Config.new }.to raise_error ArgumentError
           end
         end
       end

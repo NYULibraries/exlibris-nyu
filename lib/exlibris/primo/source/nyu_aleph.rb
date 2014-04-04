@@ -27,7 +27,7 @@ module Exlibris
         # Overwrites Exlibris::Primo::Source::Aleph#new
         def initialize(attributes={})
           super(attributes)
-          @circulation_status = CirculationStatus.new(attributes[:circulation_status])
+          @circulation_status = Exlibris::Nyu::Holding::CirculationStatus.new(attributes[:circulation_status])
           @source_data[:sub_library] = sub_library
           @source_data[:illiad_url] = ILLIAD_URL
           @source_data[:aleph_rest_url] = aleph_rest_url
@@ -39,7 +39,7 @@ module Exlibris
         end
 
         # Overrides Exlibris::Primo::Holding#==
-        # Only compare to other Primo Holdings
+        # Only compare to other Primo Holding
         def ==(other_nyu_aleph)
           return super unless other_nyu_aleph.is_a? Exlibris::Primo::Holding
           if expanding?
@@ -131,9 +131,9 @@ module Exlibris
         def requestability
           @requestability ||= begin
             if (!expanding? || circulation_status.reshelving?)
-              Requestability::NO
+              Exlibris::Nyu::Holding::Requestability::NO
             else
-              Requestability.new(translator.item_permissions).value
+              Exlibris::Nyu::Holding::Requestability.new(translator.item_permissions).value
             end
           end
         end
@@ -148,11 +148,11 @@ module Exlibris
 
         private
         def nyu_aleph_availability_status
-          @nyu_aleph_availability_status ||= AvailabilityStatus.new(circulation_status)
+          @nyu_aleph_availability_status ||= Exlibris::Nyu::Holding::AvailabilityStatus.new(circulation_status)
         end
 
         def translator
-          @translator ||= Translator.new(
+          @translator ||= Exlibris::Nyu::Holding::Translator.new(
             adm_library_code: adm_library_code,
             sub_library_code: sub_library_code,
             collection_code: collection_code,
@@ -176,7 +176,7 @@ module Exlibris
         def expanded_holdings
           @expanded_holdings ||= items.map do |item|
             source_data = { from_aleph: true, source_record_id: source_record_id }
-            source_data.merge!(Item.new(item).to_h)
+            source_data.merge!(Exlibris::Nyu::Holding::Item.new(item).to_h)
             self.class.new({holding: self, source_data: source_data}.merge(source_data))
           end
         end
@@ -216,7 +216,7 @@ module Exlibris
         # Coverage::Statement from Aleph bib
         def bib_coverage
           if @holdings_coverage.nil?
-            @bib_coverage ||= Coverage::Statement.from_marc_bib(coverage_library, marc_bib)
+            @bib_coverage ||= Exlibris::Nyu::Coverage::Statement.from_marc_bib(coverage_library, marc_bib)
           end
         end
 
@@ -224,12 +224,12 @@ module Exlibris
         def holdings_coverage
           if @bib_coverage.nil?
             @holdings_coverage ||= 
-              Coverage::Statement.from_marc_holdings(coverage_library, marc_holdings)
+              Exlibris::Nyu::Coverage::Statement.from_marc_holdings(coverage_library, marc_holdings)
           end
         end
 
         def nyu_aleph_config
-          @nyu_aleph_config ||= Config.new(source_config)
+          @nyu_aleph_config ||= Exlibris::Nyu::Holding::Config.new(source_config)
         end
       end
     end

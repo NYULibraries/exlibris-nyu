@@ -394,7 +394,7 @@ class NyuAlephTest < ActiveSupport::TestCase
         assert(abu_dhabi_source.expanded?, "Not expanded")
         assert(abu_dhabi_source.from_aleph, "The holding should be from Aleph")
         assert_nothing_raised { abu_dhabi_source.requestability }
-          assert_equal(Exlibris::Primo::Source::NyuAleph::Requestability::NO, abu_dhabi_source.requestability)
+          assert_equal(Exlibris::Nyu::Holding::Requestability::NO, abu_dhabi_source.requestability)
       end
     end
   end
