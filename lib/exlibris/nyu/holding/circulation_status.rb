@@ -1,6 +1,6 @@
 module Exlibris
   module Nyu
-    module Holding
+    class Holding
       # CirculationStatus translates Aleph statuses to 
       # something more standardized to our purposes.
       class CirculationStatus

@@ -1,6 +1,6 @@
 module Exlibris
   module Nyu
-    module Holding
+    class Holding
       # AvailabilityStatus further normalizes statuses
       # from the given CirculationStatus.
       class AvailabilityStatus

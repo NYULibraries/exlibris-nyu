@@ -1,6 +1,6 @@
 module Exlibris
   module Nyu
-    module Holding
+    class Holding
       class Requestability
         # The item is always requestable
         YES = 'yes'

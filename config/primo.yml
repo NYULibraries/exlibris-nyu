@@ -52,9 +52,8 @@ availability_statuses:
   "available": "Available"
   "unavailable": "Check Availability"
   "check_holdings": "Check Availability"
-
 sources:
-  nyu_aleph:
+  nyu_aleph: &nyu_aleph
      base_url: "http://alephstage.library.nyu.edu"
      rest_url: "http://alephstage.library.nyu.edu:1891/rest-dlf"
      type: aleph
@@ -94,146 +93,8 @@ sources:
        "NYHSREF": "NYHS"
        "REI": "NREI"
      local_base: "PRIMOCOMMON"
-     institution_codes:
-       BOBST: NYU
-       BAFC: NYU
-       BFALE: NYU
-       BLCC: NYU
-       BREF6: NYU
-       BRES: NYU
-       BTAM: NYU
-       CU: CU
-       KBHS: BHS
-       NCOUR: NYU
-       NIFA: NYU
-       NIFAC: NYU
-       NISAW: NYU
-       NKEV: NYU
-       NLAPI: NYU
-       NOFFS: NYU
-       NPOLY: NYU
-       NREI: NYU
-       NSHEQ: NYU
-       NSHNG: NYU
-       NYHS: NYHS
-       NYSID: NYSID
-       TNSFO: NS
-       TNSGI: NS
-       TNSKE: NS
-       TNSOS: NS
-       TNSSC: NS
-       NABUD: NYUAD
-       NADEQ: NYUAD
-       NADEX: NYUAD
-       NAFC: NYUAD
-     requestable_statuses: ["checked_out", "offsite", available_requestable, "Depository", "Offsite Available"]
-     requestable_collections: ["checked_out", "offsite", available_requestable, "Depository", "Offsite Available"]
-  COURSES:
-     base_url: "http://alephstage.library.nyu.edu"
-     rest_url: "http://alephstage.library.nyu.edu:1891/rest-dlf"
-     type: aleph
-     class_name: NyuAlephReserves
-     local_base: "PRIMOCOMMON"
-     institution_codes:
-       BOBST: NYU
-       BAFC: NYU
-       BFALE: NYU
-       BLCC: NYU
-       BREF6: NYU
-       BRES: NYU
-       BTAM: NYU
-       CU: CU
-       KBHS: BHS
-       NCOUR: NYU
-       NIFA: NYU
-       NIFAC: NYU
-       NISAW: NYU
-       NKEV: NYU
-       NLAPI: NYU
-       NOFFS: NYU
-       NPOLY: NYU
-       NREI: NYU
-       NSHEQ: NYU
-       NSHNG: NYU
-       NYHS: NYHS
-       NYSID: NYSID
-       TNSFO: NS
-       TNSGI: NS
-       TNSKE: NS
-       TNSOS: NS
-       TNSSC: NS
-       NABUD: NYUAD
-       NADEQ: NYUAD
-       NADEX: NYUAD
-       NAFC: NYUAD
-     statuses:
-       available: ["On Shelf", "Available"]
-       requested: ["Requested"]
-       request_ill: ["Request ILL"]
-       billed_as_lost: ["Billed as Lost", "Claimed Returned"]
-       offsite: ["Offsite Available"]
-       checked_out: !ruby/regexp /([0-9]{2}\/[0-9]{2}\/[0-9]{2})/
-       unavailable: ["Unavailable"]
-       processing: ["In Processing", "In Transit"]
-       ask_afc: ["Ask at Avery Fisher Center"]
-       ask_archives: ["Ask at NYU Archives"]
-       ask_tam: ["Ask at Tamiment"]
-       ask_fales: ["Ask at Fales"]
-       ask_reference: ["Ask at Reference"]
-       on_exhibit: ["On Exhibit"]
-       reshelving: ["Reshelving"]
+  COURSES: &course_reserves
+    <<: *nyu_aleph
+    class_name: NyuAlephReserves
   ADCOURSES:
-     base_url: "http://aleph.library.nyu.edu"
-     rest_url: "http://aleph.library.nyu.edu:1891/rest-dlf"
-     illiad_url: "http://ill.library.nyu.edu"
-     type: aleph
-     class_name: NyuAlephReserves
-     local_base: "PRIMOCOMMON"
-     institution_codes:
-       BOBST: NYU
-       BAFC: NYU
-       BFALE: NYU
-       BLCC: NYU
-       BREF6: NYU
-       BRES: NYU
-       BTAM: NYU
-       CU: CU
-       KBHS: BHS
-       NCOUR: NYU
-       NIFA: NYU
-       NIFAC: NYU
-       NISAW: NYU
-       NKEV: NYU
-       NLAPI: NYU
-       NOFFS: NYU
-       NPOLY: NYU
-       NREI: NYU
-       NSHEQ: NYU
-       NSHNG: NYU
-       NYHS: NYHS
-       NYSID: NYSID
-       TNSFO: NS
-       TNSGI: NS
-       TNSKE: NS
-       TNSOS: NS
-       TNSSC: NS
-       NABUD: NYUAD
-       NADEQ: NYUAD
-       NADEX: NYUAD
-       NAFC: NYUAD
-     statuses:
-       available: ["On Shelf", "Available"]
-       requested: ["Requested"]
-       request_ill: ["Request ILL"]
-       billed_as_lost: ["Billed as Lost", "Claimed Returned"]
-       offsite: ["Offsite Available"]
-       checked_out: !ruby/regexp /([0-9]{2}\/[0-9]{2}\/[0-9]{2})/
-       unavailable: ["Unavailable"]
-       processing: ["In Processing", "In Transit"]
-       ask_afc: ["Ask at Avery Fisher Center"]
-       ask_archives: ["Ask at NYU Archives"]
-       ask_tam: ["Ask at Tamiment"]
-       ask_fales: ["Ask at Fales"]
-       ask_reference: ["Ask at Reference"]
-       on_exhibit: ["On Exhibit"]
-       reshelving: ["Reshelving"]
+    <<: *course_reserves

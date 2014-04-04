@@ -1,6 +1,6 @@
 module Exlibris
   module Nyu
-    module Holding
+    class Holding
       class Translator
         attr_reader :adm_library_code, :sub_library_code, :collection_code,
           :item_status_code, :item_process_status_code

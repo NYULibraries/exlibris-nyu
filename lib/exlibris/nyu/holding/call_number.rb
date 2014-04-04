@@ -1,6 +1,6 @@
 module Exlibris
   module Nyu
-    module Holding
+    class Holding
       class CallNumber
         attr_reader :classification, :description
         def initialize(classification, description)

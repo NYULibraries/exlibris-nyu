@@ -12,9 +12,9 @@ module Exlibris
 
         # Overrides NyuAleph#availability_status
         def availability_status
-          unless defined? @reserves_availability_status
+          if @reserves_availability_status.nil?
             @reserves_availability_status = super.dup
-            @reserves_availability_status << " - #{item_status}" if @reserves_availability_status.eql? "Available"
+            @reserves_availability_status << " - #{item_status}" if @reserves_availability_status == "Available"
           end
           @reserves_availability_status
         end
@@ -24,6 +24,11 @@ module Exlibris
         # Override NyuAleph#collection  
         def collection
           (sub_library_code.eql? "BRES") ? "" : super
+        end
+
+        private
+        def item_status
+          @item_status ||= source_data[:item_status] if from_aleph?
         end
       end
     end
