@@ -139,18 +139,138 @@ module Exlibris
         end
       end
       describe '#available?' do
+        subject { holding.available? }
+        context 'when status is "available"' do
+          let(:status) { 'available' }
+          let(:status_display) { 'Available' }
+          it { should be_true }
+        end
+        context 'when status is not "available"' do
+          let(:status) { 'unavailable' }
+          let(:status_display) { 'Check Availability' }
+          it { should be_false }
+        end
       end
       describe '#recallable?' do
-      end
-      describe '#requested?' do
-      end
-      describe '#on_order?' do
-      end
-      describe '#ill?' do
-      end
-      describe '#checked_out?' do
+        subject { holding.recallable? }
+        context 'when status is "checked out"' do
+          let(:status) { 'checked_out' }
+          let(:status_display) { 'Due: 01/01/15' }
+          it { should be_true }
+        end
+        context 'when status is "requested"' do
+          let(:status) { 'requested' }
+          let(:status_display) { 'Requested' }
+          it { should be_true }
+        end
+        context 'when status is "available"' do
+          let(:status) { 'available' }
+          let(:status_display) { 'Available' }
+          it { should be_false }
+        end
       end
       describe '#offsite?' do
+        subject { holding.offsite? }
+        context 'when status is "offsite"' do
+          let(:status) { 'offsite' }
+          let(:status_display) { 'Offsite Available' }
+          it { should be_true }
+        end
+        context 'when status is not "offsite"' do
+          let(:status) { 'unavailable' }
+          let(:status_display) { 'Check Availability' }
+          it { should be_false }
+        end
+      end
+      describe '#processing?' do
+        subject { holding.processing? }
+        context 'when status is "processing"' do
+          let(:status) { 'processing' }
+          let(:status_display) { 'In Processing' }
+          it { should be_true }
+        end
+        context 'when status is not "processing"' do
+          let(:status) { 'unavailable' }
+          let(:status_display) { 'Check Availability' }
+          it { should be_false }
+        end
+      end
+      describe '#on_order?' do
+        subject { holding.on_order? }
+        context 'when the status display is "On Order"' do
+          let(:status) { 'check_holdings' }
+          let(:status_display) { 'On Order' }
+          it { should be_true }
+        end
+        context 'when the status display is not "On Order"' do
+          let(:status) { 'unavailable' }
+          let(:status_display) { 'Check Availability' }
+          it { should be_false }
+        end
+      end
+      describe '#ill?' do
+        subject { holding.ill? }
+        context 'when the status display is "Request ILL"' do
+          let(:status) { 'ill' }
+          let(:status_display) { 'Request ILL' }
+          it { should be_true }
+        end
+        context 'when the status display is "On Order"' do
+          let(:status) { 'check_holdings' }
+          let(:status_display) { 'On Order' }
+          it { should be_true }
+        end
+        context 'when the status is "processing"' do
+          let(:status) { 'processing' }
+          let(:status_display) { 'In Processing' }
+          it { should be_true }
+        end
+        context 'when the status is "checked out"' do
+          let(:status) { 'checked_out' }
+          let(:status_display) { 'Due: 01/01/15' }
+          it { should be_true }
+        end
+        context 'when the status is "requested"' do
+          let(:status) { 'requested' }
+          let(:status_display) { 'Requested' }
+          it { should be_true }
+        end
+        context 'when the status is "available"' do
+          let(:status) { 'available' }
+          let(:status_display) { 'Available' }
+          it { should be_false }
+        end
+      end
+      describe '#checked_out?' do
+        subject { holding.checked_out? }
+        context 'when the status is "checked_out"' do
+          let(:status) { 'checked_out' }
+          let(:status_display) { '01/01/15' }
+          it { should be_true }
+        end
+        context 'when the status is "available"' do
+          let(:status) { 'available' }
+          let(:status_display) { 'Available' }
+          it { should be_false }
+        end
+      end
+      describe '#requested?' do
+        subject { holding.requested? }
+        context 'when the status is "requested"' do
+          let(:status) { 'requested' }
+          let(:status_display) { 'Requested' }
+          it { should be_true }
+        end
+        context 'when the status display has "Requested"' do
+          let(:status) { 'checked_out' }
+          let(:status_display) { '01/01/15; Requested' }
+          it { should be_true }
+        end
+        context 'when the status is "available"' do
+          let(:status) { 'available' }
+          let(:status_display) { 'Available' }
+          it { should be_false }
+        end
       end
     end
   end

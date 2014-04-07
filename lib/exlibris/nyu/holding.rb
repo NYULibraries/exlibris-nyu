@@ -1,6 +1,16 @@
 module Exlibris
   module Nyu
     class Holding
+      STATUSES = {
+        available: ['available'],
+        recallable: ['checked_out', 'requested'],
+        processing: ['processing'],
+        offsite: ['offsite'],
+        checked_out: ['checked_out'],
+        on_order: ["On Order"],
+        ill: ['Request ILL', 'On Order', 'processing', 'checked_out', 'requested']
+      }
+
       attr_reader :status, :status_display, :institution, :sub_library,
         :collection, :location, :call_number, :requestability, :extras
 
@@ -30,6 +40,13 @@ module Exlibris
         self.new(attributes)
       end
 
+      # Define "status?" methods
+      STATUSES.each do |code, statuses|
+        define_method "#{code}?".to_sym do
+          statuses.include?(status) || statuses.include?(status_display)
+        end
+      end
+
       def initialize(attributes)
         @status = attributes[:status]
         @status_display = attributes[:status_display]
@@ -41,6 +58,11 @@ module Exlibris
         @call_number = attributes[:call_number]
         @requestability = attributes[:requestability]
         @extras = attributes[:extras]
+      end
+
+      # Is this holding requested?
+      def requested?
+        /Requested/ === status_display
       end
 
       def always_requestable?
