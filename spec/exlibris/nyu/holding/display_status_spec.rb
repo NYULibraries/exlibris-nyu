@@ -1,13 +1,13 @@
 require 'spec_helper'
 module Exlibris
   module Nyu
-    describe Holding::AvailabilityStatus do
+    describe Holding::DisplayStatus do
       let(:circulation_status_value) { 'On Shelf' }
       let(:circulation_status) { Holding::CirculationStatus.new(circulation_status_value) }
-      subject(:availability_status) { Holding::AvailabilityStatus.new(circulation_status) }
-      it { should be_an Holding::AvailabilityStatus }
+      subject(:display_status) { Holding::DisplayStatus.new(circulation_status) }
+      it { should be_an Holding::DisplayStatus }
       describe '#code' do
-        subject { availability_status.code }
+        subject { display_status.code }
         context 'when the circulation status is nil' do
           let(:circulation_status_value) { nil }
           it { should be_nil }
@@ -62,7 +62,7 @@ module Exlibris
         end
       end
       describe '#value' do
-        subject { availability_status.value }
+        subject { display_status.value }
         context 'when the circulation status is nil' do
           let(:circulation_status_value) { nil }
           it { should be_nil }

@@ -3,6 +3,7 @@ module Exlibris
     class Holding
       # CirculationStatus translates Aleph statuses to 
       # something more standardized to our purposes.
+      # AKA, the logic of mapping aleph status to our status
       class CirculationStatus
         # Enum of status mappings
         # http://rails-bestpractices.com/posts/708-clever-enums-in-rails

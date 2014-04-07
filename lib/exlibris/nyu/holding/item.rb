@@ -22,7 +22,7 @@ module Exlibris
           @collection = item["z30"]["z30_collection"]
           @item_status = item["z30"]["z30_item_status"]
           @circulation_status = CirculationStatus.new(item["status"])
-          @availability_status = AvailabilityStatus.new(@circulation_status)
+          @availability_status = DisplayStatus.new(@circulation_status)
           @status = @availability_status.code
           @classification = item["z30"]["z30_call_no"]
           @description = item["z30"]["z30_description"]

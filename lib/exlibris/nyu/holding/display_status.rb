@@ -1,10 +1,11 @@
 module Exlibris
   module Nyu
     class Holding
-      # AvailabilityStatus further normalizes statuses
+      # DisplayStatus further normalizes statuses
       # from the given CirculationStatus.
-      class AvailabilityStatus
-        AVALABILITY_STATUSES = {
+      # Aka, presentation layer status.
+      class DisplayStatus
+        DISPLAY_STATUSES = {
           available: "Available",
           unavailable: "Check Availability",
           billed_as_lost: "Request ILL",
@@ -34,8 +35,8 @@ module Exlibris
               "Due: #{circulation_status.value}"
             elsif circulation_status.reshelving?
               "Reshelving"
-            elsif AVALABILITY_STATUSES.has_key?(circulation_status.code)
-              AVALABILITY_STATUSES[circulation_status.code]
+            elsif DISPLAY_STATUSES.has_key?(circulation_status.code)
+              DISPLAY_STATUSES[circulation_status.code]
             elsif circulation_status.value
               circulation_status.value
             end
