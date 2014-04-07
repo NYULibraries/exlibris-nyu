@@ -4,8 +4,12 @@ require 'spec_helper'
 module Exlibris
   module Primo
     module Source
-      describe NyuAleph do
-        let(:aleph_holding) { }
+      describe NyuAleph, vcr: { cassette_name: "virtual inequality" } do
+        let(:bib_library) { "NYU01" }
+        let(:record_id) { "000980206" }
+        let(:aleph_record) { Exlibris::Aleph::Record.new(bib_library: bib_library, record_id: record_id) }
+        let(:aleph_item) { aleph_record.items.first }
+        let(:aleph_holding) { Exlibris::Nyu::Holding.from_aleph(aleph_item) }
         subject(:nyu_aleph) { NyuAleph.new(aleph_holding: aleph_holding) }
         it { should be_an NyuAleph }
         it { should be_an Aleph }
@@ -13,19 +17,31 @@ module Exlibris
         describe 'from_aleph?' do
           subject { nyu_aleph.from_aleph? }
           context 'when expanded from Aleph' do
-            xit { should be_true }
+            it { should be_true }
           end
           context 'when not expanded from Aleph' do
-            xit { should be_false }
+            let(:aleph_holding) { nil }
+            it { should be_false }
           end
         end
         describe 'expanded?' do
           subject { nyu_aleph.expanded? }
           context 'when expanded from Aleph' do
-            xit { should be_true }
+            it { should be_true }
           end
           context 'when not expanded from Aleph' do
-            xit { should be_false }
+            let(:aleph_holding) { nil }
+            it { should be_false }
+          end
+        end
+        describe 'requestability' do
+          subject { nyu_aleph.requestability }
+          context 'when expanded from Aleph' do
+            it { should eq 'deferred' }
+          end
+          context 'when not expanded from Aleph' do
+            let(:aleph_holding) { nil }
+            it { should eq 'no' }
           end
         end
         context 'when initialized with a Journal holding', vcr: { cassette_name: "vogue" } do
