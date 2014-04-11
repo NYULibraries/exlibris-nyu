@@ -2,11 +2,11 @@
 http_interactions:
 - request:
     method: post
-    uri: http://bobcatdev.library.nyu.edu/PrimoWebServices/services/searcher
+    uri: http://primo.library.edu/PrimoWebServices/services/searcher
     body:
       encoding: US-ASCII
       string: <?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wsdl="http://bobcatdev.library.nyu.edu/PrimoWebServices/services/searcher"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wsdl="http://primo.library.edu/PrimoWebServices/services/searcher"
         xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"><env:Body><wsdl:getRecord><request><![CDATA[<fullViewRequest
         xmlns="http://www.exlibris.com/primo/xsd/wsRequest" xmlns:uic="http://www.exlibris.com/primo/xsd/primoview/uicomponents"><PrimoSearchRequest
         xmlns="http://www.exlibris.com/primo/xsd/search/request"><QueryTerms><BoolOpeator>AND</BoolOpeator></QueryTerms><StartIndex>1</StartIndex><BulkSize>5</BulkSize><DidUMeanEnabled>false</DidUMeanEnabled></PrimoSearchRequest><institution>NYU</institution><docId>nyu_aleph002893728</docId></fullViewRequest>]]></request></wsdl:getRecord></env:Body></env:Envelope>
@@ -38,7 +38,7 @@ http_interactions:
       encoding: US-ASCII
       string: ! "<?xml version=\"1.0\" encoding=\"UTF-8\"?><soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"
         xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"><soapenv:Body><ns1:getRecordResponse
-        soapenv:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\" xmlns:ns1=\"http://bobcatdev.library.nyu.edu/PrimoWebServices/services/searcher\"><getRecordReturn
+        soapenv:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\" xmlns:ns1=\"http://primo.library.edu/PrimoWebServices/services/searcher\"><getRecordReturn
         xsi:type=\"soapenc:string\" xmlns:soapenc=\"http://schemas.xmlsoap.org/soap/encoding/\">&lt;SEGMENTS
         xmlns=&quot;http://www.exlibrisgroup.com/xsd/jaguar/search&quot;&gt;\n  &lt;JAGROOT&gt;\n
         \   &lt;RESULT&gt;\n      &lt;DOCSET TOTALHITS=&quot;1&quot;&gt;\n        &lt;DOC
@@ -146,7 +146,7 @@ http_interactions:
   recorded_at: Tue, 25 Mar 2014 21:51:58 GMT
 - request:
     method: get
-    uri: http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002893728/holdings?view=full
+    uri: http://aleph.library.edu:1891/rest-dlf/record/NYU01002893728/holdings?view=full
     body:
       encoding: US-ASCII
       string: ''
@@ -169,7 +169,7 @@ http_interactions:
     body:
       encoding: US-ASCII
       string: ! '<?xml version = "1.0" encoding = "UTF-8"?><get-hol-list><reply-text>ok</reply-text><reply-code>0000</reply-code><holdings><holding
-        href="http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002893728/holdings/NYU60000404086"><leader>     cyH
+        href="http://aleph.library.edu:1891/rest-dlf/record/NYU01002893728/holdings/NYU60000404086"><leader>     cyH
         a22003615  4500</leader><controlfield tag="001">000404086</controlfield><controlfield
         tag="004">NYUb10612735</controlfield><controlfield tag="005">20080531115252.0</controlfield><controlfield
         tag="007">he</controlfield><controlfield tag="008">0003294p||||8   0001a|eng0130402</controlfield><datafield
@@ -227,7 +227,7 @@ http_interactions:
         code="i">2007</subfield><subfield code="p">P863.11500714</subfield></datafield><datafield
         tag="863" ind1="5" ind2="0"><subfield code="8">1.18</subfield><subfield code="a">198</subfield><subfield
         code="i">2008</subfield><subfield code="p">P863.11611685</subfield></datafield></holding><holding
-        href="http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002893728/holdings/NYU60000404087"><leader>     cyH
+        href="http://aleph.library.edu:1891/rest-dlf/record/NYU01002893728/holdings/NYU60000404087"><leader>     cyH
         a22001575  4500</leader><controlfield tag="001">000404087</controlfield><controlfield
         tag="004">NYUb10612735</controlfield><controlfield tag="005">20080531115252.0</controlfield><controlfield
         tag="007">hd</controlfield><controlfield tag="008">0109200|||||8   |001|||||001092</controlfield><datafield
@@ -244,7 +244,7 @@ http_interactions:
         tag="863" ind1="5" ind2="1"><subfield code="8">1.1</subfield><subfield code="a">1-180</subfield><subfield
         code="b">1-3305</subfield><subfield code="i">1892-1990</subfield><subfield
         code="p">P863.10814375</subfield><subfield code="w">n</subfield></datafield></holding><holding
-        href="http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002893728/holdings/NYU60000404088"><leader>     cyH
+        href="http://aleph.library.edu:1891/rest-dlf/record/NYU01002893728/holdings/NYU60000404088"><leader>     cyH
         a22048975  4500</leader><controlfield tag="001">000404088</controlfield><controlfield
         tag="004">NYUb10612735</controlfield><controlfield tag="005">20080531115252.0</controlfield><controlfield
         tag="007">ta</controlfield><controlfield tag="008">9908194p||||8   0001baeng0090825</controlfield><datafield
@@ -1453,7 +1453,7 @@ http_interactions:
         ind2="0"><subfield code="8">2.395</subfield><subfield code="a">198</subfield><subfield
         code="b">6</subfield><subfield code="i">2008</subfield><subfield code="p">P863.11649747</subfield></datafield><datafield
         tag="866" ind1="4" ind2="1"><subfield code="8">0</subfield><subfield code="a">v.95
-        (1940)-</subfield></datafield></holding><holding href="http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002893728/holdings/NYU60004276363"><leader>     ny  a22     5i
+        (1940)-</subfield></datafield></holding><holding href="http://aleph.library.edu:1891/rest-dlf/record/NYU01002893728/holdings/NYU60004276363"><leader>     ny  a22     5i
         4500</leader><controlfield tag="001">004276363</controlfield><controlfield
         tag="004">002893728</controlfield><controlfield tag="007">ta</controlfield><controlfield
         tag="008">1110182p    8   0001bbeng1111018</controlfield><datafield tag="852"
@@ -1466,7 +1466,7 @@ http_interactions:
         code="b">no.</subfield><subfield code="g">no.</subfield><subfield code="i">(year)</subfield><subfield
         code="j">(month)</subfield></datafield><datafield tag="866" ind1="4" ind2="1"><subfield
         code="8">0</subfield><subfield code="a">v.48 (1916)-49, 59-62, 70-94 (1917,
-        1922-1923, 1927-1939)</subfield></datafield></holding><holding href="http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002893728/holdings/NYU60000404089"><leader>     cyH
+        1922-1923, 1927-1939)</subfield></datafield></holding><holding href="http://aleph.library.edu:1891/rest-dlf/record/NYU01002893728/holdings/NYU60000404089"><leader>     cyH
         a22001695  4500</leader><controlfield tag="001">000404089</controlfield><controlfield
         tag="004">NYUb10612735</controlfield><controlfield tag="005">20080531115252.0</controlfield><controlfield
         tag="007">ta</controlfield><controlfield tag="008">0301210|||||8   |001|||||003012</controlfield><datafield
@@ -1493,7 +1493,7 @@ http_interactions:
   recorded_at: Tue, 25 Mar 2014 21:53:59 GMT
 - request:
     method: get
-    uri: http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01002893728?view=full
+    uri: http://aleph.library.edu:1891/rest-dlf/record/NYU01002893728?view=full
     body:
       encoding: US-ASCII
       string: ''
