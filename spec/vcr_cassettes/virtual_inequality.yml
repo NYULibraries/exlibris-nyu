@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01000980206/items?view=full
+    uri: http://aleph.library.edu:1891/rest-dlf/record/NYU01000980206/items?view=full
     body:
       encoding: US-ASCII
       string: ''
@@ -21,11 +21,11 @@ http_interactions:
       Transfer-Encoding:
       - chunked
       Date:
-      - Fri, 28 Mar 2014 19:19:07 GMT
+      - Fri, 11 Apr 2014 17:50:12 GMT
     body:
       encoding: US-ASCII
       string: ! '<?xml version = "1.0" encoding = "UTF-8"?><get-item-list><reply-text>ok</reply-text><reply-code>0000</reply-code><items><item
-        href="http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01000980206/items/NYU50000980206000010"><z30-sub-library-code>BOBST</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>01</z30-item-status-code><z30-collection-code>MAIN</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>000980206</z30-doc-number><z30-item-sequence>    1.0</z30-item-sequence><z30-barcode>31142036269960</z30-barcode><z30-sub-library>NYU
+        href="http://aleph.library.edu:1891/rest-dlf/record/NYU01000980206/items/NYU50000980206000010"><z30-sub-library-code>BOBST</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>01</z30-item-status-code><z30-collection-code>MAIN</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>000980206</z30-doc-number><z30-item-sequence>    1.0</z30-item-sequence><z30-barcode>31142036269960</z30-barcode><z30-sub-library>NYU
         Bobst</z30-sub-library><z30-material>Books</z30-material><z30-item-status>Regular
         loan</z30-item-status><z30-open-date>20031027</z30-open-date><z30-update-date>20031113</z30-update-date><z30-cataloger>FISHERC</z30-cataloger><z30-date-last-return>20131021</z30-date-last-return><z30-hour-last-return>2007</z30-hour-last-return><z30-ip-last-return>128.122.88.168</z30-ip-last-return><z30-no-loans>004</z30-no-loans><z30-alpha>L</z30-alpha><z30-collection>Main
         Collection</z30-collection><z30-call-no-type>0</z30-call-no-type><z30-call-no>HN49.I56
@@ -34,8 +34,8 @@ http_interactions:
         Karen.</z13-author><z13-title-code>24510</z13-title-code><z13-title>Virtual
         inequality :</z13-title><z13-imprint-code>260</z13-imprint-code><z13-imprint>Washington,
         D.C. : Georgetown University Press, c2003.</z13-imprint><z13-isbn-issn-code>020</z13-isbn-issn-code><z13-isbn-issn>0878409998
-        (pbk. : alk. paper)</z13-isbn-issn></z13><status>03/07/14</status></item><item
-        href="http://alephstage.library.nyu.edu:1891/rest-dlf/record/NYU01000980206/items/NYU50000980206000020"><z30-sub-library-code>TNSFO</z30-sub-library-code><z30-item-process-status-code>DP</z30-item-process-status-code><z30-item-status-code>01</z30-item-status-code><z30-collection-code>MAIN</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>000980206</z30-doc-number><z30-item-sequence>    2.0</z30-item-sequence><z30-barcode>31207039784289</z30-barcode><z30-sub-library>New
+        (pbk. : alk. paper)</z13-isbn-issn></z13><status>06/28/14</status></item><item
+        href="http://aleph.library.edu:1891/rest-dlf/record/NYU01000980206/items/NYU50000980206000020"><z30-sub-library-code>TNSFO</z30-sub-library-code><z30-item-process-status-code>DP</z30-item-process-status-code><z30-item-status-code>01</z30-item-status-code><z30-collection-code>MAIN</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>000980206</z30-doc-number><z30-item-sequence>    2.0</z30-item-sequence><z30-barcode>31207039784289</z30-barcode><z30-sub-library>New
         School Fogelman Library</z30-sub-library><z30-material>Books</z30-material><z30-item-status>Offsite
         Available</z30-item-status><z30-open-date>20040105</z30-open-date><z30-update-date>20080806</z30-update-date><z30-cataloger>TEREFENK</z30-cataloger><z30-date-last-return>20131219</z30-date-last-return><z30-hour-last-return>1203</z30-hour-last-return><z30-ip-last-return>149.31.15.79</z30-ip-last-return><z30-no-loans>008</z30-no-loans><z30-alpha>L</z30-alpha><z30-collection>Main
         Collection</z30-collection><z30-call-no-type>0</z30-call-no-type><z30-call-no>HN49.I56
@@ -43,7 +43,7 @@ http_interactions:
         Karen.</z13-author><z13-title-code>24510</z13-title-code><z13-title>Virtual
         inequality :</z13-title><z13-imprint-code>260</z13-imprint-code><z13-imprint>Washington,
         D.C. : Georgetown University Press, c2003.</z13-imprint><z13-isbn-issn-code>020</z13-isbn-issn-code><z13-isbn-issn>0878409998
-        (pbk. : alk. paper)</z13-isbn-issn></z13><status>In Transit; 01/09/14</status></item></items></get-item-list> '
+        (pbk. : alk. paper)</z13-isbn-issn></z13><status>Billed as Lost</status></item></items></get-item-list> '
     http_version: 
-  recorded_at: Fri, 28 Mar 2014 19:19:07 GMT
+  recorded_at: Fri, 11 Apr 2014 17:50:14 GMT
 recorded_with: VCR 2.8.0

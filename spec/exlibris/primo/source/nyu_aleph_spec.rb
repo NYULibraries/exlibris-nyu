@@ -44,51 +44,66 @@ module Exlibris
             it { should eq 'no' }
           end
         end
-        context 'when initialized with a Journal holding', vcr: { cassette_name: "vogue" } do
-          let(:record_id) { "nyu_aleph002893728" }
+        context 'when initialized with a journal holding' do
           let(:search) { Exlibris::Primo::Search.new(record_id: record_id) }
           let(:records) { search.records }
           let(:holdings) { records.map{ |record| record.holdings }.flatten }
-          subject(:vogue_nyu_aleph) { NyuAleph.new(holding: holding) }
-          context 'and the holding has coverage statements in the bib MARC' do
-            let(:holding) do
-              holdings.find { |holding| holding.institution_code == "NYU" }
-            end
-            it { should be_an NyuAleph }
+          let(:holding) { holdings.first }
+          subject(:nyu_aleph) { NyuAleph.new(holding: holding) }
+          context 'and the journal is "Visionaire"', vcr: { cassette_name: "visionaire" } do
+            let(:record_id) { "nyu_aleph001951476" }
             describe '#coverage' do
-              subject { vogue_nyu_aleph.coverage }
+              subject { nyu_aleph.coverage }
               it { should be_an Array }
               it { should_not be_empty }
-              it 'should display the bib coverage statement' do
-                expect(subject.size).to be 2
-              end
-            end
-          end
-          context 'and the holding has coverage statements in the holding MARC' do
-            let(:holding) do
-              holdings.find { |holding| holding.institution_code == "NS" }
-            end
-            it { should be_an NyuAleph }
-            describe '#coverage' do
-              subject { vogue_nyu_aleph.coverage }
-              it { should be_an Array }
-              it { should_not be_empty }
-              it 'should display the holding coverage statement' do
-                expect(subject.size).to be 2
-              end
-            end
-          end
-          context 'and the holding has coverage statements in both the bib and holding MARC' do
-            let(:holding) do
-              holdings.find { |holding| holding.institution_code == "NYHS" }
-            end
-            it { should be_an NyuAleph }
-            describe '#coverage' do
-              subject { vogue_nyu_aleph.coverage }
-              it { should be_an Array }
-              it { should_not be_empty }
-              it 'should display the holding coverage statement' do
+              it 'should display the notes' do
                 expect(subject.size).to be 1
+                expect(subject.first).to eql 'Note: Some volumes held OffSite -- consult detailed holdings for location.'
+              end
+            end
+          end
+          context 'and the journal is "Vogue"', vcr: { cassette_name: "vogue" } do
+            let(:record_id) { "nyu_aleph002893728" }
+            context 'and the holding has coverage statements in the bib MARC' do
+              let(:holding) do
+                holdings.find { |holding| holding.institution_code == "NYU" }
+              end
+              it { should be_an NyuAleph }
+              describe '#coverage' do
+                subject { nyu_aleph.coverage }
+                it { should be_an Array }
+                it { should_not be_empty }
+                it 'should display the bib coverage statement' do
+                  expect(subject.size).to be 2
+                end
+              end
+            end
+            context 'and the holding has coverage statements in the holding MARC' do
+              let(:holding) do
+                holdings.find { |holding| holding.institution_code == "NS" }
+              end
+              it { should be_an NyuAleph }
+              describe '#coverage' do
+                subject { nyu_aleph.coverage }
+                it { should be_an Array }
+                it { should_not be_empty }
+                it 'should display the holding coverage statement' do
+                  expect(subject.size).to be 2
+                end
+              end
+            end
+            context 'and the holding has coverage statements in both the bib and holding MARC' do
+              let(:holding) do
+                holdings.find { |holding| holding.institution_code == "NYHS" }
+              end
+              it { should be_an NyuAleph }
+              describe '#coverage' do
+                subject { nyu_aleph.coverage }
+                it { should be_an Array }
+                it { should_not be_empty }
+                it 'should display the holding coverage statement' do
+                  expect(subject.size).to be 1
+                end
               end
             end
           end
