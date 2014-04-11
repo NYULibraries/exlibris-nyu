@@ -9,11 +9,11 @@ module Exlibris
         end
 
         def sub_library
-          @sub_library ||= pair['sub_library']
+          @sub_library ||= pair['sub_library'] unless pair.nil?
         end
 
         def collection
-          @collection ||= pair['collection']
+          @collection ||= pair['collection'] unless pair.nil?
         end
 
         private
