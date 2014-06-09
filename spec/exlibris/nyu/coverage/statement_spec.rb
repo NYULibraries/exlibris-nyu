@@ -3,9 +3,8 @@ module Exlibris
   module Nyu
     module Coverage
       describe Statement do
-        let(:bib_library) { "NYU01" }
-        let(:record_id) { "002893728" }
-        let(:aleph_record) { Exlibris::Aleph::Record.new(bib_library: bib_library, record_id: record_id) }
+        let(:record_id) { 'NYU01002893728' }
+        let(:record) { Exlibris::Aleph::Record.new(record_id) }
         let(:textual_holding) { "This is a textual holding" }
         let(:textual_holdings) { [textual_holding] }
         let(:note) { "This is a note" }
@@ -13,11 +12,12 @@ module Exlibris
         let(:args) { [textual_holdings, notes] }
         subject(:statement) { Statement.new(*args) }
         it { should be_a Statement }
-        describe 'MARC initialization helpers', vcr: { cassette_name: "vogue" } do
-          describe '.from_marc_bib' do
-            let(:sub_library) { "BOBST" }
-            let(:marc_bib) { aleph_record.bib }
-            subject(:statement) { Statement.from_marc_bib(sub_library, marc_bib) }
+        describe 'MARC initialization helpers', vcr: { cassette_name: "vogue", record: :new_episodes } do
+          let(:admin_library) { Exlibris::Aleph::AdminLibrary.new('NYU50') }
+          describe '.from_record_metadata' do
+            let(:sub_library) { Exlibris::Aleph::SubLibrary.new('BOBST', 'NYU Bobst', admin_library) }
+            let(:record_metadata) { record.metadata }
+            subject(:statement) { Statement.from_record_metadata(sub_library, record_metadata) }
             it { should be_a Statement }
             describe '#textual_holdings' do
               subject { statement.textual_holdings }
@@ -30,10 +30,10 @@ module Exlibris
               end
             end
           end
-          describe '.from_marc_holdings', vcr: { cassette_name: "vogue" } do
-            let(:sub_library) { "TNSGI" }
-            let(:marc_holdings) { aleph_record.holdings }
-            subject { Statement.from_marc_holdings(sub_library, marc_holdings) }
+          describe '.from_holdings', vcr: { cassette_name: "vogue", record: :new_episodes } do
+            let(:sub_library) { Exlibris::Aleph::SubLibrary.new('TNSGI', 'TNSGI', admin_library) }
+            let(:holdings) { record.holdings }
+            subject { Statement.from_holdings(sub_library, holdings) }
             it { should be_a Statement }
           end
         end
