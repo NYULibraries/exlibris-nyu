@@ -3,23 +3,25 @@ module Exlibris
     module Source
       require 'exlibris-aleph'
       ##
-      # NyuAleph is an Exlibris::Primo::Source::Aleph that expands Primo holdings
+      # NyuAleph is an Exlibris::Primo::Holding that expands Primo holdings
       # based on the Aleph items return from the Aleph REST APIs.
       # It stores metadata from these items in the source data attribute
       # that can be used by custom controllers to extend patron services,
       # including request and paging functionality.
       # NyuAleph also provides coverage metadata based on bib and holdings
-      # information from the Aleph bib and holdings REST APIs.
+      # information from the Aleph record and holdings REST APIs.
       #
       class NyuAleph < Exlibris::Primo::Source::Aleph
 
-        # Overwrites Exlibris::Primo::Source::Aleph#new
+        attr_reader :aleph_item
+
+        # Overwrites Exlibris::Primo::Holding
         def initialize(attributes={})
-          @aleph_holding = attributes[:aleph_holding]
+          @aleph_item = attributes[:aleph_item]
           super(attributes)
         end
 
-        # Overrides Exlibris::Primo::Source::Aleph#expand
+        # Overrides Exlibris::Primo::Holding
         def expand
           (expanding?) ? expanded_holdings : super
         end
@@ -38,72 +40,62 @@ module Exlibris
 
         # Is this Holding from Aleph?
         def from_aleph?
-          !@aleph_holding.nil?
+          !aleph_item.nil?
         end
         alias_method :expanded?, :from_aleph?
         alias_method :from_aleph, :from_aleph?
 
-        # Overrides Exlibris::Primo::Source::Holding#institution_code
+        # Overrides Exlibris::Primo::Source::Aleph#institution_code
         # based on the source config settings
         # 
         # This is necessary since we are expanding from a source that may
         # not have the same institution
         def institution_code
-          (from_aleph?) ? @aleph_holding.institution : super
+          (from_aleph?) ? aleph_item.institution : super
         end
 
-        # Overrides Exlibris::Primo::Source::Aleph#sub_library based
-        # on the Aleph holding
-        #   library -> sub_library -> super -> library
-        def sub_library
-          (from_aleph?) ? @aleph_holding.sub_library : super
-        end
-
-        # Overrides Exlibris::Primo::Source::Aleph#sub_library based
-        # on the expanded source data
+        # Overrides Exlibris::Primo::Source::Aleph#sub_library_code to return
+        # based on the Aleph item
         def sub_library_code
-          (from_aleph?) ? source_data[:sub_library_code] : (super || library_code)
+          (from_aleph?) ? sub_library.code : (super || library_code)
         end
 
-        # Overrides Exlibris::Primo::Holding#library to return
-        # based on the Aleph holding
         def library
-          (from_aleph?) ? @aleph_holding.sub_library : super
+          (sub_library || super)
         end
 
-        # Overrides Exlibris::Primo::Holding#collection to return
-        # based on the Aleph holding
+        # Overrides Exlibris::Primo::Source::Aleph#sub_library to return
+        # based on the Aleph item
+        def sub_library
+          (from_aleph?) ? aleph_item.sub_library : translator.sub_library
+        end
+
+        # Overrides Exlibris::Primo::Source::Aleph#collection to return
+        # based on the Aleph item
         def collection
-          (from_aleph?) ? @aleph_holding.collection : super
+          (from_aleph?) ? aleph_item.collection : super
         end
 
-        # Overrides Exlibris::Primo::Holding#call_number to return
-        # based on the Aleph holding
+        # Overrides Exlibris::Primo::Source::Aleph#call_number to return
+        # based on the Aleph item
         def call_number
-          (from_aleph?) ? @aleph_holding.call_number : super
+          (from_aleph?) ? aleph_item.call_number : super
         end
 
-        # Overrides Exlibris::Primo::Holding#availability_status_code
-        def availability_status_code
-          (from_aleph?) ? @aleph_holding.status : super
+        # Overrides Exlibris::Primo::Holding#status to return
+        # based on the Aleph item
+        def status
+          (from_aleph?) ? aleph_item.status : super
         end
-        alias :status_code :availability_status_code
 
-        # Overrides Exlibris::Primo::Holding#availability_status
-        def availability_status
-          (from_aleph?) ? @aleph_holding.status_display : super
-        end
-        alias :availability :availability_status
-        alias :status :availability_status
-
-        # It's only requestable if we're expanding the holdings
-        # and then defer to the holding
+        # It's only requestable if we're expanding and it's
+        # from Aleph and then defer to the Aleph item
         def requestability
           @requestability ||= begin
-            unless expanding?
-              Exlibris::Nyu::Holding::Requestability::NO
+            unless expanding? && from_aleph?
+              Exlibris::Nyu::Aleph::Requestability::NO
             else
-              @aleph_holding.requestability
+              aleph_item.requestability
             end
           end
         end
@@ -132,37 +124,27 @@ module Exlibris
         # Get expanded holdings based on Aleph items.
         def expanded_holdings
           @expanded_holdings ||= items.map do |item|
-            aleph_holding = Exlibris::Nyu::Holding.from_aleph(item)
-            source_data = {
-              original_source_id: original_source_id,
-              source_record_id: source_record_id,
-              adm_library: aleph_holding.extras[:adm_library],
-              sub_library_code: aleph_holding.extras[:sub_library_code],
-              collection_code: aleph_holding.extras[:collection_code],
-              item_status_code: aleph_holding.extras[:item_status_code],
-              item_process_status_code: aleph_holding.extras[:item_process_status_code],
-              item_id: aleph_holding.extras[:item_id],
-              item_status: aleph_holding.extras[:item_status]
-            }
-            self.class.new({holding: self, aleph_holding: aleph_holding, source_data: source_data})
+            aleph_item = Exlibris::Nyu::Aleph::Item.new(item)
+            source_data = { item_id: aleph_item.id }
+            self.class.new({holding: self, aleph_item: aleph_item, source_data: source_data})
           end
+        end
+
+        def translator
+          @translator ||= Exlibris::Nyu::Aleph::Translator.new(sub_library_code)
         end
 
         # Get Aleph record
         def record
-          @record ||=
-            Exlibris::Aleph::Record.new(bib_library: original_source_id, record_id: source_record_id)
+          @record ||= Exlibris::Aleph::Record.new(ils_api_id)
         end
 
-        # Returns nil if we get an error, e.g. Aleph is down
-        def marc_bib
-          @marc_bib ||= record.bib
-        rescue
-          nil
+        def record_metadata
+          @record_metadata ||= record.metadata
         end
 
         # Returns an empty array if we get an error, e.g. Aleph is down
-        def marc_holdings
+        def holdings
           @marc_holdings ||= record.holdings
         rescue
           []
@@ -171,14 +153,15 @@ module Exlibris
         # Returns an empty array if we get an error, e.g. Aleph is down
         def items
           @items ||= record.items
-        rescue
-          []
+        # rescue
+        #   []
         end
 
         # Coverage::Statement from Aleph bib
         def bib_coverage
           if @holdings_coverage.nil?
-            @bib_coverage ||= Exlibris::Nyu::Coverage::Statement.from_marc_bib(sub_library_code, marc_bib)
+            @bib_coverage ||=
+              Exlibris::Nyu::Coverage::Statement.from_record_metadata(sub_library, record_metadata)
           end
         end
 
@@ -186,7 +169,7 @@ module Exlibris
         def holdings_coverage
           if @bib_coverage.nil?
             @holdings_coverage ||= 
-              Exlibris::Nyu::Coverage::Statement.from_marc_holdings(sub_library_code, marc_holdings)
+              Exlibris::Nyu::Coverage::Statement.from_holdings(sub_library, holdings)
           end
         end
       end
