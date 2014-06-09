@@ -2,7 +2,6 @@ module Exlibris
   module Primo
     module Source
       require 'exlibris-aleph'
-      require 'nokogiri'
       ##
       # NyuAlephReserves is an Exlibris::Primo::Source::NyuAleph that
       # overrides availability and collection to provide specific
