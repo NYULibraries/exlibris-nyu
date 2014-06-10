@@ -1,6 +1,6 @@
 require 'coveralls'
 Coveralls.wear_merged!
-require 'test/unit'
+require 'minitest/autorun'
 require File.expand_path("../../lib/exlibris-nyu.rb",  __FILE__)
 require 'pry'
 
@@ -34,7 +34,7 @@ end
 
 # Add Exlibris::Primo::Search to TestCase
 # so we can search Primo.
-class Test::Unit::TestCase
+class ActiveSupport::TestCase
   def exlibris_primo_search
     Exlibris::Primo::Search.new
   end
