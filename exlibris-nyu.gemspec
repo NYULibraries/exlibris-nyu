@@ -19,13 +19,12 @@ Gem::Specification.new do |s|
 
   s.add_dependency "require_all", "~> 1.3"
   s.add_dependency "exlibris-primo", "~> 1.1.2"
-  s.add_dependency "exlibris-aleph", "~> 1.1.0"
-  s.add_dependency "nokogiri", "~> 1.6"
+  # s.add_dependency "exlibris-aleph", "~> 1.1.0"
 
-  s.add_development_dependency "rake", "~> 10.1.0"
-  s.add_development_dependency "rdoc"
-  s.add_development_dependency "rspec", "~> 2.14"
-  s.add_development_dependency "vcr", "~> 2.8"
-  s.add_development_dependency "webmock", "~> 1.17"
-  s.add_development_dependency "pry", "~> 0.9.12"
+  s.add_development_dependency 'rake', '~> 10.3'
+  s.add_development_dependency 'rspec', '~> 2.14'
+  s.add_development_dependency 'activesupport', '~> 4.1.1'
+  s.add_development_dependency 'vcr', '~> 2.9'
+  s.add_development_dependency 'webmock', '~> 1.17'
+  s.add_development_dependency 'pry', "~> 0.9.12"
 end
