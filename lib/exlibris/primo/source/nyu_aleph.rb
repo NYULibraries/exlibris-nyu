@@ -153,8 +153,8 @@ module Exlibris
         # Returns an empty array if we get an error, e.g. Aleph is down
         def items
           @items ||= record.items
-        # rescue
-        #   []
+        rescue
+          []
         end
 
         # Coverage::Statement from Aleph bib
