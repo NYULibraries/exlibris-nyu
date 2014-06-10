@@ -125,7 +125,7 @@ module Exlibris
         def expanded_holdings
           @expanded_holdings ||= items.map do |item|
             aleph_item = Exlibris::Nyu::Aleph::Item.new(item)
-            source_data = { item_id: aleph_item.id }
+            source_data = {item_id: aleph_item.id}
             self.class.new({holding: self, aleph_item: aleph_item, source_data: source_data})
           end
         end
