@@ -57,10 +57,36 @@ module Exlibris
           subject { item.id }
           it { should eq 'NYU50000980206000010' }
         end
-        context 'when initialized with a record item argument which is not an Exlibris::Aleph::Item' do
+        context 'when initialized with an item argument which is not an Exlibris::Aleph::Item' do
           let(:record_item) { 'invalid' }
           it 'should raise an ArgumentError' do
             expect { subject }.to raise_error ArgumentError
+          end
+        end
+        context 'when initialized with an item argument which is an Exlibris::Aleph::Item' do
+          context 'but the Item is not valid' do
+            let(:item_id) { 'ADM50' }
+            let(:record_item) { Exlibris::Aleph::Item.new(record_id, item_id) }
+            describe '#sub_library' do
+              subject { item.sub_library }
+              it { should be_nil }
+            end
+            describe '#collection' do
+              subject { item.collection }
+              it { should be_nil }
+            end
+            describe '#call_number' do
+              subject { item.call_number }
+              it { should be_nil }
+            end
+            describe '#status' do
+              subject { item.status }
+              it { should be_nil }
+            end
+            describe '#requestability' do
+              subject { item.requestability }
+              it { should eq Requestability::NO }
+            end
           end
         end
       end

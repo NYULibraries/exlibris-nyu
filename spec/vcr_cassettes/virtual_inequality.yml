@@ -354,4 +354,38 @@ http_interactions:
         does not exist</reply-text><reply-code>0019</reply-code></get-record> '
     http_version: 
   recorded_at: Thu, 22 May 2014 18:26:24 GMT
+- request:
+    method: get
+    uri: http://aleph.library.edu:1891/rest-dlf/record/NYU01000980206/items/ADM50
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.8.9
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      X-Powered-By:
+      - Servlet 2.5; JBoss-5.0/JBossWeb-2.1
+      Content-Type:
+      - application/xml
+      Transfer-Encoding:
+      - chunked
+      Date:
+      - Tue, 10 Jun 2014 18:30:07 GMT
+    body:
+      encoding: US-ASCII
+      string: ! '<?xml version = "1.0" encoding = "UTF-8"?><get-item><reply-text>Item
+        does not exist</reply-text><reply-code>0027</reply-code></get-item> '
+    http_version: 
+  recorded_at: Tue, 10 Jun 2014 18:30:07 GMT
 recorded_with: VCR 2.9.0

@@ -13,16 +13,24 @@ module Exlibris
             raise ArgumentError.new("Expecting #{item} to be an Exlibris::Aleph::Item")
           end
           @item = item
-          @sub_library = collection.sub_library
-          @institution = SubLibraryInstitution.new(sub_library).institution
+          unless collection.nil?
+            @sub_library = collection.sub_library
+          end
+          unless sub_library.nil?
+            @institution = SubLibraryInstitution.new(sub_library).institution
+          end
         end
 
         def call_number
-          @call_number ||= CallNumber.new(item.call_number)
+          unless item.call_number.nil?
+            @call_number ||= CallNumber.new(item.call_number)
+          end
         end
 
         def status
-          @status ||= Status.new(item.circulation_status)
+          unless item.circulation_status.nil?
+            @status ||= Status.new(item.circulation_status)
+          end
         end
 
         # The "requestability" of the holding, i.e. under what
@@ -33,7 +41,7 @@ module Exlibris
         # object do the work
         def requestability
           @requestability ||= begin
-            if (status.reshelving?)
+            if (status.nil? || status.reshelving? || privileges.nil?)
               Nyu::Aleph::Requestability::NO
             else
               Nyu::Aleph::Requestability.new(privileges).to_s
@@ -43,7 +51,9 @@ module Exlibris
 
         private
         def privileges
-          @privileges ||= circulation_policy.privileges
+          unless circulation_policy.nil?
+            @privileges ||= circulation_policy.privileges
+          end
         end
 
         def circulation_policy
