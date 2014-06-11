@@ -88,6 +88,17 @@ module Exlibris
           (from_aleph?) ? aleph_item.status : super
         end
 
+        # The OPAC note if it's from Aleph
+        def opac_note
+          (from_aleph?) ? aleph_item.opac_note : nil
+        end
+
+        # The number of requests on the item
+        # 0 if it's not from Aleph
+        def number_of_requests
+          (from_aleph?) ? aleph_item.queue.number_of_requests : 0
+        end
+
         # It's only requestable if we're expanding and it's
         # from Aleph and then defer to the Aleph item
         def requestability

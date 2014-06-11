@@ -147,6 +147,17 @@ module Exlibris
               expect("#{subject}").to eq '(HN49.I56 M67 2003)'
             end
           end
+          describe '#opac_note' do
+            subject { nyu_aleph.opac_note }
+            it { should be_an Exlibris::Aleph::Item::OpacNote }
+            it 'should equal "OPAC Note"' do
+              expect("#{subject}").to eq 'OPAC Note'
+            end
+          end
+          describe '#number_of_requests' do
+            subject { nyu_aleph.number_of_requests }
+            it { should eq 1 }
+          end
           describe '#status' do
             subject { nyu_aleph.status }
             context 'when expanded from Aleph' do
@@ -297,6 +308,14 @@ module Exlibris
               it { should_not be_nil }
               it { should eq 'no' }
             end
+            describe '#opac_note' do
+              subject { nyu_aleph.opac_note }
+              it { should be_nil }
+            end
+            describe '#number_of_requests' do
+              subject { nyu_aleph.number_of_requests }
+              it { should eq 0 }
+            end
             describe '#expand' do
               subject { nyu_aleph.expand }
               it 'should not raise an error' do
@@ -436,6 +455,17 @@ module Exlibris
                 it 'should equal "Due: 06/28/14' do
                   expect("#{subject}").to eq 'Due: 06/28/14'
                 end
+              end
+              describe '#opac_note' do
+                subject { expanded_nyu_aleph.opac_note }
+                it { should be_an Exlibris::Aleph::Item::OpacNote }
+                it 'should equal "OPAC Note' do
+                  expect("#{subject}").to eq 'OPAC Note'
+                end
+              end
+              describe '#number_of_requests' do
+                subject { expanded_nyu_aleph.number_of_requests }
+                it { should eq 1 }
               end
               describe '#requestability' do
                 subject { expanded_nyu_aleph.requestability }
