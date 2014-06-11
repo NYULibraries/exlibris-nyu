@@ -9,8 +9,7 @@ require 'pry'
 
 # Use the included testmnt for testing.
 Exlibris::Aleph.configure do |config|
-  config.tab_path = "#{File.dirname(__FILE__)}/../test/mnt/aleph_tab" if ENV['CI']
-  config.yml_path = "#{File.dirname(__FILE__)}/../spec/config/aleph" if ENV['CI']
+  config.table_path = "#{File.dirname(__FILE__)}/../test/mnt/aleph_tab" if ENV['CI']
 end
 
 def aleph_url
