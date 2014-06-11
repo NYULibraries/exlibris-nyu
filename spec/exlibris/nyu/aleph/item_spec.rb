@@ -39,6 +39,20 @@ module Exlibris
             expect("#{subject}").to eq 'Due: 06/28/14'
           end
         end
+        describe '#opac_note' do
+          subject { item.opac_note }
+          it { should be_a Exlibris::Aleph::Item::OpacNote }
+          it 'should equal "OPAC Note"' do
+            expect("#{subject}").to eq 'OPAC Note'
+          end
+        end
+        describe '#queue' do
+          subject { item.queue }
+          it { should be_a Exlibris::Aleph::Item::Queue }
+          it 'should equal "1 request(s) of 1 items."' do
+            expect("#{subject}").to eq '1 request(s) of 1 items.'
+          end
+        end
         describe '#requestability' do
           subject { item.requestability }
           it { should eq Requestability::DEFERRED }

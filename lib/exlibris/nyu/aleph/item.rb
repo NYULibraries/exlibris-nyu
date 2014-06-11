@@ -4,7 +4,7 @@ module Exlibris
       class Item
 
         extend Forwardable
-        def_delegators :item, :id, :collection
+        def_delegators :item, :id, :collection, :opac_note, :queue
 
         attr_reader :item, :institution, :sub_library
 
