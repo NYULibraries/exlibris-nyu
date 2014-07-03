@@ -1,12 +1,12 @@
 require 'coveralls'
-Coveralls.wear!
-require 'test/unit'
+Coveralls.wear_merged!
+require 'minitest/autorun'
 require File.expand_path("../../lib/exlibris-nyu.rb",  __FILE__)
+require 'pry'
 
 # Use the included testmnt for testing.
 Exlibris::Aleph.configure do |config|
-  config.tab_path = "#{File.dirname(__FILE__)}/../test/mnt/aleph_tab" if ENV['CI']
-  config.yml_path = "#{File.dirname(__FILE__)}/../test/config/aleph" if ENV['CI']
+  config.table_path = "#{File.dirname(__FILE__)}/../test/mnt/aleph_tab" if ENV['CI']
 end
 
 # VCR is used to 'record' HTTP interactions with
@@ -33,7 +33,7 @@ end
 
 # Add Exlibris::Primo::Search to TestCase
 # so we can search Primo.
-class Test::Unit::TestCase
+class ActiveSupport::TestCase
   def exlibris_primo_search
     Exlibris::Primo::Search.new
   end

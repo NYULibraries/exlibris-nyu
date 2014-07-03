@@ -35,7 +35,7 @@ http_interactions:
       Transfer-Encoding:
       - chunked
       Date:
-      - Thu, 20 Feb 2014 19:43:40 GMT
+      - Tue, 10 Jun 2014 13:31:11 GMT
     body:
       encoding: US-ASCII
       string: ! "<?xml version=\"1.0\" encoding=\"UTF-8\"?><soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"
@@ -97,12 +97,12 @@ http_interactions:
         formation that examines the intersection of race, class and gender&quot;--&lt;/description&gt;\n
         \               &lt;language&gt;eng&lt;/language&gt;\n                &lt;source&gt;nyu_aleph&lt;/source&gt;\n
         \               &lt;availlibrary&gt;$$INYU$$LBOBST$$1Main Collection$$2(GN640
-        .C66 2014 )$$Savailable$$31$$40$$5N$$60$$XNYU50$$YBOBST$$ZMAIN&lt;/availlibrary&gt;\n
-        \               &lt;availlibrary&gt;$$INYUAD$$LNABUD$$1Annex Collection$$2(GN640
-        .C66 2014 )$$Sunavailable$$31$$41$$5N$$60$$XNYU51$$YNADEX$$ZOFFAD&lt;/availlibrary&gt;\n
+        .C66 2014 )$$Savailable$$31$$40$$5N$$66$$XNYU50$$YBOBST$$ZMAIN&lt;/availlibrary&gt;\n
+        \               &lt;availlibrary&gt;$$INYUAD$$LNABUD$$1Main Collection$$2(GN640
+        .C66 2014 )$$Savailable$$32$$41$$5N$$62$$XNYU51$$YNABUD$$ZMAIN&lt;/availlibrary&gt;\n
         \               &lt;lds02&gt;nyu_aleph003921627&lt;/lds02&gt;\n                &lt;lds01&gt;NYU&lt;/lds01&gt;\n
         \               &lt;lds01&gt;NYUAD&lt;/lds01&gt;\n                &lt;availinstitution&gt;$$INYU$$Savailable&lt;/availinstitution&gt;\n
-        \               &lt;availinstitution&gt;$$INYUAD$$Sunavailable&lt;/availinstitution&gt;\n
+        \               &lt;availinstitution&gt;$$INYUAD$$Savailable&lt;/availinstitution&gt;\n
         \               &lt;availpnx&gt;available&lt;/availpnx&gt;\n              &lt;/display&gt;\n
         \             &lt;links&gt;\n                &lt;openurl&gt;$$Topenurl_journal&lt;/openurl&gt;\n
         \               &lt;backlink&gt;$$Taleph_backlink$$DMore bibliographic information&lt;/backlink&gt;\n
@@ -170,12 +170,12 @@ http_interactions:
         \               &lt;isbn&gt;0520280105&lt;/isbn&gt;\n                &lt;rsrctype&gt;book&lt;/rsrctype&gt;\n
         \               &lt;creationdate&gt;2014&lt;/creationdate&gt;\n                &lt;searchscope&gt;BOBST&lt;/searchscope&gt;\n
         \               &lt;searchscope&gt;BOBST Main Collection&lt;/searchscope&gt;\n
-        \               &lt;searchscope&gt;NADEX&lt;/searchscope&gt;\n                &lt;searchscope&gt;NADEX
-        Annex Collection&lt;/searchscope&gt;\n                &lt;searchscope&gt;nyu_aleph&lt;/searchscope&gt;\n
+        \               &lt;searchscope&gt;NABUD&lt;/searchscope&gt;\n                &lt;searchscope&gt;NABUD
+        Main Collection&lt;/searchscope&gt;\n                &lt;searchscope&gt;nyu_aleph&lt;/searchscope&gt;\n
         \               &lt;searchscope&gt;NYU&lt;/searchscope&gt;\n                &lt;searchscope&gt;NYUAD&lt;/searchscope&gt;\n
         \               &lt;scope&gt;BOBST&lt;/scope&gt;\n                &lt;scope&gt;BOBST
-        Main Collection&lt;/scope&gt;\n                &lt;scope&gt;NADEX&lt;/scope&gt;\n
-        \               &lt;scope&gt;NADEX Annex Collection&lt;/scope&gt;\n                &lt;scope&gt;nyu_aleph&lt;/scope&gt;\n
+        Main Collection&lt;/scope&gt;\n                &lt;scope&gt;NABUD&lt;/scope&gt;\n
+        \               &lt;scope&gt;NABUD Main Collection&lt;/scope&gt;\n                &lt;scope&gt;nyu_aleph&lt;/scope&gt;\n
         \               &lt;scope&gt;NYU&lt;/scope&gt;\n                &lt;scope&gt;NYUAD&lt;/scope&gt;\n
         \               &lt;lsr01&gt;GN640 .C66 2014&lt;/lsr01&gt;\n                &lt;lsr01&gt;GN640.C66
         2014&lt;/lsr01&gt;\n                &lt;lsr02&gt;University of California
@@ -194,13 +194,12 @@ http_interactions:
         \               &lt;prefilter&gt;books&lt;/prefilter&gt;\n                &lt;rsrctype&gt;books&lt;/rsrctype&gt;\n
         \               &lt;creatorcontrib&gt;Cooke, M&lt;/creatorcontrib&gt;\n                &lt;library&gt;BOBST&lt;/library&gt;\n
         \               &lt;library&gt;NYUAD&lt;/library&gt;\n                &lt;lfc01&gt;Main
-        Collection&lt;/lfc01&gt;\n                &lt;lfc01&gt;Annex Collection&lt;/lfc01&gt;\n
-        \               &lt;classificationlcc&gt;G - Geography. Anthropology. Recreation.&#x2013;Anthropology&#x2013;Ethnology.
-        Social and cultural anthropology&#x2013;Ethnic groups and races&#x2013;By
-        region or country&lt;/classificationlcc&gt;\n                &lt;frbrgroupid&gt;110968757&lt;/frbrgroupid&gt;\n
-        \               &lt;frbrtype&gt;6&lt;/frbrtype&gt;\n              &lt;/facets&gt;\n
-        \             &lt;dedup&gt;\n                &lt;t&gt;1&lt;/t&gt;\n                &lt;c1&gt;2013019649&lt;/c1&gt;\n
-        \               &lt;c2&gt;9780520280090;0520280091;9780520280106;0520280105&lt;/c2&gt;\n
+        Collection&lt;/lfc01&gt;\n                &lt;classificationlcc&gt;G - Geography.
+        Anthropology. Recreation.&#x2013;Anthropology&#x2013;Ethnology. Social and
+        cultural anthropology&#x2013;Ethnic groups and races&#x2013;By region or country&lt;/classificationlcc&gt;\n
+        \               &lt;frbrgroupid&gt;110968757&lt;/frbrgroupid&gt;\n                &lt;frbrtype&gt;6&lt;/frbrtype&gt;\n
+        \             &lt;/facets&gt;\n              &lt;dedup&gt;\n                &lt;t&gt;1&lt;/t&gt;\n
+        \               &lt;c1&gt;2013019649&lt;/c1&gt;\n                &lt;c2&gt;9780520280090;0520280091;9780520280106;0520280105&lt;/c2&gt;\n
         \               &lt;c3&gt;tribalmodernbrandinghearabgulf&lt;/c3&gt;\n                &lt;c4&gt;2014&lt;/c4&gt;\n
         \               &lt;f1&gt;2013019649&lt;/f1&gt;\n                &lt;f3&gt;9780520280090;0520280091;9780520280106;0520280105&lt;/f3&gt;\n
         \               &lt;f5&gt;tribalmodernbrandinghearabgulf&lt;/f5&gt;\n                &lt;f6&gt;2014&lt;/f6&gt;\n
@@ -261,19 +260,25 @@ http_interactions:
         come from the social sciences. Tribal Modern looks at cultural indices of
         local self-assertion. It provides a cultural analysis of Gulf Arab social
         formation that examines the intersection of race, class and gender&quot;--&lt;/abstract&gt;\n
-        \               &lt;lccn&gt;2013019649&lt;/lccn&gt;\n                &lt;lad01&gt;BOBSTNADEX&lt;/lad01&gt;\n
+        \               &lt;lccn&gt;2013019649&lt;/lccn&gt;\n                &lt;lad01&gt;BOBSTNABUDNABUD&lt;/lad01&gt;\n
         \               &lt;lad01&gt;Physical Item&lt;/lad01&gt;\n              &lt;/addata&gt;\n
         \           &lt;/record&gt;\n          &lt;/PrimoNMBib&gt;\n        &lt;/DOC&gt;\n
         \     &lt;/DOCSET&gt;\n    &lt;/RESULT&gt;\n  &lt;/JAGROOT&gt;\n&lt;/SEGMENTS&gt;</getRecordReturn></ns1:getRecordResponse></soapenv:Body></soapenv:Envelope>"
     http_version: 
-  recorded_at: Thu, 20 Feb 2014 19:43:42 GMT
+  recorded_at: Tue, 10 Jun 2014 13:31:12 GMT
 - request:
     method: get
-    uri: http://aleph.library.edu:1891/rest-dlf/record/NYU01003921627/items?view=full
+    uri: http://aleph.library.edu:1891/rest-dlf/record/NYU01003921627/items
     body:
       encoding: US-ASCII
       string: ''
-    headers: {}
+    headers:
+      User-Agent:
+      - Faraday v0.8.9
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
   response:
     status:
       code: 200
@@ -288,28 +293,136 @@ http_interactions:
       Transfer-Encoding:
       - chunked
       Date:
-      - Thu, 20 Feb 2014 19:43:41 GMT
+      - Tue, 10 Jun 2014 13:31:11 GMT
     body:
       encoding: US-ASCII
       string: ! '<?xml version = "1.0" encoding = "UTF-8"?><get-item-list><reply-text>ok</reply-text><reply-code>0000</reply-code><items><item
-        href="http://aleph.library.edu:1891/rest-dlf/record/NYU01003921627/items/NYU50003921627000010"><z30-sub-library-code>BOBST</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>01</z30-item-status-code><z30-collection-code>MAIN</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>003921627</z30-doc-number><z30-item-sequence>    1.0</z30-item-sequence><z30-barcode>31142055560257</z30-barcode><z30-sub-library>NYU
+        href="http://aleph.library.edu:1891/rest-dlf/record/NYU01003921627/items/NYU50003921627000010"></item><item
+        href="http://aleph.library.edu:1891/rest-dlf/record/NYU01003921627/items/NYU51003921627000010"></item><item
+        href="http://aleph.library.edu:1891/rest-dlf/record/NYU01003921627/items/NYU51003921627000020"></item></items></get-item-list> '
+    http_version: 
+  recorded_at: Tue, 10 Jun 2014 13:31:12 GMT
+- request:
+    method: get
+    uri: http://aleph.library.edu:1891/rest-dlf/record/NYU01003921627/items/NYU50003921627000010
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.8.9
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      X-Powered-By:
+      - Servlet 2.5; JBoss-5.0/JBossWeb-2.1
+      Content-Type:
+      - application/xml
+      Transfer-Encoding:
+      - chunked
+      Date:
+      - Tue, 10 Jun 2014 13:31:11 GMT
+    body:
+      encoding: US-ASCII
+      string: ! '<?xml version = "1.0" encoding = "UTF-8"?><get-item><reply-text>ok</reply-text><reply-code>0000</reply-code><item><z30-sub-library-code>BOBST</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>01</z30-item-status-code><z30-collection-code>MAIN</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU50</translate-change-active-library><z30-doc-number>003921627</z30-doc-number><z30-item-sequence>    1.0</z30-item-sequence><z30-barcode>31142055560257</z30-barcode><z30-sub-library>NYU
         Bobst</z30-sub-library><z30-material>Books</z30-material><z30-item-status>Regular
-        loan</z30-item-status><z30-open-date>20140118</z30-open-date><z30-update-date>20140203</z30-update-date><z30-cataloger>LIYU</z30-cataloger><z30-date-last-return>20140206</z30-date-last-return><z30-hour-last-return>1119</z30-hour-last-return><z30-ip-last-return>BOBSTSTACKSLAPTOP</z30-ip-last-return><z30-no-loans>000</z30-no-loans><z30-alpha>L</z30-alpha><z30-collection>Main
+        loan</z30-item-status><z30-open-date>20140118</z30-open-date><z30-update-date>20140203</z30-update-date><z30-cataloger>LIYU</z30-cataloger><z30-date-last-return>20140601</z30-date-last-return><z30-hour-last-return>1231</z30-hour-last-return><z30-ip-last-return>128.122.88.117</z30-ip-last-return><z30-no-loans>006</z30-no-loans><z30-alpha>L</z30-alpha><z30-collection>Main
         Collection</z30-collection><z30-call-no-type>0</z30-call-no-type><z30-call-no>GN640
         .C66 2014</z30-call-no><z30-call-no-key>0 gn&quot;640 c66 2014</z30-call-no-key><z30-call-no-2-type></z30-call-no-2-type><z30-call-no-2></z30-call-no-2><z30-call-no-2-key></z30-call-no-2-key><z30-description></z30-description><z30-note-opac></z30-note-opac><z30-note-circulation></z30-note-circulation><z30-note-internal></z30-note-internal><z30-order-number>20144126</z30-order-number><z30-inventory-number></z30-inventory-number><z30-inventory-number-date>00000000</z30-inventory-number-date><z30-last-shelf-report-date>00000000</z30-last-shelf-report-date><z30-price>53.30</z30-price><z30-shelf-report-number></z30-shelf-report-number><z30-on-shelf-date>00000000</z30-on-shelf-date><z30-on-shelf-seq>000000</z30-on-shelf-seq><z30-doc-number-2>000000000</z30-doc-number-2><z30-schedule-sequence-2>00000</z30-schedule-sequence-2><z30-copy-sequence-2>00000</z30-copy-sequence-2><z30-vendor-code></z30-vendor-code><z30-invoice-number></z30-invoice-number><z30-line-number>00000</z30-line-number><z30-pages></z30-pages><z30-issue-date>00000000</z30-issue-date><z30-expected-arrival-date>00000000</z30-expected-arrival-date><z30-arrival-date>00000000</z30-arrival-date><z30-item-statistic>c</z30-item-statistic><z30-item-process-status>Not
-        in Process</z30-item-process-status><z30-copy-id></z30-copy-id><z30-hol-doc-number>004848316</z30-hol-doc-number><z30-temp-location>No</z30-temp-location><z30-enumeration-a></z30-enumeration-a><z30-enumeration-b></z30-enumeration-b><z30-enumeration-c></z30-enumeration-c><z30-enumeration-d></z30-enumeration-d><z30-enumeration-e></z30-enumeration-e><z30-enumeration-f></z30-enumeration-f><z30-enumeration-g></z30-enumeration-g><z30-enumeration-h></z30-enumeration-h><z30-chronological-i></z30-chronological-i><z30-chronological-j></z30-chronological-j><z30-chronological-k></z30-chronological-k><z30-chronological-l></z30-chronological-l><z30-chronological-m></z30-chronological-m><z30-supp-index-o></z30-supp-index-o><z30-85x-type></z30-85x-type><z30-depository-id></z30-depository-id><z30-linking-number>000000000</z30-linking-number><z30-gap-indicator></z30-gap-indicator><z30-maintenance-count>000</z30-maintenance-count><z30-process-status-date>20140204</z30-process-status-date></z30><z13><translate-change-active-library>NYU50</translate-change-active-library><z13-doc-number>003921627</z13-doc-number><z13-year>2014</z13-year><z13-open-date>20140118</z13-open-date><z13-update-date>20140212</z13-update-date><z13-call-no-key></z13-call-no-key><z13-call-no-code>LOC0</z13-call-no-code><z13-call-no>GN640</z13-call-no><z13-author-code>1001</z13-author-code><z13-author>Cooke,
+        in Process</z30-item-process-status><z30-copy-id></z30-copy-id><z30-hol-doc-number>004848316</z30-hol-doc-number><z30-temp-location>No</z30-temp-location><z30-enumeration-a></z30-enumeration-a><z30-enumeration-b></z30-enumeration-b><z30-enumeration-c></z30-enumeration-c><z30-enumeration-d></z30-enumeration-d><z30-enumeration-e></z30-enumeration-e><z30-enumeration-f></z30-enumeration-f><z30-enumeration-g></z30-enumeration-g><z30-enumeration-h></z30-enumeration-h><z30-chronological-i></z30-chronological-i><z30-chronological-j></z30-chronological-j><z30-chronological-k></z30-chronological-k><z30-chronological-l></z30-chronological-l><z30-chronological-m></z30-chronological-m><z30-supp-index-o></z30-supp-index-o><z30-85x-type></z30-85x-type><z30-depository-id></z30-depository-id><z30-linking-number>000000000</z30-linking-number><z30-gap-indicator></z30-gap-indicator><z30-maintenance-count>003</z30-maintenance-count><z30-process-status-date>20140204</z30-process-status-date></z30><z13><translate-change-active-library>NYU50</translate-change-active-library><z13-doc-number>003921627</z13-doc-number><z13-year>2014</z13-year><z13-open-date>20140118</z13-open-date><z13-update-date>20140318</z13-update-date><z13-call-no-key></z13-call-no-key><z13-call-no-code>LOC0</z13-call-no-code><z13-call-no>GN640</z13-call-no><z13-author-code>1001</z13-author-code><z13-author>Cooke,
         Miriam.</z13-author><z13-title-code>24510</z13-title-code><z13-title>Tribal
         modern :</z13-title><z13-imprint-code></z13-imprint-code><z13-imprint></z13-imprint><z13-isbn-issn-code>020</z13-isbn-issn-code><z13-isbn-issn>9780520280090
-        (hardback)</z13-isbn-issn></z13><status>On Shelf</status></item><item href="http://aleph.library.edu:1891/rest-dlf/record/NYU01003921627/items/NYU51003921627000010"><z30-sub-library-code>NADEX</z30-sub-library-code><z30-item-process-status-code>PT</z30-item-process-status-code><z30-item-status-code>01</z30-item-status-code><z30-collection-code>OFFAD</z30-collection-code><queue>1
-        request(s) of 1 items.</queue><z30><translate-change-active-library>NYU51</translate-change-active-library><z30-doc-number>003921627</z30-doc-number><z30-item-sequence>    1.0</z30-item-sequence><z30-barcode>31122057455268</z30-barcode><z30-sub-library>NYU
-        Abu Dhabi (UAE) Annex</z30-sub-library><z30-material>Books</z30-material><z30-item-status>In
-        Processing</z30-item-status><z30-open-date>20140118</z30-open-date><z30-update-date>20140215</z30-update-date><z30-cataloger>NWASIKEN</z30-cataloger><z30-date-last-return>00000000</z30-date-last-return><z30-hour-last-return>0000</z30-hour-last-return><z30-ip-last-return></z30-ip-last-return><z30-no-loans>000</z30-no-loans><z30-alpha>L</z30-alpha><z30-collection>Annex
-        Collection</z30-collection><z30-call-no-type>0</z30-call-no-type><z30-call-no>GN640
-        .C66 2014</z30-call-no><z30-call-no-key>0 gn&quot;640 c66 2014</z30-call-no-key><z30-call-no-2-type></z30-call-no-2-type><z30-call-no-2></z30-call-no-2><z30-call-no-2-key></z30-call-no-2-key><z30-description></z30-description><z30-note-opac></z30-note-opac><z30-note-circulation></z30-note-circulation><z30-note-internal></z30-note-internal><z30-order-number>NYUAD2014206</z30-order-number><z30-inventory-number></z30-inventory-number><z30-inventory-number-date>00000000</z30-inventory-number-date><z30-last-shelf-report-date>00000000</z30-last-shelf-report-date><z30-price>24.56</z30-price><z30-shelf-report-number></z30-shelf-report-number><z30-on-shelf-date>00000000</z30-on-shelf-date><z30-on-shelf-seq>000000</z30-on-shelf-seq><z30-doc-number-2>000000000</z30-doc-number-2><z30-schedule-sequence-2>00000</z30-schedule-sequence-2><z30-copy-sequence-2>00000</z30-copy-sequence-2><z30-vendor-code></z30-vendor-code><z30-invoice-number></z30-invoice-number><z30-line-number>00000</z30-line-number><z30-pages></z30-pages><z30-issue-date>00000000</z30-issue-date><z30-expected-arrival-date>00000000</z30-expected-arrival-date><z30-arrival-date>00000000</z30-arrival-date><z30-item-statistic>c</z30-item-statistic><z30-item-process-status>Post-TSD
-        In transit</z30-item-process-status><z30-copy-id></z30-copy-id><z30-hol-doc-number>004847623</z30-hol-doc-number><z30-temp-location>No</z30-temp-location><z30-enumeration-a></z30-enumeration-a><z30-enumeration-b></z30-enumeration-b><z30-enumeration-c></z30-enumeration-c><z30-enumeration-d></z30-enumeration-d><z30-enumeration-e></z30-enumeration-e><z30-enumeration-f></z30-enumeration-f><z30-enumeration-g></z30-enumeration-g><z30-enumeration-h></z30-enumeration-h><z30-chronological-i></z30-chronological-i><z30-chronological-j></z30-chronological-j><z30-chronological-k></z30-chronological-k><z30-chronological-l></z30-chronological-l><z30-chronological-m></z30-chronological-m><z30-supp-index-o></z30-supp-index-o><z30-85x-type></z30-85x-type><z30-depository-id></z30-depository-id><z30-linking-number>000000000</z30-linking-number><z30-gap-indicator></z30-gap-indicator><z30-maintenance-count>000</z30-maintenance-count><z30-process-status-date>20140214</z30-process-status-date></z30><z13><translate-change-active-library>NYU51</translate-change-active-library><z13-doc-number>003921627</z13-doc-number><z13-year>2014</z13-year><z13-open-date>20140118</z13-open-date><z13-update-date>20140212</z13-update-date><z13-call-no-key></z13-call-no-key><z13-call-no-code>LOC0</z13-call-no-code><z13-call-no>GN640</z13-call-no><z13-author-code>1001</z13-author-code><z13-author>Cooke,
-        Miriam.</z13-author><z13-title-code>24510</z13-title-code><z13-title>Tribal
-        modern :</z13-title><z13-imprint-code></z13-imprint-code><z13-imprint></z13-imprint><z13-isbn-issn-code>020</z13-isbn-issn-code><z13-isbn-issn>9780520280090
-        (hardback)</z13-isbn-issn></z13><status>Requested</status></item></items></get-item-list> '
+        (hardback)</z13-isbn-issn></z13><status>On Shelf</status></item></get-item> '
     http_version: 
-  recorded_at: Thu, 20 Feb 2014 19:43:42 GMT
-recorded_with: VCR 2.5.0
+  recorded_at: Tue, 10 Jun 2014 13:31:12 GMT
+- request:
+    method: get
+    uri: http://aleph.library.edu:1891/rest-dlf/record/NYU01003921627/items/NYU51003921627000010
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.8.9
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      X-Powered-By:
+      - Servlet 2.5; JBoss-5.0/JBossWeb-2.1
+      Content-Type:
+      - application/xml
+      Transfer-Encoding:
+      - chunked
+      Date:
+      - Tue, 10 Jun 2014 13:31:11 GMT
+    body:
+      encoding: US-ASCII
+      string: ! '<?xml version = "1.0" encoding = "UTF-8"?><get-item><reply-text>ok</reply-text><reply-code>0000</reply-code><item><z30-sub-library-code>NABAD</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>01</z30-item-status-code><z30-collection-code>MAIN</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU51</translate-change-active-library><z30-doc-number>003921627</z30-doc-number><z30-item-sequence>    1.0</z30-item-sequence><z30-barcode>31122057455268</z30-barcode><z30-sub-library>NYU
+        Abu Dhabi Library (UAE)</z30-sub-library><z30-material>Books</z30-material><z30-item-status>Regular
+        loan</z30-item-status><z30-open-date>20140118</z30-open-date><z30-update-date>20140223</z30-update-date><z30-cataloger>MAKANDAB</z30-cataloger><z30-date-last-return>20140326</z30-date-last-return><z30-hour-last-return>1159</z30-hour-last-return><z30-ip-last-return>NYUAD</z30-ip-last-return><z30-no-loans>002</z30-no-loans><z30-alpha>L</z30-alpha><z30-collection>Main
+        Collection</z30-collection><z30-call-no-type>0</z30-call-no-type><z30-call-no>GN640
+        .C66 2014</z30-call-no><z30-call-no-key>0 gn&quot;640 c66 2014</z30-call-no-key><z30-call-no-2-type></z30-call-no-2-type><z30-call-no-2></z30-call-no-2><z30-call-no-2-key></z30-call-no-2-key><z30-description></z30-description><z30-note-opac></z30-note-opac><z30-note-circulation></z30-note-circulation><z30-note-internal></z30-note-internal><z30-order-number>NYUAD2014206</z30-order-number><z30-inventory-number></z30-inventory-number><z30-inventory-number-date>00000000</z30-inventory-number-date><z30-last-shelf-report-date>00000000</z30-last-shelf-report-date><z30-price>24.56</z30-price><z30-shelf-report-number></z30-shelf-report-number><z30-on-shelf-date>00000000</z30-on-shelf-date><z30-on-shelf-seq>000000</z30-on-shelf-seq><z30-doc-number-2>000000000</z30-doc-number-2><z30-schedule-sequence-2>00000</z30-schedule-sequence-2><z30-copy-sequence-2>00000</z30-copy-sequence-2><z30-vendor-code></z30-vendor-code><z30-invoice-number></z30-invoice-number><z30-line-number>00000</z30-line-number><z30-pages></z30-pages><z30-issue-date>00000000</z30-issue-date><z30-expected-arrival-date>00000000</z30-expected-arrival-date><z30-arrival-date>00000000</z30-arrival-date><z30-item-statistic>c</z30-item-statistic><z30-item-process-status>Not
+        in Process</z30-item-process-status><z30-copy-id></z30-copy-id><z30-hol-doc-number>004847623</z30-hol-doc-number><z30-temp-location>No</z30-temp-location><z30-enumeration-a></z30-enumeration-a><z30-enumeration-b></z30-enumeration-b><z30-enumeration-c></z30-enumeration-c><z30-enumeration-d></z30-enumeration-d><z30-enumeration-e></z30-enumeration-e><z30-enumeration-f></z30-enumeration-f><z30-enumeration-g></z30-enumeration-g><z30-enumeration-h></z30-enumeration-h><z30-chronological-i></z30-chronological-i><z30-chronological-j></z30-chronological-j><z30-chronological-k></z30-chronological-k><z30-chronological-l></z30-chronological-l><z30-chronological-m></z30-chronological-m><z30-supp-index-o></z30-supp-index-o><z30-85x-type></z30-85x-type><z30-depository-id></z30-depository-id><z30-linking-number>000000000</z30-linking-number><z30-gap-indicator></z30-gap-indicator><z30-maintenance-count>002</z30-maintenance-count><z30-process-status-date>20140223</z30-process-status-date></z30><z13><translate-change-active-library>NYU51</translate-change-active-library><z13-doc-number>003921627</z13-doc-number><z13-year>2014</z13-year><z13-open-date>20140118</z13-open-date><z13-update-date>20140318</z13-update-date><z13-call-no-key></z13-call-no-key><z13-call-no-code>LOC0</z13-call-no-code><z13-call-no>GN640</z13-call-no><z13-author-code>1001</z13-author-code><z13-author>Cooke,
+        Miriam.</z13-author><z13-title-code>24510</z13-title-code><z13-title>Tribal
+        modern :</z13-title><z13-imprint-code></z13-imprint-code><z13-imprint></z13-imprint><z13-isbn-issn-code>020</z13-isbn-issn-code><z13-isbn-issn>9780520280090
+        (hardback)</z13-isbn-issn></z13><status>05/21/14</status></item></get-item> '
+    http_version: 
+  recorded_at: Tue, 10 Jun 2014 13:31:12 GMT
+- request:
+    method: get
+    uri: http://aleph.library.edu:1891/rest-dlf/record/NYU01003921627/items/NYU51003921627000020
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.8.9
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      X-Powered-By:
+      - Servlet 2.5; JBoss-5.0/JBossWeb-2.1
+      Content-Type:
+      - application/xml
+      Transfer-Encoding:
+      - chunked
+      Date:
+      - Tue, 10 Jun 2014 13:31:11 GMT
+    body:
+      encoding: US-ASCII
+      string: ! '<?xml version = "1.0" encoding = "UTF-8"?><get-item><reply-text>ok</reply-text><reply-code>0000</reply-code><item><z30-sub-library-code>NABAD</z30-sub-library-code><z30-item-process-status-code></z30-item-process-status-code><z30-item-status-code>01</z30-item-status-code><z30-collection-code>MAIN</z30-collection-code><queue></queue><z30><translate-change-active-library>NYU51</translate-change-active-library><z30-doc-number>003921627</z30-doc-number><z30-item-sequence>    2.0</z30-item-sequence><z30-barcode>31122055029123</z30-barcode><z30-sub-library>NYU
+        Abu Dhabi Library (UAE)</z30-sub-library><z30-material>Books</z30-material><z30-item-status>Regular
+        loan</z30-item-status><z30-open-date>20140318</z30-open-date><z30-update-date>20140409</z30-update-date><z30-cataloger>PARRC</z30-cataloger><z30-date-last-return>20140518</z30-date-last-return><z30-hour-last-return>1052</z30-hour-last-return><z30-ip-last-return>NYUAD</z30-ip-last-return><z30-no-loans>001</z30-no-loans><z30-alpha>L</z30-alpha><z30-collection>Main
+        Collection</z30-collection><z30-call-no-type>0</z30-call-no-type><z30-call-no>GN640
+        .C66 2014</z30-call-no><z30-call-no-key>0 gn&quot;640 c66 2014</z30-call-no-key><z30-call-no-2-type></z30-call-no-2-type><z30-call-no-2></z30-call-no-2><z30-call-no-2-key></z30-call-no-2-key><z30-description></z30-description><z30-note-opac></z30-note-opac><z30-note-circulation></z30-note-circulation><z30-note-internal></z30-note-internal><z30-order-number>NYUAD20142364</z30-order-number><z30-inventory-number></z30-inventory-number><z30-inventory-number-date>00000000</z30-inventory-number-date><z30-last-shelf-report-date>00000000</z30-last-shelf-report-date><z30-price>24.56</z30-price><z30-shelf-report-number></z30-shelf-report-number><z30-on-shelf-date>00000000</z30-on-shelf-date><z30-on-shelf-seq>000000</z30-on-shelf-seq><z30-doc-number-2>000000000</z30-doc-number-2><z30-schedule-sequence-2>00000</z30-schedule-sequence-2><z30-copy-sequence-2>00000</z30-copy-sequence-2><z30-vendor-code></z30-vendor-code><z30-invoice-number></z30-invoice-number><z30-line-number>00000</z30-line-number><z30-pages></z30-pages><z30-issue-date>00000000</z30-issue-date><z30-expected-arrival-date>00000000</z30-expected-arrival-date><z30-arrival-date>00000000</z30-arrival-date><z30-item-statistic>c</z30-item-statistic><z30-item-process-status>Not
+        in Process</z30-item-process-status><z30-copy-id></z30-copy-id><z30-hol-doc-number>004921199</z30-hol-doc-number><z30-temp-location>No</z30-temp-location><z30-enumeration-a></z30-enumeration-a><z30-enumeration-b></z30-enumeration-b><z30-enumeration-c></z30-enumeration-c><z30-enumeration-d></z30-enumeration-d><z30-enumeration-e></z30-enumeration-e><z30-enumeration-f></z30-enumeration-f><z30-enumeration-g></z30-enumeration-g><z30-enumeration-h></z30-enumeration-h><z30-chronological-i></z30-chronological-i><z30-chronological-j></z30-chronological-j><z30-chronological-k></z30-chronological-k><z30-chronological-l></z30-chronological-l><z30-chronological-m></z30-chronological-m><z30-supp-index-o></z30-supp-index-o><z30-85x-type></z30-85x-type><z30-depository-id></z30-depository-id><z30-linking-number>000000000</z30-linking-number><z30-gap-indicator></z30-gap-indicator><z30-maintenance-count>001</z30-maintenance-count><z30-process-status-date>20140413</z30-process-status-date></z30><z13><translate-change-active-library>NYU51</translate-change-active-library><z13-doc-number>003921627</z13-doc-number><z13-year>2014</z13-year><z13-open-date>20140118</z13-open-date><z13-update-date>20140318</z13-update-date><z13-call-no-key></z13-call-no-key><z13-call-no-code>LOC0</z13-call-no-code><z13-call-no>GN640</z13-call-no><z13-author-code>1001</z13-author-code><z13-author>Cooke,
+        Miriam.</z13-author><z13-title-code>24510</z13-title-code><z13-title>Tribal
+        modern :</z13-title><z13-imprint-code></z13-imprint-code><z13-imprint></z13-imprint><z13-isbn-issn-code>020</z13-isbn-issn-code><z13-isbn-issn>9780520280090
+        (hardback)</z13-isbn-issn></z13><status>On Shelf</status></item></get-item> '
+    http_version: 
+  recorded_at: Tue, 10 Jun 2014 13:31:12 GMT
+recorded_with: VCR 2.9.0

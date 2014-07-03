@@ -4,5 +4,4 @@ adms:
   - NYU50
   - NYU51
   - NYU52
-tab_path: /mnt/aleph_tab
-yml_path: config/aleph
+table_path: /mnt/aleph_tab
