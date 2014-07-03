@@ -25,3 +25,6 @@ config/aleph
 
 # Ignore the wiki
 wiki
+
+# Ignore the .ruby-version
+.ruby-version
