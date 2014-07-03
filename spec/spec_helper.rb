@@ -4,8 +4,8 @@ require 'coveralls'
 Coveralls.wear_merged!
 require 'rspec'
 require 'vcr'
-require 'exlibris-nyu'
 require 'pry'
+require 'exlibris-nyu'
 
 # Use the included testmnt for testing.
 Exlibris::Aleph.configure do |config|
