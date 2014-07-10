@@ -27,8 +27,8 @@ VCR.configure do |c|
   # webmock needed for HTTPClient testing
   c.hook_into :webmock
   # c.debug_logger = $stderr
-  c.filter_sensitive_data("http://aleph.library.edu") { @@aleph_url }
-  c.filter_sensitive_data("http://primo.library.edu") { @@primo_url }
+  c.filter_sensitive_data("http://aleph.library.edu") { Exlibris::Aleph::Config.base_url }
+  c.filter_sensitive_data("http://primo.library.edu") { Exlibris::Primo::Config.base_url }
 end
 
 # Add Exlibris::Primo::Search to TestCase
