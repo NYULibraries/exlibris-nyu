@@ -57,6 +57,7 @@ class NyuAlephTest < ActiveSupport::TestCase
       :title => "New Yorker (New York, N.Y. : 1925)",
       :institution_code => "NYU",
       :library_code => "BOBST",
+      :collection => "Microform",
       :record_id => "nyu_aleph002904404",
       :source_id => "nyu_aleph",
       :ils_api_id => 'NYU01002904404',
@@ -69,7 +70,7 @@ class NyuAlephTest < ActiveSupport::TestCase
     assert_nil(holding.status)
     assert((not holding.respond_to?(:sub_library_code)))
     assert((not holding.respond_to?(:sub_library)))
-    assert_nil(holding.collection)
+    assert_equal("Microform", holding.collection)
     assert_equal("BOBST", holding.library_code)
     assert_equal("NYU", holding.institution_code)
     assert_equal("NYU Bobst", holding.library)
@@ -81,9 +82,9 @@ class NyuAlephTest < ActiveSupport::TestCase
       assert_nil(nyu_aleph.status)
       assert_equal("BOBST", nyu_aleph.sub_library_code)
       assert_equal("NYU Bobst", "#{nyu_aleph.sub_library}")
-      assert_nil(nyu_aleph.collection)
+      assert_equal("Microform", "#{nyu_aleph.collection}")
       assert_equal("BOBST", nyu_aleph.library_code)
-      assert_equal("NYU", holding.institution_code)
+      assert_equal("NYU", nyu_aleph.institution_code)
       assert_equal("NYU Bobst", "#{nyu_aleph.library}")
       assert((not nyu_aleph.coverage.empty?), "Journal coverage is empty")
       assert_equal(1, nyu_aleph.coverage.size)
