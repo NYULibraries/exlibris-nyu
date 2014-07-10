@@ -67,13 +67,19 @@ module Exlibris
         # Overrides Exlibris::Primo::Source::Aleph#sub_library to return
         # based on the Aleph item
         def sub_library
-          (from_aleph?) ? aleph_item.sub_library : translator.sub_library
+          if from_aleph?
+            aleph_item.sub_library
+          elsif collection.is_a? Exlibris::Aleph::Collection
+            collection.sub_library
+          else
+            find_aleph_sub_library(sub_library_code)
+          end
         end
 
         # Overrides Exlibris::Primo::Source::Aleph#collection to return
         # based on the Aleph item
         def collection
-          (from_aleph?) ? aleph_item.collection : super
+          (from_aleph?) ? aleph_item.collection : find_aleph_collection(super)
         end
 
         # Overrides Exlibris::Primo::Source::Aleph#call_number to return
@@ -141,8 +147,20 @@ module Exlibris
           end
         end
 
-        def translator
-          @translator ||= Exlibris::Nyu::Aleph::Translator.new(sub_library_code)
+        def find_aleph_sub_library(sub_library_code)
+          aleph_sub_library_finder(sub_library_code).sub_library
+        end
+
+        def aleph_sub_library_finder(sub_library_code)
+          Exlibris::Nyu::Aleph::SubLibraryFinder.new(sub_library_code)
+        end
+
+        def find_aleph_collection(collection_display)
+          aleph_collection_finder(collection_display).collection
+        end
+
+        def aleph_collection_finder(collection_display)
+          Exlibris::Nyu::Aleph::CollectionFinder.new(sub_library_code, collection_display)
         end
 
         # Get Aleph record
@@ -172,7 +190,7 @@ module Exlibris
         def bib_coverage
           if @holdings_coverage.nil?
             @bib_coverage ||=
-              Exlibris::Nyu::Coverage::Statement.from_record_metadata(sub_library, record_metadata)
+              Exlibris::Nyu::Coverage::Statement.from_record_metadata(collection, record_metadata)
           end
         end
 
@@ -180,7 +198,7 @@ module Exlibris
         def holdings_coverage
           if @bib_coverage.nil?
             @holdings_coverage ||= 
-              Exlibris::Nyu::Coverage::Statement.from_holdings(sub_library, holdings)
+              Exlibris::Nyu::Coverage::Statement.from_holdings(collection, holdings)
           end
         end
       end

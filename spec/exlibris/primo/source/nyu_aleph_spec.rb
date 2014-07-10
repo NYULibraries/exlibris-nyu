@@ -27,28 +27,28 @@ module Exlibris
                 let(:other_source_id) { 'nyu_aleph' }
                 context 'and the source record id is the same' do
                   let(:other_source_record_id) { '000980206' }
-                  it { should be_true }
+                  it { should be true }
                 end
                 context 'but the source record id is not the same' do
                   let(:other_source_record_id) { '000980207' }
-                  it { should be_false }
+                  it { should be false }
                 end
               end
               context 'but the source id is not the same' do
                 let(:other_source_id) { 'nyu_other' }
                 context 'and the source record id is the same' do
                   let(:other_source_record_id) { '000980206' }
-                  it { should be_false }
+                  it { should be false }
                 end
                 context 'but the source record id is not the same' do
                   let(:other_source_record_id) { '000980207' }
-                  it { should be_false }
+                  it { should be false }
                 end
               end
             end
             context 'when the other object is not an Exlibris::Primo::Holding' do
               let(:other_object) { "string" }
-              it { should be_false }
+              it { should be false }
             end
           end
           describe '#eql?' do
@@ -61,48 +61,48 @@ module Exlibris
                 let(:other_source_id) { 'nyu_aleph' }
                 context 'and the source record id is the same' do
                   let(:other_source_record_id) { '000980206' }
-                  it { should be_true }
+                  it { should be true }
                 end
                 context 'but the source record id is not the same' do
                   let(:other_source_record_id) { '000980207' }
-                  it { should be_false }
+                  it { should be false }
                 end
               end
               context 'but the source id is not the same' do
                 let(:other_source_id) { 'nyu_other' }
                 context 'and the source record id is the same' do
                   let(:other_source_record_id) { '000980206' }
-                  it { should be_false }
+                  it { should be false }
                 end
                 context 'but the source record id is not the same' do
                   let(:other_source_record_id) { '000980207' }
-                  it { should be_false }
+                  it { should be false }
                 end
               end
             end
             context 'when the other object is not an Exlibris::Primo::Holding' do
               let(:other_object) { "string" }
-              it { should be_false }
+              it { should be false }
             end
           end
           describe '#from_aleph?' do
             subject { nyu_aleph.from_aleph? }
             context 'when expanded from Aleph' do
-              it { should be_true }
+              it { should be true }
             end
             context 'when not expanded from Aleph' do
               let(:nyu_aleph_item) { nil }
-              it { should be_false }
+              it { should be false }
             end
           end
           describe '#expanded?' do
             subject { nyu_aleph.expanded? }
             context 'when expanded from Aleph' do
-              it { should be_true }
+              it { should be true }
             end
             context 'when not expanded from Aleph' do
               let(:nyu_aleph_item) { nil }
-              it { should be_false }
+              it { should be false }
             end
           end
           describe '#aleph_item' do
@@ -200,28 +200,28 @@ module Exlibris
                   let(:other_source_id) { 'nyu_aleph' }
                   context 'and the source record id is the same' do
                     let(:other_source_record_id) { '000980206' }
-                    it { should be_true }
+                    it { should be true }
                   end
                   context 'but the source record id is not the same' do
                     let(:other_source_record_id) { '000980207' }
-                    it { should be_false }
+                    it { should be false }
                   end
                 end
                 context 'but the source id is not the same' do
                   let(:other_source_id) { 'nyu_other' }
                   context 'and the source record id is the same' do
                     let(:other_source_record_id) { '000980206' }
-                    it { should be_false }
+                    it { should be false }
                   end
                   context 'but the source record id is not the same' do
                     let(:other_source_record_id) { '000980207' }
-                    it { should be_false }
+                    it { should be false }
                   end
                 end
               end
               context 'when the other object is not an Exlibris::Primo::Holding' do
                 let(:other_object) { "string" }
-                it { should be_false }
+                it { should be false }
               end
             end
             describe '#eql?' do
@@ -234,37 +234,37 @@ module Exlibris
                   let(:other_source_id) { 'nyu_aleph' }
                   context 'and the source record id is the same' do
                     let(:other_source_record_id) { '000980206' }
-                    it { should be_true }
+                    it { should be true }
                   end
                   context 'but the source record id is not the same' do
                     let(:other_source_record_id) { '000980207' }
-                    it { should be_false }
+                    it { should be false }
                   end
                 end
                 context 'but the source id is not the same' do
                   let(:other_source_id) { 'nyu_other' }
                   context 'and the source record id is the same' do
                     let(:other_source_record_id) { '000980206' }
-                    it { should be_false }
+                    it { should be false }
                   end
                   context 'but the source record id is not the same' do
                     let(:other_source_record_id) { '000980207' }
-                    it { should be_false }
+                    it { should be false }
                   end
                 end
               end
               context 'when the other object is not an Exlibris::Primo::Holding' do
                 let(:other_object) { "string" }
-                it { should be_false }
+                it { should be false }
               end
             end
             describe '#from_aleph?' do
               subject { nyu_aleph.from_aleph? }
-              it { should be_false }
+              it { should be false }
             end
             describe '#expanded?' do
               subject { nyu_aleph.expanded? }
-              it { should be_false }
+              it { should be false }
             end
             describe '#aleph_item' do
               subject { nyu_aleph.aleph_item }
@@ -290,8 +290,10 @@ module Exlibris
             end
             describe '#collection' do
               subject { nyu_aleph.collection }
-              it { should_not be_an Exlibris::Aleph::Collection }
-              it { should eq 'Main Collection' }
+              it { should be_an Exlibris::Aleph::Collection }
+              it 'should equal "Main Collection"'do
+                expect("#{subject}").to eq 'Main Collection'
+              end
             end
             describe '#call_number' do
               subject { nyu_aleph.call_number }
@@ -347,28 +349,28 @@ module Exlibris
                     let(:other_source_id) { 'nyu_aleph' }
                     context 'and the source record id is the same' do
                       let(:other_source_record_id) { '000980206' }
-                      it { should be_true }
+                      it { should be true }
                     end
                     context 'but the source record id is not the same' do
                       let(:other_source_record_id) { '000980207' }
-                      it { should be_false }
+                      it { should be false }
                     end
                   end
                   context 'but the source id is not the same' do
                     let(:other_source_id) { 'nyu_other' }
                     context 'and the source record id is the same' do
                       let(:other_source_record_id) { '000980206' }
-                      it { should be_false }
+                      it { should be false }
                     end
                     context 'but the source record id is not the same' do
                       let(:other_source_record_id) { '000980207' }
-                      it { should be_false }
+                      it { should be false }
                     end
                   end
                 end
                 context 'when the other object is not an Exlibris::Primo::Holding' do
                   let(:other_object) { "string" }
-                  it { should be_false }
+                  it { should be false }
                 end
               end
               describe '#eql?' do
@@ -381,37 +383,37 @@ module Exlibris
                     let(:other_source_id) { 'nyu_aleph' }
                     context 'and the source record id is the same' do
                       let(:other_source_record_id) { '000980206' }
-                      it { should be_true }
+                      it { should be true }
                     end
                     context 'but the source record id is not the same' do
                       let(:other_source_record_id) { '000980207' }
-                      it { should be_false }
+                      it { should be false }
                     end
                   end
                   context 'but the source id is not the same' do
                     let(:other_source_id) { 'nyu_other' }
                     context 'and the source record id is the same' do
                       let(:other_source_record_id) { '000980206' }
-                      it { should be_false }
+                      it { should be false }
                     end
                     context 'but the source record id is not the same' do
                       let(:other_source_record_id) { '000980207' }
-                      it { should be_false }
+                      it { should be false }
                     end
                   end
                 end
                 context 'when the other object is not an Exlibris::Primo::Holding' do
                   let(:other_object) { "string" }
-                  it { should be_false }
+                  it { should be false }
                 end
               end
               describe '#from_aleph?' do
                 subject { expanded_nyu_aleph.from_aleph? }
-                it { should be_true }
+                it { should be true }
               end
               describe '#expanded?' do
                 subject { expanded_nyu_aleph.expanded? }
-                it { should be_true }
+                it { should be true }
               end
               describe '#aleph_item' do
                 subject { expanded_nyu_aleph.aleph_item }
@@ -486,28 +488,28 @@ module Exlibris
                     let(:other_source_id) { 'nyu_aleph' }
                     context 'and the source record id is the same' do
                       let(:other_source_record_id) { '001951476' }
-                      it { should be_false }
+                      it { should be false }
                     end
                     context 'but the source record id is not the same' do
                       let(:other_source_record_id) { '001951477' }
-                      it { should be_false }
+                      it { should be false }
                     end
                   end
                   context 'but the source id is not the same' do
                     let(:other_source_id) { 'nyu_other' }
                     context 'and the source record id is the same' do
                       let(:other_source_record_id) { '001951476' }
-                      it { should be_false }
+                      it { should be false }
                     end
                     context 'but the source record id is not the same' do
                       let(:other_source_record_id) { '001951477' }
-                      it { should be_false }
+                      it { should be false }
                     end
                   end
                 end
                 context 'when the other object is not an Exlibris::Primo::Holding' do
                   let(:other_object) { "string" }
-                  it { should be_false }
+                  it { should be false }
                 end
               end
               describe '#eql?' do
@@ -520,37 +522,37 @@ module Exlibris
                     let(:other_source_id) { 'nyu_aleph' }
                     context 'and the source record id is the same' do
                       let(:other_source_record_id) { '001951476' }
-                      it { should be_false }
+                      it { should be false }
                     end
                     context 'but the source record id is not the same' do
                       let(:other_source_record_id) { '001951477' }
-                      it { should be_false }
+                      it { should be false }
                     end
                   end
                   context 'but the source id is not the same' do
                     let(:other_source_id) { 'nyu_other' }
                     context 'and the source record id is the same' do
                       let(:other_source_record_id) { '001951476' }
-                      it { should be_false }
+                      it { should be false }
                     end
                     context 'but the source record id is not the same' do
                       let(:other_source_record_id) { '001951477' }
-                      it { should be_false }
+                      it { should be false }
                     end
                   end
                 end
                 context 'when the other object is not an Exlibris::Primo::Holding' do
                   let(:other_object) { "string" }
-                  it { should be_false }
+                  it { should be false }
                 end
               end
               describe '#from_aleph?' do
                 subject { nyu_aleph.from_aleph? }
-                it { should be_false }
+                it { should be false }
               end
               describe '#expanded?' do
                 subject { nyu_aleph.expanded? }
-                it { should be_false }
+                it { should be false }
               end
               describe '#aleph_item' do
                 subject { nyu_aleph.aleph_item }
@@ -576,8 +578,10 @@ module Exlibris
               end
               describe '#collection' do
                 subject { nyu_aleph.collection }
-                it { should_not be_an Exlibris::Aleph::Collection }
-                it { should eq 'SpecCol Periodicals' }
+                it { should be_an Exlibris::Aleph::Collection }
+                it 'should equal "SpecCol Periodicals"'do
+                  expect("#{subject}").to eq 'SpecCol Periodicals'
+                end
               end
               describe '#expand' do
                 subject { nyu_aleph.expand }
@@ -606,7 +610,9 @@ module Exlibris
               let(:record_id) { "nyu_aleph002893728" }
               context 'and the holding has coverage statements in the bib MARC' do
                 let(:holding) do
-                  holdings.find { |holding| holding.institution_code == "NYU" }
+                  holdings.find do |holding|
+                    holding.institution_code == "NYU" && holding.collection == "Microform"
+                  end
                 end
                 it { should be_an NyuAleph }
                 describe '#coverage' do
@@ -628,7 +634,7 @@ module Exlibris
                   it { should be_an Array }
                   it { should_not be_empty }
                   it 'should display the holding coverage statement' do
-                    expect(subject.size).to be 2
+                    expect(subject.size).to be 1
                   end
                 end
               end
