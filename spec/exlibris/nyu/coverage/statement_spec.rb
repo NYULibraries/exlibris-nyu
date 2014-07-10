@@ -16,8 +16,9 @@ module Exlibris
           let(:admin_library) { Exlibris::Aleph::AdminLibrary.new('NYU50') }
           describe '.from_record_metadata' do
             let(:sub_library) { Exlibris::Aleph::SubLibrary.new('BOBST', 'NYU Bobst', admin_library) }
+            let(:collection) { Exlibris::Aleph::Collection.new('MFORM', 'Microform', sub_library) }
             let(:record_metadata) { record.metadata }
-            subject(:statement) { Statement.from_record_metadata(sub_library, record_metadata) }
+            subject(:statement) { Statement.from_record_metadata(collection, record_metadata) }
             it { should be_a Statement }
             describe '#textual_holdings' do
               subject { statement.textual_holdings }
@@ -29,12 +30,35 @@ module Exlibris
                 end
               end
             end
+            context 'when the collection argument is not an Exlibris::Aleph::Collection' do
+              let(:collection) { 'invalid' }
+              it 'should raise an ArgumentError' do
+                expect { subject }.to raise_error ArgumentError
+              end
+            end
           end
           describe '.from_holdings', vcr: { cassette_name: "vogue", record: :new_episodes } do
-            let(:sub_library) { Exlibris::Aleph::SubLibrary.new('TNSGI', 'TNSGI', admin_library) }
+            let(:sub_library) { Exlibris::Aleph::SubLibrary.new('TNSGI', 'New School University Center', admin_library) }
+            let(:collection) { Exlibris::Aleph::Collection.new('SPCLP', 'SpecCol Periodicals', sub_library) }
             let(:holdings) { record.holdings }
-            subject { Statement.from_holdings(sub_library, holdings) }
+            subject(:statement) { Statement.from_holdings(collection, holdings) }
             it { should be_a Statement }
+            describe '#textual_holdings' do
+              subject { statement.textual_holdings }
+              it { should be_an Array }
+              it 'should have TextualHoldings as the elements' do
+                expect(subject.size).to be > 0
+                subject.each do |textual_holding|
+                  expect(textual_holding).to be_a TextualHolding
+                end
+              end
+            end
+            context 'when the collection argument is not an Exlibris::Aleph::Collection' do
+              let(:collection) { 'invalid' }
+              it 'should raise an ArgumentError' do
+                expect { subject }.to raise_error ArgumentError
+              end
+            end
           end
         end
         describe '#textual_holdings' do
