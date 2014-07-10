@@ -32,9 +32,6 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
-  # so we can use :vcr rather than :vcr => true;
-  # in RSpec 3 this will no longer be necessary.
-  config.treat_symbols_as_metadata_keys_with_true_values = true
 
   # Declare exclusion filters
   config.filter_run_excluding skip: true

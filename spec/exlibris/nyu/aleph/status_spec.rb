@@ -81,106 +81,106 @@ module Exlibris
         end
         describe '#available?' do
           subject { status.available? }
-          it { should be_true }
+          it { should be true }
           context 'when the value is "Available"' do
             let(:value) { 'Available' }
-            it { should be_true }
+            it { should be true }
           end
           context 'when the value is "05/31/14"' do
             let(:value) { '05/31/14' }
-            it { should be_false }
+            it { should be false }
           end
         end
         describe '#offsite?' do
           subject { status.offsite? }
-          it { should be_false }
+          it { should be false }
           context 'when the value is "Offsite Available"' do
             let(:value) { 'Offsite Available' }
-            it { should be_true }
+            it { should be true }
           end
         end
         describe '#billed_as_lost?' do
           subject { status.billed_as_lost? }
-          it { should be_false }
+          it { should be false }
           context 'when the value is "Billed as Lost"' do
             let(:value) { 'Billed as Lost' }
-            it { should be_true }
+            it { should be true }
           end
           context 'when the value is "Claimed Returned"' do
             let(:value) { 'Claimed Returned' }
-            it { should be_true }
+            it { should be true }
           end
         end
         describe '#processing?' do
           subject { status.processing? }
-          it { should be_false }
+          it { should be false }
           context 'when the value is "In Processing"' do
             let(:value) { 'In Processing' }
-            it { should be_true }
+            it { should be true }
           end
           context 'when the value is "In Transit"' do
             let(:value) { 'In Transit' }
-            it { should be_true }
+            it { should be true }
           end
         end
         describe '#unavailable?' do
           subject { status.unavailable? }
-          it { should be_false }
+          it { should be false }
           context 'when the value is "Unavailable"' do
             let(:value) { 'Unavailable' }
-            it { should be_true }
+            it { should be true }
           end
         end
         describe '#checked_out?' do
           subject { status.checked_out? }
-          it { should be_false }
+          it { should be false }
           context 'when the value is "05/31/14"' do
             let(:value) { '05/31/14' }
-            it { should be_true }
+            it { should be true }
           end
           context 'when the value is "Recalled due date: 05/31/14"' do
             let(:value) { 'Recalled due date: 05/31/14' }
-            it { should be_true }
+            it { should be true }
           end
         end
         describe '#recalled?' do
           subject { status.recalled? }
-          it { should be_false }
+          it { should be false }
           context 'when the value is "Recalled"' do
             let(:value) { 'Recalled' }
-            it { should be_true }
+            it { should be true }
           end
           context 'when the value is "Recalled due date: 05/31/14"' do
             let(:value) { 'Recalled due date: 05/31/14' }
-            it { should be_true }
+            it { should be true }
           end
         end
         describe '#reshelving?' do
           subject { status.reshelving? }
-          it { should be_false }
+          it { should be false }
           context 'when the value is "Reshelving"' do
             let(:value) { 'Reshelving' }
-            it { should be_true }
+            it { should be true }
           end
           context 'when the value is "Reshelving: with a note"' do
             let(:value) { 'Reshelving: with a note' }
-            it { should be_true }
+            it { should be true }
           end
         end
         describe '#requested?' do
           subject { status.requested? }
-          it { should be_false }
+          it { should be false }
           context 'when the value is "On Hold"' do
             let(:value) { 'On Hold' }
-            it { should be_true }
+            it { should be true }
           end
           context 'when the value is "Requested"' do
             let(:value) { 'Requested' }
-            it { should be_true }
+            it { should be true }
           end
           context 'when the value is "Requested: with a note"' do
             let(:value) { 'Requested: with a note' }
-            it { should be_true }
+            it { should be true }
           end
         end
         context 'when the item circulation status argument is not an Exlibris::Aleph::Item::CirculationStatus' do
