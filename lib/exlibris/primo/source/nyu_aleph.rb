@@ -91,7 +91,15 @@ module Exlibris
         # Overrides Exlibris::Primo::Holding#status to return
         # based on the Aleph item
         def status
-          (from_aleph?) ? aleph_item.status : super
+          if from_aleph?
+            if collection.display === /Reserves/
+              Exlibris::Nyu::Aleph::ReservesStatus.new(super, item_status)
+            else
+              aleph_item.status
+            end
+          else
+            super
+          end
         end
 
         # The OPAC note if it's from Aleph
