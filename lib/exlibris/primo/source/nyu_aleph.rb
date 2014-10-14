@@ -47,7 +47,7 @@ module Exlibris
 
         # Overrides Exlibris::Primo::Source::Aleph#institution_code
         # based on the source config settings
-        # 
+        #
         # This is necessary since we are expanding from a source that may
         # not have the same institution
         def institution_code
@@ -125,17 +125,12 @@ module Exlibris
           @coverage = (journal?) ? (holdings_coverage || bib_coverage).to_a : []
         end
 
-        private
+        protected
         # Logic to determine whether we're expanding this holding
         # Only expand if not a journal and we've already been to Aleph
         # or we have expanded holdings from Aleph (Aleph could be down) or
         def expanding?
           @expanding ||= (!journal? && (from_aleph? || expanded_holdings.any?))
-        end
-
-        # Is this a journal
-        def journal?
-          (display_type && display_type.upcase == "JOURNAL")
         end
 
         # Get expanded holdings based on Aleph items.
@@ -145,6 +140,12 @@ module Exlibris
             source_data = {item_id: aleph_item.id}
             self.class.new({holding: self, aleph_item: aleph_item, source_data: source_data})
           end
+        end
+
+        private
+        # Is this a journal
+        def journal?
+          (display_type && display_type.upcase == "JOURNAL")
         end
 
         def find_aleph_sub_library(sub_library_code)
@@ -197,7 +198,7 @@ module Exlibris
         # Coverage::Statement from Aleph holdings
         def holdings_coverage
           if @bib_coverage.nil?
-            @holdings_coverage ||= 
+            @holdings_coverage ||=
               Exlibris::Nyu::Coverage::Statement.from_holdings(collection, holdings)
           end
         end
