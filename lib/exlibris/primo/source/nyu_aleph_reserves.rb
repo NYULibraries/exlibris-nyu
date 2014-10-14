@@ -9,25 +9,24 @@ module Exlibris
       #
       class NyuAlephReserves < Exlibris::Primo::Source::NyuAleph
 
-        # Overrides NyuAleph#availability_status
-        def availability_status
-          if @reserves_availability_status.nil?
-            @reserves_availability_status = super.dup
-            @reserves_availability_status << " - #{item_status}" if @reserves_availability_status == "Available"
+        # Overrides NyuAleph#status
+        def status
+          if from_aleph?
+            Exlibris::Nyu::Aleph::ReservesStatus.new(super, item_status)
+          else
+            super
           end
-          @reserves_availability_status
         end
-        alias :availability :availability_status
-        alias :status :availability_status
 
-        # Override NyuAleph#collection  
+        # Override NyuAleph#collection
         def collection
-          (sub_library_code.eql? "BRES") ? "" : super
+          (from_aleph? && sub_library.code == 'BRES') ? '' : super
         end
 
-        private
-        def item_status
-          @item_status ||= source_data[:item_status] if from_aleph?
+        protected
+        # For the most part, always expand Reserves items
+        def expanding?
+          (from_aleph? || expanded_holdings.any?)
         end
       end
     end
