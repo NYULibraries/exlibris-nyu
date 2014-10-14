@@ -28,11 +28,6 @@ module Exlibris
         def expanding?
           (from_aleph? || expanded_holdings.any?)
         end
-
-        private
-        def item_status
-          @item_status ||= aleph_item.item.status if from_aleph?
-        end
       end
     end
   end

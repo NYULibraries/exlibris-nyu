@@ -142,6 +142,10 @@ module Exlibris
           end
         end
 
+        def item_status
+          @item_status ||= aleph_item.item.status if from_aleph?
+        end
+
         private
         # Is this a journal
         def journal?
