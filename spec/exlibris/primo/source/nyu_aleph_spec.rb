@@ -565,15 +565,15 @@ module Exlibris
               describe '#library' do
                 subject { nyu_aleph.library }
                 it { should be_an Exlibris::Aleph::SubLibrary }
-                it 'should equal "New School Gimbel Library"'do
-                  expect("#{subject}").to eq 'New School Gimbel Library'
+                it 'should equal "New School University Center"'do
+                  expect("#{subject}").to eq 'New School University Center'
                 end
               end
               describe '#sub_library' do
                 subject { nyu_aleph.sub_library }
                 it { should be_an Exlibris::Aleph::SubLibrary }
-                it 'should equal "New School Gimbel Library"'do
-                  expect("#{subject}").to eq 'New School Gimbel Library'
+                it 'should equal "New School University Center"'do
+                  expect("#{subject}").to eq 'New School University Center'
                 end
               end
               describe '#collection' do
