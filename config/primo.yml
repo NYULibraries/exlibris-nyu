@@ -1,4 +1,10 @@
-base_url: "http://bobcat.library.nyu.edu"
+# Default and environment-specific variables
+base_url: "http://bobcatdev.library.nyu.edu"
+production: &production
+  base_url: "http://bobcat.library.nyu.edu"
+reindex:
+  <<: *production
+#
 institution: "NYU"
 libraries:
   "BAFC": "NYU Bobst Avery Fisher Center"

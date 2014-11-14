@@ -8,6 +8,7 @@ require 'exlibris-aleph'
 aleph_configuration_file =
   File.expand_path("#{File.dirname(__FILE__)}/../config/aleph.yml",  __FILE__)
 aleph_configuration = YAML.load_file(aleph_configuration_file)
+aleph_configuration.merge!(YAML.load_file(aleph_configuration_file)[Rails.env]) unless YAML.load_file(aleph_configuration_file)[Rails.env].nil?
 # Load Aleph configuration
 Exlibris::Aleph.configure do |config|
   config.adms = aleph_configuration['adms']
@@ -18,4 +19,3 @@ end
 
 require "require_all"
 require_all "#{File.dirname(__FILE__)}/exlibris/"
-
