@@ -1,7 +1,11 @@
 require 'exlibris-primo'
 # Load Primo configuration
+primo_configuration_file =
+  File.expand_path("#{File.dirname(__FILE__)}/../config/primo.yml",  __FILE__)
+primo_configuration = YAML.load_file(primo_configuration_file)
+primo_configuration.merge!(primo_configuration[ENV['RAILS_ENV']]) unless primo_configuration[ENV['RAILS_ENV']].nil?
 Exlibris::Primo.configure do |config|
-  config.load_yaml File.expand_path("#{File.dirname(__FILE__)}/../config/primo.yml",  __FILE__)
+  config.load_hash primo_configuration
 end
 
 require 'exlibris-aleph'
