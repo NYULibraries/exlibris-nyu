@@ -1,4 +1,15 @@
-base_url: "http://bobcat.library.nyu.edu"
+# Default and environment-specific variables #
+base_url: "http://bobcatdev.library.nyu.edu"
+production: &production
+  base_url: "http://bobcat.library.nyu.edu"
+  sources:
+    nyu_aleph:
+      base_url: "http://aleph.library.nyu.edu"
+      rest_url: "http://aleph.library.nyu.edu:1891/rest-dlf"
+reindex:
+  <<: *production
+##############################################
+
 institution: "NYU"
 libraries:
   "BAFC": "NYU Bobst Avery Fisher Center"
@@ -54,8 +65,8 @@ availability_statuses:
   "check_holdings": "Check Availability"
 sources:
   nyu_aleph: &nyu_aleph
-     base_url: "http://aleph.library.nyu.edu"
-     rest_url: "http://aleph.library.nyu.edu:1891/rest-dlf"
+     base_url: "http://alephstage.library.nyu.edu"
+     rest_url: "http://alephstage.library.nyu.edu:1891/rest-dlf"
      type: aleph
      class_name: NyuAleph
      sub_library_codes:
