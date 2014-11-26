@@ -1,22 +1,7 @@
-# Default and environment-specific variables
-base_url: "http://alephstage.library.nyu.edu"
-rest_url: "http://alephstage.library.nyu.edu:1891/rest-dlf"
+base_url: <%= ENV["ALEPH_BASE_URL"] || "http://alephstage.library.nyu.edu" %>
+rest_url: <%= ENV["ALEPH_REST_URL"] || "http://alephstage.library.nyu.edu:1891/rest-dlf" %>
 adms:
   - NYU50
   - NYU51
   - NYU52
-table_path: /mnt/aleph_stage_tab
-
-# Production values for production
-production: &production
-  base_url: "http://aleph.library.nyu.edu"
-  rest_url: "http://aleph.library.nyu.edu:1891/rest-dlf"
-  adms:
-    - NYU50
-    - NYU51
-    - NYU52
-  table_path: /mnt/aleph_tab
-
-# Reindex matches production, for use in GetIt
-reindex:
-  <<: *production
+table_path: <%= ENV["ALEPH_TABLE_PATH"] || '/mnt/aleph_stage_tab' %>
