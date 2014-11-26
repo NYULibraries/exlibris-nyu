@@ -8,4 +8,4 @@ gemspec
 
 gem 'coveralls', '~> 0.7.0', require: false, group: :test
 
-gem 'exlibris-primo', github: 'barnabyalter/exlibris-primo'
+gem 'exlibris-primo', github: 'barnabyalter/exlibris-primo', require: false, group: :test
