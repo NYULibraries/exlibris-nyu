@@ -565,15 +565,15 @@ module Exlibris
               describe '#library' do
                 subject { nyu_aleph.library }
                 it { should be_an Exlibris::Aleph::SubLibrary }
-                it 'should equal "New School University Center"'do
-                  expect("#{subject}").to eq 'New School University Center'
+                it 'should equal "TNS University Center Library"'do
+                  expect("#{subject}").to eq 'TNS University Center Library'
                 end
               end
               describe '#sub_library' do
                 subject { nyu_aleph.sub_library }
                 it { should be_an Exlibris::Aleph::SubLibrary }
-                it 'should equal "New School University Center"'do
-                  expect("#{subject}").to eq 'New School University Center'
+                it 'should equal "TNS University Center Library"'do
+                  expect("#{subject}").to eq 'TNS University Center Library'
                 end
               end
               describe '#collection' do
@@ -652,6 +652,11 @@ module Exlibris
                   end
                 end
               end
+            end
+            xcontext 'and the journal is "TLS, the Times literary supplement."', vcr: { cassette_name: 'tls', record: :all } do
+              let(:record_id) { 'dedupmrg230329532' }
+              subject { nyu_aleph.coverage }
+              it { should eql '' }
             end
           end
         end

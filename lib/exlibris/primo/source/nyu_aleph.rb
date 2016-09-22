@@ -157,7 +157,7 @@ module Exlibris
         private
         # Is this a journal
         def journal?
-          (display_type && display_type.upcase == "JOURNAL")
+          (display_type && (display_type.upcase == "JOURNAL" || display_type.upcase == "E_JOURNAL"))
         end
 
         def find_aleph_sub_library(sub_library_code)
