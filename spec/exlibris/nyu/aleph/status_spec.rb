@@ -17,7 +17,34 @@ module Exlibris
         end
         describe '#value' do
           subject { status.value }
-          it { should eq 'Available' }
+          # There are too many so we're just spot checking here
+          describe 'mapping of statuses to "Available"' do
+            it { should eq 'Available' }
+            context 'when the value is "Regular loan"' do
+              let(:value) { 'Regular loan' }
+              it { should eq 'Available' }
+            end
+            context 'when the value is "Video"' do
+              let(:value) { 'Video' }
+              it { should eq 'Available' }
+            end
+            context 'when the value is "Library use only"' do
+              let(:value) { 'Library use only' }
+              it { should eq 'Available' }
+            end
+            context 'when the value is "REF6NYCENSUS"' do
+              let(:value) { 'REF6NYCENSUS' }
+              it { should eq 'Available' }
+            end
+            context 'when the value is "CD Rom"' do
+              let(:value) { 'CD Rom' }
+              it { should eq 'Available' }
+            end
+          end
+          context 'when the value is "Regular loan"' do
+            let(:value) { 'Regular loan' }
+            it { should eq 'Available' }
+          end
           context 'when the value is "Recalled due date: 05/31/14"' do
             let(:value) { 'Recalled due date: 05/31/14' }
             it { should eq 'Due: 05/31/14' }
