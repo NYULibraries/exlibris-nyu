@@ -11,7 +11,15 @@ module Exlibris
         # Enum of status mappings
         # http://rails-bestpractices.com/posts/708-clever-enums-in-rails
         STATUSES = {
-          available: AVAILABLE = ["On Shelf", "Available"],
+          available: AVAILABLE = ["On Shelf", "Available", "Regular loan",
+            "Video", "Library use only", "Microform", "Multi-Media", "Periodicals",
+            "Reference", "Recorded music", "Juvenile", "Leisure", "Special",
+            "Spoken Word", "In house loan", "Special Collection", "US documents",
+            "International documents", "Reserve 2 hour loan", "Reserve 4 hour loan",
+            "Reserve 6 hour loan", "Reserve 24 hour loan", "Reserve 3 day loan",
+            "Reserve 7 day loan", "Reserve 14 day loan", "Reserve 3 hour loan",
+            "Reserve 2 hour photocopy", "Reserve 4 hour loan AFC", "Hourly loan",
+            "BTECH", "BMICR", "NYU GREY ART", "REF6NYCENSUS", "NYAA", "INET1", "BMEZZ", "CD Rom"],
           offsite: OFFSITE = ["Offsite Available"],
           requested: REQUESTED = ["Requested", "On Hold"],
           billed_as_lost: BILLED_AS_LOST = ["Billed as Lost", "Claimed Returned"],
