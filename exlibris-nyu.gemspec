@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.test_files = Dir['test/**/*'] + Dir['spec/**/*']
 
   s.add_dependency 'require_all', '~> 1.3'
-  s.add_dependency 'exlibris-primo', '~> 2.0.0'
+  s.add_dependency 'exlibris-primo', '~> 2.1'
   s.add_dependency 'exlibris-aleph', '~> 2.0.4'
 
   s.add_development_dependency 'rake', '~> 10.3'
