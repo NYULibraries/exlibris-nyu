@@ -6,4 +6,4 @@ source "https://rubygems.org"
 
 gemspec
 
-gem 'coveralls', '~> 0.7.0', require: false, group: :test
+gem 'coveralls', '~> 0.8.0', require: false, group: :test
