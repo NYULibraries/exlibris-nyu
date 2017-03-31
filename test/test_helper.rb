@@ -6,7 +6,7 @@ require 'pry'
 
 # Use the included testmnt for testing.
 Exlibris::Aleph.configure do |config|
-  config.table_path = "#{File.dirname(__FILE__)}/../test/mnt/aleph_tab" if ENV['CI']
+  config.table_path = ENV["ALEPH_TABLE_PATH"] || "#{File.dirname(__FILE__)}/../test/mnt/aleph_tab"
 end
 
 # VCR is used to 'record' HTTP interactions with
