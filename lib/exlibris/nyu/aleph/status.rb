@@ -20,7 +20,7 @@ module Exlibris
             "Reserve 7 day loan", "Reserve 14 day loan", "Reserve 3 hour loan",
             "Reserve 2 hour photocopy", "Reserve 4 hour loan AFC", "Hourly loan",
             "BTECH", "BMICR", "NYU GREY ART", "REF6NYCENSUS", "NYAA", "INET1", "BMEZZ", "CD Rom"],
-          offsite: OFFSITE = ["Offsite Available"],
+          offsite: OFFSITE = ["Offsite Available", "Offsite"],
           requested: REQUESTED = ["Requested", "On Hold"],
           billed_as_lost: BILLED_AS_LOST = ["Billed as Lost", "Claimed Returned"],
           unavailable: UNAVAILABLE = ["Unavailable"],
